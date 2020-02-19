@@ -8,12 +8,180 @@
   <link rel="stylesheet" type="text/css" href="" />
   <!-- Code JavaScript local -->
   <script type="text/javascript"> 
-	
+    let objCanvas = null;
+    let objC2D = null;
+    let objCycleAnimation = null;
+
+    let objImageFond = null;
+    let tabObjMurs = null;
+        
+    function initAnimation() {
+        objCanvas = document.getElementById('monCanvas'); // (960x640)
+	    	objCanvas.focus();
+        objC2D = objCanvas.getContext('2d');
+        initImageFond();
+        initMurs();
+	      dessiner(); // Dessiner une première fois
+        animer();  // animer
+    }
+
+    // Aller chercher l'image de fond
+    function initImageFond() {
+        objImageFond = new Image();
+    }
+
+    // Construire les murs
+    function initMurs() {
+        tabObjMurs = new Array();
+        let objMur = null;
+
+        // Le mur de gauche (#0)
+        objMur = new Object();
+        objMur.intXDebut = 0;
+        objMur.intYDebut = 0;
+        objMur.intXFin = 16;
+        objMur.intYFin = objCanvas.height
+        objMur.strCouleur = 'orange';
+        tabObjMurs.push(objMur);
+
+        // Le mur du centre (en haut) (#1)
+        objMur = new Object();
+        objMur.intXDebut = 0;
+        objMur.intYDebut = 0;
+        objMur.intXFin = objCanvas.width;
+        objMur.intYFin = 32;
+        objMur.strCouleur = 'orange';
+        tabObjMurs.push(objMur);
+
+        // Le mur de droite (#2)
+        objMur = new Object();
+        objMur.intXDebut = objCanvas.width;
+        objMur.intYDebut = 0;
+        objMur.intXFin = objCanvas.width - 16;
+        objMur.intYFin = objCanvas.height;
+        objMur.strCouleur = 'orange';
+        tabObjMurs.push(objMur);
+
+        // Le mur du bas (#3)
+        objMur = new Object();
+        objMur.intXDebut = 0;
+        objMur.intYDebut = objCanvas.height;
+        objMur.intXFin = objCanvas.width;
+        objMur.intYFin = objCanvas.height - 16;
+        objMur.strCouleur = 'orange';
+        tabObjMurs.push(objMur);
+
+        // L'espace du score
+        objMur = new Object();
+        objMur.intXDebut = 16;
+        objMur.intYDebut = objCanvas.height - 16;
+        objMur.intXFin = objCanvas.width - 16;
+        objMur.intYFin = objCanvas.height - 96;
+        objMur.strCouleur = 'gray';
+        tabObjMurs.push(objMur);
+
+        // L'espace du jeu TEST
+        // objMur = new Object();
+        // objMur.intXDebut = 16;
+        // objMur.intYDebut = 32;
+        // objMur.intXFin = 16 + 896;
+        // objMur.intYFin = 32 + 544;
+        // objMur.strCouleur = 'blue';
+        // tabObjMurs.push(objMur);
+    }
+
+    // Un cycle d'animation	
+    function animer() {
+        // Requête pour le prochain cycle
+        objCycleAnimation = requestAnimationFrame(animer);
+
+        // Le cycle d'animation
+        effacerDessin();
+        mettreAjourAnimation();
+        dessiner();
+    }
+
+    // Arrêter l'animation
+    function arreterAnimation() {
+        if (objCycleAnimation != null)
+            cancelAnimationFrame(objCycleAnimation);
+        objCycleAnimation = null;
+    }
+		
+    // Pour effacer le dessin
+    function effacerDessin() {
+        objC2D.clearRect(0,0, objCanvas.width, objCanvas.height); 
+    }
+
+    // Pour mettre à jour l'animation
+    function mettreAjourAnimation() {
+      // mettreAjourQQCH();
+	}
+
+    // Pour dessiner
+    function dessiner() {
+        dessinerFond();
+        dessinerMurs();
+        dessinerBeton();
+        dessinerBriques();
+        dessinerEchellesBarres();
+    }
+
+    // Pour dessiner l'image de fond
+    function dessinerFond() {
+        objC2D.save();
+        objC2D.fillStyle = 'black';    
+        objC2D.fillRect(0,0,objCanvas.width,objCanvas.height);    
+        objC2D.restore();
+    }
+
+    // Pour dessiner les murs
+    function dessinerMurs() {
+      objC2D.save();
+      objC2D.globalAlpha = 0.8;
+
+      for (let intNoMur = 0; intNoMur < tabObjMurs.length; intNoMur++) {
+          let objMur = tabObjMurs[intNoMur];
+          objC2D.fillStyle = objMur.strCouleur;
+          objC2D.beginPath();
+          objC2D.moveTo(objMur.intXDebut, objMur.intYDebut);
+          objC2D.lineTo(objMur.intXFin, objMur.intYDebut);
+          objC2D.lineTo(objMur.intXFin, objMur.intYFin);
+          objC2D.lineTo(objMur.intXDebut, objMur.intYFin);
+          objC2D.closePath();
+          objC2D.fill();
+      }
+      objC2D.restore();
+	  }
+
+    // Pour dessiner la base de beton du jeu
+    function dessinerBeton() {
+      objC2D.save();
+        objImageBrique = new Image();
+        objImageBrique.src = 'images/beton.png'
+        for (var i = 0; i < 28; i++) {
+            objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
+        }
+      objC2D.restore();
+    }
+
+    // Pour dessiner les briques du jeu
+    function dessinerBriques() {
+
+
+    }
+
+    // Pour dessiner les echelles et les barres 
+    function dessinerEchellesBarres() {
+
+      
+    }
+
    </script>
 </head>
 
 <body onload="initAnimation()"> 
-	<canvas id="monCanvas" width="960" height="640" tabIndex="1" onkeydown="deplacerBaton(); return false">
+	<canvas id="monCanvas" width="928" height="672" tabIndex="1" onkeydown="deplacerBaton(); return false">
 		Votre navigateur ne supporte pas la balise canvas
 	</canvas>
 </body>
