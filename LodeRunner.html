@@ -14,20 +14,25 @@
 
     let objImageFond = null;
     let tabObjMurs = null;
+    var intPosX = 0;
+    var intPosY = 0;
         
     function initAnimation() {
         objCanvas = document.getElementById('monCanvas'); // (960x640)
 	    	objCanvas.focus();
         objC2D = objCanvas.getContext('2d');
-        initImageFond();
+        initDisposition();
         initMurs();
 	      dessiner(); // Dessiner une première fois
         animer();  // animer
     }
 
-    // Aller chercher l'image de fond
-    function initImageFond() {
-        objImageFond = new Image();
+    // Initialiser la disposition initiale dans un tableau
+    function initDisposition() {
+      // apprendre a faire la lecture de fichier
+      // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
+      // remplacer la
+
     }
 
     // Construire les murs
@@ -122,9 +127,17 @@
     function dessiner() {
         dessinerFond();
         dessinerMurs();
-        dessinerBeton();
-        dessinerBriques();
-        dessinerEchellesBarres();
+        // creer une fonction dessinerXYZ:
+        //  qui va lire le tableau2D, puis va appeler les 3 fonctions si-dessous
+        //  dépendament de ce qui est neccessaire pour dessiner un objet a la fois
+          dessinerBeton();
+          dessinerBriques();
+          dessinerEchellesBarres();
+        // ajouter une fonction qui enleve les briques/ajoute gold en utilisant le 
+        //    même tableau2D, pour enlever briques, on ajoute par dessus l'image nobrick.png
+        //dessinerVide();
+        //dessinerOr();
+
     }
 
     // Pour dessiner l'image de fond
@@ -138,7 +151,6 @@
     // Pour dessiner les murs
     function dessinerMurs() {
       objC2D.save();
-      objC2D.globalAlpha = 0.8;
 
       for (let intNoMur = 0; intNoMur < tabObjMurs.length; intNoMur++) {
           let objMur = tabObjMurs[intNoMur];
