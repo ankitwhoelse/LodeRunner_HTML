@@ -85,15 +85,24 @@ function initMurs() {
     // objMur.strCouleur = 'blue';
     // tabObjMurs.push(objMur);
 } 
-function initLodeRunner(){
-    let objImageLodeRunner = new Image();
-    objImageLodeRunner.src="";
+function initLodeRunner(){ 
+    console.log("allo");
+    objImageLodeRunner = new Image();
+    objImageLodeRunner.src = 'Personnages/LodeRunner/loderunner_dpl_droite_1.png';
     objLodeRunner = new Object();
-    objLodeRunner.objImage = objImageLodeRunner;
-    objLodeRunner.intLargeur = Math.floor(objCanvas.width / 10);
-    objLodeRunner.intHauteur = Math.floor(objCanvas.height / 20);
-    objLodeRunner.intX = (objCanvas.width - objLodeRunner.intLargeur) / 2;
-    objLodeRunner.intY = objCanvas.height - Math.floor(objCanvas.height / 5);
-    objLodeRunner.intVitesse = Math.floor(objCanvas.width / 30);
-    objLodeRunner.intDirection = 1;
+    objLodeRunner.Image = objImageLodeRunner;
+
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "5") {
+                  objLodeRunner.intX =   k*32 + 16;
+                  objLodeRunner.intY =i*32 + 32;
+                  
+                } 
+            }
+        }
+    }
+   
 }
