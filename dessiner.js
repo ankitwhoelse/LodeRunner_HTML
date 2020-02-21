@@ -128,3 +128,4 @@ function dessinerLodeRunner(){
     objC2D.drawImage(objLodeRunner.objImage, objLodeRunner.intX, objLodeRunner.intY, objLodeRunner.intLargeur, objLodeRunner.intHauteur);
     objC2D.restore();
 }
+}
