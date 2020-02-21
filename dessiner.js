@@ -126,7 +126,6 @@ function dessinerTexte() {
 
 function dessinerLodeRunner(){
     objC2D.save();
-    console.log(objLodeRunner.intX);
     objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
     objC2D.restore();
     
