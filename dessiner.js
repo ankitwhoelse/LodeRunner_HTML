@@ -12,11 +12,8 @@ function dessiner() {
     //    même tableau2D, pour enlever briques, on ajoute par dessus l'image nobrick.png
     //dessinerVide();
     //dessinerOr();
-<<<<<<< HEAD
     dessinerTexte();
-=======
     dessinerLodeRunner();
->>>>>>> e183076452d0bde4e7e7ed73ed22511763f327a2
 }
 
 // Pour dessiner l'image de fond
@@ -110,7 +107,6 @@ function dessinerEchellesBarres() {
     objC2D.restore();
 }
 
-<<<<<<< HEAD
 // Pour dessiner les éléments de texte
 function dessinerTexte() {
     objC2D.save();
@@ -128,6 +124,5 @@ function dessinerTexte() {
 function dessinerLodeRunner(){
     objC2D.save();
     objC2D.drawImage(objLodeRunner.objImage, objLodeRunner.intX, objLodeRunner.intY, objLodeRunner.intLargeur, objLodeRunner.intHauteur);
->>>>>>> e183076452d0bde4e7e7ed73ed22511763f327a2
     objC2D.restore();
 }
