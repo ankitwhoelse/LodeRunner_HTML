@@ -1,0 +1,7 @@
+Légende de dispositions.txt
+# Vide = 0
+# Brique = 1
+# Echelle = 2
+# Barre = 3
+# Beton = 4
+# Lode Runner = 5

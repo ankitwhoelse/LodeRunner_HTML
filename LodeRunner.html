@@ -7,7 +7,13 @@
   <title>Vortex par Ribensky Merzius et Ankit Patel</title>
   <link rel="stylesheet" type="text/css" href="" />
   <!-- Code JavaScript local -->
+  <script data-require="jquery@3.0.0" data-semver="3.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+  <script type='text/javascript' src="init.js"></script>
+  <script type='text/javascript' src="maj.js"></script>
+  <script type='text/javascript' src="dessiner.js"></script>
+  <script type='text/javascript' s="fonctions.js"></script>
   <script type="text/javascript"> 
+  
     let objCanvas = null;
     let objC2D = null;
     let objCycleAnimation = null;
@@ -17,15 +23,13 @@
     var intPosX = 0;
     var intPosY = 0;
 
+    
+
    </script>
-   <script type='text/javascript' src="maj.js"></script>
-   <script type='text/javascript' src="init.js"></script>
-   <script type='text/javascript' src="dessiner.js"></script>
-   <script type='text/javascript' src="fonctions.js"></script>
 </head>
 
 <body onload="initAnimation()"> 
-	<canvas id="monCanvas" width="928" height="672" tabIndex="1" onkeydown="deplacerBaton(); return false">
+	<canvas id="monCanvas" width="928" height="672" tabIndex="1">
 		Votre navigateur ne supporte pas la balise canvas
 	</canvas>
 </body>

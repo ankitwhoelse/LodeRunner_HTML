@@ -9,14 +9,22 @@ function initAnimation() {
     animer();  // animer
 }
 
+var tabDispo;
 
 // Initialiser la disposition initiale dans un tableau
 function initDisposition() {
     // apprendre a faire la lecture de fichier
     // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
     // remplacer la
+    $.get("dispositions.txt", function(data) {
+        tabDispo = data.split("\r\n").map( function(el) {
+             return el.split(";");
+            }
+        );
+        console.log(tabDispo)
+    });
 
-    }
+}
 
     // Construire les murs
 function initMurs() {
@@ -32,7 +40,7 @@ function initMurs() {
     objMur.strCouleur = 'orange';
     tabObjMurs.push(objMur);
 
-    // Le mur du centre (en haut) (#1)
+    // Le mur du haut (#1)
     objMur = new Object();
     objMur.intXDebut = 0;
     objMur.intYDebut = 0;
