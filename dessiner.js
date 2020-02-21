@@ -5,14 +5,14 @@ function dessiner() {
     // creer une fonction dessinerXYZ:
     //  qui va lire le tableau2D, puis va appeler les 3 fonctions si-dessous
     //  dépendament de ce qui est neccessaire pour dessiner un objet a la fois
-        dessinerBeton();
-        dessinerBriques();
-        dessinerEchellesBarres();
+    dessinerBeton();
+    dessinerBriques();
+    dessinerEchellesBarres();
     // ajouter une fonction qui enleve les briques/ajoute gold en utilisant le 
     //    même tableau2D, pour enlever briques, on ajoute par dessus l'image nobrick.png
     //dessinerVide();
     //dessinerOr();
-
+    dessinerTexte();
 }
 
 // Pour dessiner l'image de fond
@@ -39,16 +39,15 @@ function dessinerMurs() {
         objC2D.fill();
     }
     objC2D.restore();
-    }
+    
+}
 
 // Pour dessiner la base de beton du jeu
 function dessinerBeton() {
     objC2D.save();
     objImageBeton = new Image();
     objImageBeton.src = 'images/beton.png'
-    // for (var i = 0; i < 28; i++) {
-    //     objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
-    // }
+    
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
@@ -68,9 +67,7 @@ function dessinerBriques() {
     objC2D.save();
     objImageBrique = new Image();
     objImageBrique.src = 'images/brick.png'
-    // for (var i = 0; i < 28; i++) {
-    //     objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
-    // }
+    
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
@@ -92,9 +89,7 @@ function dessinerEchellesBarres() {
     objImageBarre.src = 'images/barre.png'
     objImageEchelle = new Image();
     objImageEchelle.src = 'images/ladder.png'
-    // for (var i = 0; i < 28; i++) {
-    //     objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
-    // }
+    
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
@@ -107,6 +102,22 @@ function dessinerEchellesBarres() {
             }
         }
     }
+
+    objC2D.restore();
+}
+
+// Pour dessiner les éléments de texte
+function dessinerTexte() {
+    objC2D.save();
+
+    // Titre dans mur du haut
+    objC2D.beginPath();
+    objC2D.strokeStyle = 'black'; 
+    objC2D.lineWidth = 2;
+    objC2D.font = '20pt Verdana'; // Police de caractères
+    objC2D.textAlign = 'center';
+    objC2D.strokeText('Lode Runner by the bois',objCanvas.width/2,25);
+    objC2D.closePath();
 
     objC2D.restore();
 }
