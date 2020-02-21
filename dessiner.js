@@ -44,22 +44,69 @@ function dessinerMurs() {
 // Pour dessiner la base de beton du jeu
 function dessinerBeton() {
     objC2D.save();
-    objImageBrique = new Image();
-    objImageBrique.src = 'images/beton.png'
-    for (var i = 0; i < 28; i++) {
-        objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
+    objImageBeton = new Image();
+    objImageBeton.src = 'images/beton.png'
+    // for (var i = 0; i < 28; i++) {
+    //     objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
+    // }
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "4") {
+                    objC2D.drawImage(objImageBeton, k*32 + 16,i*32 + 32, 32, 32);
+                } 
+            }
+        }
     }
+
     objC2D.restore();
 }
 
 // Pour dessiner les briques du jeu
 function dessinerBriques() {
+    objC2D.save();
+    objImageBrique = new Image();
+    objImageBrique.src = 'images/brick.png'
+    // for (var i = 0; i < 28; i++) {
+    //     objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
+    // }
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "1") {
+                    objC2D.drawImage(objImageBrique, k*32 + 16,i*32 + 32, 32, 32);
+                } 
+            }
+        }
+    }
 
-
+    objC2D.restore();
 }
 
 // Pour dessiner les echelles et les barres 
 function dessinerEchellesBarres() {
+    objC2D.save();
+    objImageBarre = new Image();
+    objImageBarre.src = 'images/barre.png'
+    objImageEchelle = new Image();
+    objImageEchelle.src = 'images/ladder.png'
+    // for (var i = 0; i < 28; i++) {
+    //     objC2D.drawImage(objImageBrique, 16 + i*32, objCanvas.height - 128, 32, 32);
+    // }
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "2") {
+                    objC2D.drawImage(objImageEchelle, k*32 + 16,i*32 + 32, 32, 32);
+                } else if  (tabDispo[i][k] == "3") {
+                    objC2D.drawImage(objImageBarre, k*32 + 16,i*32 + 32, 32, 32); 
+                }
+            }
+        }
+    }
 
-    
+    objC2D.restore();
 }
