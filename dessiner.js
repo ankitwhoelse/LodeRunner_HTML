@@ -113,14 +113,16 @@ function dessinerTexte() {
 
     // Titre dans mur du haut
     objC2D.beginPath();
-    objC2D.strokeStyle = 'black'; 
-    objC2D.lineWidth = 2;
+    objC2D.strokeStyle = 'black';
+    objC2D.fillStyle = "black";
+    objC2D.lineWidth = 1;
     objC2D.font = '20pt Verdana'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.strokeText('Lode Runner by the bois',objCanvas.width/2,25);
+    objC2D.strokeText('Lode Runner par Ribensky/Ankit',objCanvas.width/2,25);
+    objC2D.fillText('Lode Runner par Ribensky/Ankit',objCanvas.width/2,25);
     objC2D.closePath();
+}
 
-=======
 function dessinerLodeRunner(){
     objC2D.save();
     objC2D.drawImage(objLodeRunner.objImage, objLodeRunner.intX, objLodeRunner.intY, objLodeRunner.intLargeur, objLodeRunner.intHauteur);
