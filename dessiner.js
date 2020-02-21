@@ -120,9 +120,11 @@ function dessinerTexte() {
     objC2D.strokeText('Lode Runner by the bois',objCanvas.width/2,25);
     objC2D.closePath();
 
+}
 function dessinerLodeRunner(){
     objC2D.save();
-    objC2D.drawImage(objLodeRunner.objImage, objLodeRunner.intX, objLodeRunner.intY, objLodeRunner.intLargeur, objLodeRunner.intHauteur);
+    console.log(objLodeRunner.intX);
+    objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
     objC2D.restore();
-}
+    
 }
