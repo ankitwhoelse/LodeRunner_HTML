@@ -123,15 +123,11 @@ function dessinerTexte() {
     objC2D.closePath();
 }
 
-}
+
 function dessinerLodeRunner(){
     objC2D.save();
     console.log(objLodeRunner.intX);
     objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
     objC2D.restore();
-<<<<<<< HEAD
-}
-=======
     
 }
->>>>>>> c4eda6dc7a69ee53f48e96433b857eb1bcd38389
