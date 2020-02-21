@@ -12,11 +12,8 @@ function dessiner() {
     //    même tableau2D, pour enlever briques, on ajoute par dessus l'image nobrick.png
     //dessinerVide();
     //dessinerOr();
-<<<<<<< HEAD
     dessinerTexte();
-=======
     dessinerLodeRunner();
->>>>>>> e183076452d0bde4e7e7ed73ed22511763f327a2
 }
 
 // Pour dessiner l'image de fond
