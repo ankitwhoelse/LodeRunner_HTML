@@ -1,18 +1,3 @@
-let objCanvas = null;
-let objC2D = null;
-let objCycleAnimation = null;
-
-let objImageFond = null;
-let tabObjMurs = null;
-let tabX = null;
-let tabY = null;
-let objBaton = null;
-let objBalle = null;
-let objBalleJaune = null;
-let objVortex = null;
-let objSons = null;
-let objPointage = null;
-
 
  function initAnimation() {
     objCanvas = document.getElementById('monCanvas');

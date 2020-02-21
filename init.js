@@ -4,7 +4,8 @@ function initAnimation() {
     objC2D = objCanvas.getContext('2d');
     initDisposition();
     initMurs();
-    dessiner(); // Dessiner une première fois
+    initLodeRunner();
+      dessiner(); // Dessiner une première fois
     animer();  // animer
 }
 
@@ -84,3 +85,15 @@ function initMurs() {
     // objMur.strCouleur = 'blue';
     // tabObjMurs.push(objMur);
 } 
+function initLodeRunner(){
+    let objImageLodeRunner = new Image();
+    objImageLodeRunner.src="";
+    objLodeRunner = new Object();
+    objLodeRunner.objImage = objImageLodeRunner;
+    objLodeRunner.intLargeur = Math.floor(objCanvas.width / 10);
+    objLodeRunner.intHauteur = Math.floor(objCanvas.height / 20);
+    objLodeRunner.intX = (objCanvas.width - objLodeRunner.intLargeur) / 2;
+    objLodeRunner.intY = objCanvas.height - Math.floor(objCanvas.height / 5);
+    objLodeRunner.intVitesse = Math.floor(objCanvas.width / 30);
+    objLodeRunner.intDirection = 1;
+}
