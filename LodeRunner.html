@@ -88,8 +88,10 @@
       framesPerSecond = 15;
       switch(event.key) {
           case "ArrowLeft": 
+              framesPerSecond=15;
               changementDirection("gauche");
               touche="gauche";
+              console.log(objLodeRunner.intX);
               break;
           case "ArrowRight": 
               touche="droite";

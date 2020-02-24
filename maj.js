@@ -61,16 +61,22 @@ function mettreAjourLodeRunner(sprite, touche) {
                 break;
             case 3:    // mouvement sur sol/barre de franchissement et placer bombs
                 if (touche == "droite") {
+                    if(objLodeRunner.intX< objCanvas.width-36 )
+                    {
                     curFrame3 = ++curFrame3 % frameCount3;
                     srcX3 = curFrame3 * width3;
                     srcY3 = 0;
+                    }
                 } else if (touche == "gauche") {
+                    if( objLodeRunner.intX>16){
+                    objLodeRunner.Image = objLodeRunnerGauche;
                     curFrame3 = ++curFrame3 % frameCount3;
                     srcX3 = curFrame3 * width3;
                     srcY3 = 0;
                 }
+                
                 break;
-
+            }
             default: "idk";
                 break;
         }
