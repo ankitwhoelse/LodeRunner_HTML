@@ -31,11 +31,23 @@ function mettreAjourAnimation() {
     temps++;
 }
 
-function mettreAjourLodeRunner(){
-    curFrame = ++curFrame % frameCount; 				
-    srcX = curFrame * width; 
-    srcY=0;
-    objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);	
+function mettreAjourLodeRunner(toucheAppuye){
+     curFrame = ++curFrame % frameCount; 				
+    
+    objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
+    switch(toucheAppuye) {
+        case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
+
+            break;
+        case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
+        srcX = curFrame * width; 
+        srcY=0;
+            break;
+
+        default: "idk";
+            break;
+    }
+   	
     
   /*  if(left && x>0){
         srcY = trackLeft * height; 
