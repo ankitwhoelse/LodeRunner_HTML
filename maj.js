@@ -100,21 +100,21 @@ function changementDirection(toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
-            if (objLodeRunner.intX <= objCanvas.width - 36 && (objLodeRunner.intX >= 16))
+            if ( (objLodeRunner.intX >= 16))
                 objLodeRunner.intX -= 2;
             break;
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
-            if (objLodeRunner.intX <= objCanvas.width - 36 && (objLodeRunner.intX > 16))
+            if (objLodeRunner.intX <= objCanvas.width - 36 )
                 objLodeRunner.intX += 2;
 
                 if (objLodeRunner.intX >= objCanvas.width-16)
                     objLodeRunner.intX = objCanvas.width-17;
 
             break;
-
+ 
         case "haut":      // echelles
             spriteCount = 2;
             for (var i = 0; i < tabDispo.length; i++) {
@@ -142,6 +142,7 @@ function changementDirection(toucheAppuye) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if (tabDispo[i][k] == "2") {
+                        
                         var ladderX = k * 32 + 16;
                         var ladderY = i * 32 + 32;
 
