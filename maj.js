@@ -33,19 +33,36 @@ function mettreAjourAnimation() {
     temps++;
 }
 
-function mettreAjourLodeRunner(spriteCount){
-    if (spriteCount==3) {
-        curFrame = ++curFrame % frameCount; 				
+function mettreAjourLodeRunner(toucheAppuye){
+     curFrame = ++curFrame % frameCount; 				
+    
+    objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
+    switch(toucheAppuye) {
+        case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
+
+            break;
+        case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
         srcX = curFrame * width; 
         srcY=0;
-        objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
-    } else if (spriteCount ==2) {
-        curFrame2 = ++curFrame2 % frameCount2; 				
-        srcX2 = curFrame2 * width2; 
-        srcY2=0;    
-        objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width2,height2); 
-    }	
+            break;
 
+        default: "idk";
+            break;
+    }
+
+    // function mettreAjourLodeRunner(spriteCount){
+    //     if (spriteCount==3) {
+    //         curFrame = ++curFrame % frameCount; 				
+    //         srcX = curFrame * width; 
+    //         srcY=0;
+    //         objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
+    //     } else if (spriteCount ==2) {
+    //         curFrame2 = ++curFrame2 % frameCount2; 				
+    //         srcX2 = curFrame2 * width2; 
+    //         srcY2=0;    
+    //         objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width2,height2); 
+    //     }	
+   	
     
   /*  if(left && x>0){
         srcY = trackLeft * height; 
