@@ -19,8 +19,8 @@ function dessiner() {
 // Pour dessiner l'image de fond
 function dessinerFond() {
     objC2D.save();
-    objC2D.fillStyle = 'black';    
-    objC2D.fillRect(0,0,objCanvas.width,objCanvas.height);    
+    objC2D.fillStyle = 'black';
+    objC2D.fillRect(0, 0, objCanvas.width, objCanvas.height);
     objC2D.restore();
 }
 
@@ -40,7 +40,7 @@ function dessinerMurs() {
         objC2D.fill();
     }
     objC2D.restore();
-    
+
 }
 
 // Pour dessiner la base de beton du jeu
@@ -48,14 +48,14 @@ function dessinerBeton() {
     objC2D.save();
     objImageBeton = new Image();
     objImageBeton.src = 'images/beton.png'
-    
+
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == "4") {
-                    objC2D.drawImage(objImageBeton, k*32 + 16,i*32 + 32, 32, 32);
-                } 
+                    objC2D.drawImage(objImageBeton, k * 32 + 16, i * 32 + 32, 32, 32);
+                }
             }
         }
     }
@@ -68,14 +68,14 @@ function dessinerBriques() {
     objC2D.save();
     objImageBrique = new Image();
     objImageBrique.src = 'images/brick.png'
-    
+
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == "1") {
-                    objC2D.drawImage(objImageBrique, k*32 + 16,i*32 + 32, 32, 32);
-                } 
+                    objC2D.drawImage(objImageBrique, k * 32 + 16, i * 32 + 32, 32, 32);
+                }
             }
         }
     }
@@ -90,15 +90,15 @@ function dessinerEchellesBarres() {
     objImageBarre.src = 'images/barre.png'
     objImageEchelle = new Image();
     objImageEchelle.src = 'images/ladder.png'
-    
+
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == "2") {
-                    objC2D.drawImage(objImageEchelle, k*32 + 16,i*32 + 32, 32, 32);
-                } else if  (tabDispo[i][k] == "3") {
-                    objC2D.drawImage(objImageBarre, k*32 + 16,i*32 + 32, 32, 32); 
+                    objC2D.drawImage(objImageEchelle, k * 32 + 16, i * 32 + 32, 32, 32);
+                } else if (tabDispo[i][k] == "3") {
+                    objC2D.drawImage(objImageBarre, k * 32 + 16, i * 32 + 32, 32, 32);
                 }
             }
         }
@@ -118,13 +118,13 @@ function dessinerTexte() {
     objC2D.lineWidth = 1;
     objC2D.font = '20pt Verdana'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.strokeText('Lode Runner par Ribensky/Ankit',objCanvas.width/2,25);
-    objC2D.fillText('Lode Runner par Ribensky/Ankit',objCanvas.width/2,25);
+    objC2D.strokeText('Lode Runner par Ribensky/Ankit', objCanvas.width / 2, 25);
+    objC2D.fillText('Lode Runner par Ribensky/Ankit', objCanvas.width / 2, 25);
     objC2D.closePath();
 }
 
 
-function dessinerLodeRunner(){
+function dessinerLodeRunner() {
 
 
     objC2D.save();
@@ -135,19 +135,21 @@ function dessinerLodeRunner(){
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == "5") {
                     if (objLodeRunner.intY == 0 && objLodeRunner.intX == 0) {
-                        objLodeRunner.intX = k*32 + 16 + 32;
-                        objLodeRunner.intY = i*32 + 32;
+                        objLodeRunner.intX = k * 32 + 16 + 32;
+                        objLodeRunner.intY = i * 32 + 32;
                     }
-                    objC2D.drawImage(objLodeRunner.Image,srcX,srcY,width,height, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
-                   // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
-                } 
+                    objC2D.drawImage(objLodeRunner.Image, srcX, srcY, width, height, objLodeRunner.intX, objLodeRunner.intY, 32, 32);
+                    if (booStart == false)
+                        touche = null;
+                    // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
+                }
             }
         }
     }
-    
-    
-    
+
+
+
     objC2D.restore();
-  
-    
+
+
 }

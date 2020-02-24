@@ -1,14 +1,18 @@
-   // Un cycle d'animation	
-   function animer() {
-    // Requête pour le prochain cycle
-    objCycleAnimation = requestAnimationFrame(animer);
+   // Un cycle d'animation
+  
 
-    // Le cycle d'animation
+function animer() {
+    setTimeout(function() {
+     objCycleAnimation =     requestAnimationFrame(animer);
     effacerDessin();
-    mettreAjourAnimation();
+     mettreAjourAnimation();
     dessiner();
-}
+        // animating/drawing code goes here
 
+
+    }, 1000 / framesPerSecond);
+}	
+   
 // Arrêter l'animation
 function arreterAnimation() {
     if (objCycleAnimation != null)
@@ -23,27 +27,44 @@ function effacerDessin() {
 
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
-    if(temps==5 && spriteCount ==3) {
-        mettreAjourLodeRunner(3);
+    if(temps==5 && spriteCount ==3&&booStart==true) {
+        mettreAjourLodeRunner(3,touche);
         temps=0;
     } else if (temps==5 && spriteCount ==2) {
-        mettreAjourLodeRunner(2);
+        mettreAjourLodeRunner(2,touche);
+        temps=0;
+    }
+    if(booStart==false)
+    {
+        mettreAjourLodeRunner(3,touche);
         temps=0;
     }
     temps++;
 }
 
-function mettreAjourLodeRunner(toucheAppuye){
-     curFrame = ++curFrame % frameCount; 				
-    
-    objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
-    switch(toucheAppuye) {
+function mettreAjourLodeRunner(sprite,touche){
+    if(booStart==true)
+    {
+    curFrame = ++curFrame % frameCount; 	
+    srcX = curFrame * width; 
+    srcY=0; 
+    }
+   objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
+   
+    switch(sprite) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
 
             break;
-        case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
-        srcX = curFrame * width; 
-        srcY=0;
+        case 3:    // mouvement sur sol/barre de franchissement et placer bombs
+        if(touche=="droite")
+        {
+     
+        curFrame = ++curFrame % frameCount; 	
+         srcX = curFrame * width; 
+         srcY=0; 
+         objLodeRunner.intX+=5;
+        }
+         
             break;
 
         default: "idk";
@@ -83,7 +104,7 @@ function changementDirection(toucheAppuye) {
             spriteCount = 3;
             break;
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
-            spriteCount = 3;
+            spriteCount = 3
             break;
         case "haut":      // echelles
             spriteCount = 2;

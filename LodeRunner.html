@@ -23,9 +23,11 @@
     var intPosX = 0;
     var intPosY = 0;
     var tabDispo = null;
-    
+    let framesPerSecond = 60;
+    let booStart=true;
     let temps=0;
     let spriteCount = 3;
+    let touche=null;
 
     // spritesheet 2
       var spriteWidth2 = 64; 
@@ -39,7 +41,9 @@
 			var curFrame2 = 0; 
 			var frameCount2 = 2; 
 			var srcX2; 
-			var srcY2; 
+      var srcY2; 
+      var srcX = 0; 
+      var srcY=0;
     // spritesheet 2  
 
     // spritesheet 3
@@ -72,7 +76,11 @@
               changementDirection("gauche");
               break;
           case "ArrowRight": 
+              touche="droite";
+              booStart=false;
+              framesPerSecond=15;
               changementDirection("droite");
+              
               break;
           case "ArrowUp":  
               changementDirection("haut");
