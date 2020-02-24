@@ -22,14 +22,42 @@
     let tabObjMurs = null;
     var intPosX = 0;
     var intPosY = 0;
+    var tabDispo = null;
     
+    function gestionClavier() {
+      console.log("appuyé sur: " + event.key);
     
+      switch(event.key) {
+          case "ArrowLeft": 
+              changementDirection("gauche");
+              break;
+          case "ArrowRight": 
+              changementDirection("droite");
+              break;
+          case "ArrowUp":  
+              changementDirection("haut");
+              break;
+          case "ArrowDown":
+              changementDirection("bas"); 
+              break;
+          case "z": 
+              changementDirection("gauche"); 
+              break;
+          case "c":  
+              changementDirection("droite"); 
+              break;
+          default: 
+          console.log("bad key - Billie Eilish")
+          break;
+      }
+
+    }
 
    </script>
 </head>
 
 <body onload="initAnimation()"> 
-	<canvas id="monCanvas" width="928" height="672" tabIndex="1">
+	<canvas id="monCanvas" width="928" height="672" tabIndex="1" onkeydown="gestionClavier()">
 		Votre navigateur ne supporte pas la balise canvas
 	</canvas>
 </body>

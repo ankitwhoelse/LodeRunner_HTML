@@ -1,15 +1,16 @@
 function initAnimation() {
     objCanvas = document.getElementById('monCanvas'); // (960x640)
-        objCanvas.focus();
+    objCanvas.focus();
     objC2D = objCanvas.getContext('2d');
     initDisposition();
-    initMurs();
-    initLodeRunner();
-      dessiner(); // Dessiner une première fois
-    animer();  // animer
-}
 
-var tabDispo;
+    if (tabDispo == null) {
+        initMurs();
+        initLodeRunner();
+        dessiner(); // Dessiner une première fois
+        animer();  // animer 
+    }
+}
 
 // Initialiser la disposition initiale dans un tableau
 function initDisposition() {
@@ -23,7 +24,6 @@ function initDisposition() {
         );
         console.log(tabDispo)
     });
-
 }
 
     // Construire les murs
@@ -85,24 +85,16 @@ function initMurs() {
     // objMur.strCouleur = 'blue';
     // tabObjMurs.push(objMur);
 } 
+
 function initLodeRunner(){ 
-    console.log("allo");
     objImageLodeRunner = new Image();
     objImageLodeRunner.src = 'Personnages/LodeRunner/loderunner_dpl_droite_1.png';
     objLodeRunner = new Object();
     objLodeRunner.Image = objImageLodeRunner;
+    objLodeRunner.intX = 0;
+    objLodeRunner.intY = 0;
+    
+    // initialisation des images
 
-    if (tabDispo != null) {
-        for (var i = 0; i < tabDispo.length; i++) {
-            var ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (tabDispo[i][k] == "5") {
-                  objLodeRunner.intX =   k*32 + 16;
-                  objLodeRunner.intY =i*32 + 32;
-                  
-                } 
-            }
-        }
-    }
-   
+
 }

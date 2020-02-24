@@ -126,7 +126,22 @@ function dessinerTexte() {
 
 function dessinerLodeRunner(){
     objC2D.save();
-    objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "5") {
+                    objLodeRunner.intX = k*32 + 16;
+                    objLodeRunner.intY = i*32 + 32;
+                    objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+                } 
+            }
+        }
+    }
+    
+    
+    
     objC2D.restore();
     
 }
