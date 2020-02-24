@@ -40,16 +40,40 @@ function changementDirection(toucheAppuye) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if (tabDispo[i][k] == "2") {
-                        if (objLodeRunner.intX == i*32 && objLodeRunner.intY == k*32)
-                            console.log("on ladder")
-                    } 
+                        var ladderX = k*32 + 16;
+                        var ladderY = i*32 + 32;
+
+                        
+                            
+                    }
                 }
             }
 
 
             break;
         case "bas":       // echelles
-            
+            for (var i = 0; i < tabDispo.length; i++) {
+                var ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (tabDispo[i][k] == "2") {
+                        var ladderX = k*32 + 16;
+                        var ladderY = i*32 + 32;
+
+                        if (objLodeRunner.intX == ladderX && 
+                            objLodeRunner.intY >= ladderY  && objLodeRunner.intX <= ladderX+32) {
+                            // LODE SUR UNE ECHELLE
+                            if (objLodeRunner.Image == objImageUp1)
+                                objLodeRunner.Image = objImageUp2;
+                            else 
+                                objLodeRunner.Image = objImageUp1;
+                            
+                            objLodeRunner.intY++;
+                            console.log(objLodeRunner)
+                        }
+                            
+                    }
+                }
+            }
             break;
 
         default: "idk";

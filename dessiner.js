@@ -125,6 +125,8 @@ function dessinerTexte() {
 
 
 function dessinerLodeRunner(){
+
+
     objC2D.save();
 
     if (tabDispo != null) {
@@ -132,8 +134,10 @@ function dessinerLodeRunner(){
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == "5") {
-                    objLodeRunner.intX = k*32 + 16;
-                    objLodeRunner.intY = i*32 + 32;
+                    if (objLodeRunner.intX == 0 && objLodeRunner.intY == 0) {
+                        objLodeRunner.intX = k*32 + 16 + 32;
+                        objLodeRunner.intY = i*32 + 32; 
+                    }
                     objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
                 } 
             }

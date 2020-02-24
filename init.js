@@ -95,6 +95,9 @@ function initLodeRunner(){
     objLodeRunner.intY = 0;
     
     // initialisation des images
-
+    objImageUp1 = new Image();
+    objImageUp1.src = "Personnages/LodeRunner/loderunner_echelle_1.png";
+    objImageUp2 = new Image();
+    objImageUp2.src = "Personnages/LodeRunner/loderunner_echelle_2.png";
 
 }
