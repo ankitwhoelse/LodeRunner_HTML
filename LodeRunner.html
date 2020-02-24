@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+
 <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Vortex par Ribensky Merzius et Ankit Patel</title>
   <link rel="stylesheet" type="text/css" href="" />
   <!-- Code JavaScript local -->
-  <script data-require="jquery@3.0.0" data-semver="3.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+  <script data-require="jquery@3.0.0" data-semver="3.0.0"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
   <script type='text/javascript' src="init.js"></script>
   <script type='text/javascript' src="maj.js"></script>
   <script type='text/javascript' src="dessiner.js"></script>
   <script type='text/javascript' s="fonctions.js"></script>
-  <script type="text/javascript"> 
-  
+  <script type="text/javascript">
+
     let objCanvas = null;
     let objC2D = null;
     let objCycleAnimation = null;
-    let objLodeRunner=null;
+    let objLodeRunner = null;
     let objImageFond = null;
     let tabObjMurs = null;
     var intPosX = 0;
@@ -30,44 +32,42 @@
     let touche=null;
 
     // spritesheet 2
-      var spriteWidth2 = 64; 
-			var spriteHeight2 = 32; 
-			var rows2 = 1; 
-			var cols2 = 2; 
-		//var trackRight = 0; 
-		//var trackLeft = 1; 
-			var width2 = spriteWidth/cols; 
-			var height2 = spriteHeight/rows; 
-			var curFrame2 = 0; 
-			var frameCount2 = 2; 
-			var srcX2; 
-      var srcY2; 
-      var srcX = 0; 
-      var srcY=0;
+    var spriteWidth2 = 64;
+    var spriteHeight2 = 32;
+    var rows2 = 1;
+    var cols2 = 2;
+    //var trackRight = 0; 
+    //var trackLeft = 1; 
+    var width2 = spriteWidth2 / cols2;
+    var height2 = spriteHeight2 / rows2;
+    var curFrame2 = 0;
+    var frameCount2 = 2;
+    var srcX2;
+    var srcY2;
     // spritesheet 2  
 
     // spritesheet 3
-			var spriteWidth = 96; 
-			var spriteHeight = 32; 
-			var rows = 1; 
-			var cols = 3; 
-		//	var trackRight = 0; 
-		//	var trackLeft = 1; 
-			var width = spriteWidth/cols; 
-			var height = spriteHeight/rows; 
-			var curFrame = 0; 
-			var frameCount = 3; 
-			var srcX; 
-      var srcY; 
+    var spriteWidth3 = 96;
+    var spriteHeight3 = 32;
+    var rows3 = 1;
+    var cols3 = 3;
+    //	var trackRight = 0; 
+    //	var trackLeft = 1; 
+    var width3 = spriteWidth3 / cols3;
+    var height3 = spriteHeight3 / rows3;
+    var curFrame3 = 0;
+    var frameCount3 = 3;
+    var srcX3;
+    var srcY3;
     // spritesheet 3
-			
-		//	var left = false; 
-	//		var right = true;
-			
-			var speed = 12; 
-			
-		
-    
+
+    //	var left = false; 
+    //		var right = true;
+
+    var speed = 12;
+
+
+
     function gestionClavier() {
       console.log("appuyé sur: " + event.key);
     
@@ -101,13 +101,13 @@
 
     }
 
-   </script>
+  </script>
 </head>
 
-<body onload="initAnimation()"> 
-	<canvas id="monCanvas" width="928" height="672" tabIndex="1" onkeydown="gestionClavier()">
-		Votre navigateur ne supporte pas la balise canvas
-	</canvas>
+<body onload="initAnimation()">
+  <canvas id="monCanvas" width="928" height="672" tabIndex="1" onkeydown="gestionClavier()">
+    Votre navigateur ne supporte pas la balise canvas
+  </canvas>
 </body>
 
 </html>

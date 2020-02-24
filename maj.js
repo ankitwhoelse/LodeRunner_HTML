@@ -45,11 +45,11 @@ function mettreAjourAnimation() {
 function mettreAjourLodeRunner(sprite,touche){
     if(booStart==true)
     {
-    curFrame = ++curFrame % frameCount; 	
-    srcX = curFrame * width; 
-    srcY=0; 
+    curFrame3 = ++curFrame3 % frameCount3; 	
+    srcX3 = curFrame3 * width3; 
+    srcY3=0; 
     }
-   objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
+   objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width3,height3);
    
     switch(sprite) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
@@ -59,9 +59,9 @@ function mettreAjourLodeRunner(sprite,touche){
         if(touche=="droite")
         {
      
-        curFrame = ++curFrame % frameCount; 	
-         srcX = curFrame * width; 
-         srcY=0; 
+        curFrame3 = ++curFrame3 % frameCount3; 	
+         srcX3 = curFrame3 * width3; 
+         srcY3=0; 
          objLodeRunner.intX+=5;
         }
          
@@ -115,6 +115,13 @@ function changementDirection(toucheAppuye) {
                         var ladderX = k*32 + 16;
                         var ladderY = i*32 + 32;
 
+                        if ( ( objLodeRunner.intX == ladderX && objLodeRunner.intX == ladderX ) &&
+                             ( objLodeRunner.intY - 32 <= ladderY && objLodeRunner.intY >= ladderY-32 )  ) {
+
+                            // LODE SUR UNE ECHELLE
+                            objLodeRunner.Image = objLodeEchelle;
+                            objLodeRunner.intY--;
+                        }
                             
                     }
                 }
@@ -131,13 +138,12 @@ function changementDirection(toucheAppuye) {
                         var ladderX = k*32 + 16;
                         var ladderY = i*32 + 32;
 
-                        if (objLodeRunner.intX == ladderX && 
-                            objLodeRunner.intY >= ladderY  && objLodeRunner.intX <= ladderX+32) {
+                        if ( ( objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX <= ladderX+16 ) &&
+                             ( objLodeRunner.intY <= ladderY && objLodeRunner.intY <= ladderY+16 ) ) {
+
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
-                            
-                            objLodeRunner.intY++;
-                            console.log(objLodeRunner)
+                            objLodeRunner.intY ++;
                         }
                             
                     }
