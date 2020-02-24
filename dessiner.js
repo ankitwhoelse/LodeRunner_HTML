@@ -134,7 +134,8 @@ function dessinerLodeRunner(){
                 if (tabDispo[i][k] == "5") {
                     objLodeRunner.intX = k*32 + 16;
                     objLodeRunner.intY = i*32 + 32;
-                    objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+                    objC2D.drawImage(objLodeRunner.Image,srcX,srcY,width,height, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+                   // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
                 } 
             }
         }
@@ -143,5 +144,6 @@ function dessinerLodeRunner(){
     
     
     objC2D.restore();
+  
     
 }

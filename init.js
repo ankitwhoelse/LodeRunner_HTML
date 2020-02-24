@@ -89,7 +89,7 @@ function initMurs() {
 function initLodeRunner(){ 
     objImageLodeRunner = new Image();
     objLodeRunner = new Object();
-    objImageLodeRunner.src = 'Personnages/LodeRunner/loderunner_dpl_droite_1.png';
+    objImageLodeRunner.src = 'Personnages/LodeRunner/sprite_dpl_droite.png';
     objLodeRunner.Image = objImageLodeRunner;
     objLodeRunner.intX = 0;
     objLodeRunner.intY = 0;
