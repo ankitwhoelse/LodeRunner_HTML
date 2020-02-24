@@ -30,7 +30,7 @@ function mettreAjourAnimation() {
     if (temps == 5 && spriteCount == 3 && booStart == true) {
         mettreAjourLodeRunner(3, touche);
         temps = 0;
-    } else if (temps == 5 && spriteCount == 2) {
+    } else if (  spriteCount == 2) {
         mettreAjourLodeRunner(2, touche);
         temps = 0;
     }
@@ -52,16 +52,20 @@ function mettreAjourLodeRunner(sprite, touche) {
 
     switch (sprite) {
         case 2:      // mouvement sur sol/barre de franchissement et placer bombs
+        if(touche=="bas"||touche=="haut")
+        {
             curFrame2 = ++curFrame2 % frameCount2;
             srcX2 = curFrame2 * width2;
             srcY2 = 0;
             objC2D.clearRect(objLodeRunner.intX, objLodeRunner.intY, width2, height2);
+        }
             break;
         case 3:    // mouvement sur sol/barre de franchissement et placer bombs
             if (touche == "droite") {
                 curFrame3 = ++curFrame3 % frameCount3;
                 srcX3 = curFrame3 * width3;
                 srcY3 = 0;
+                if(objLodeRunner.intX<(objCanvas.width-36))
                 objLodeRunner.intX += 5;
                 objC2D.clearRect(objLodeRunner.intX, objLodeRunner.intY, width3, height3);
             }
@@ -120,8 +124,9 @@ function changementDirection(toucheAppuye) {
 
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
-                            objLodeRunner.intY--;
+                            objLodeRunner.intY-=1.5;
                         }
+                       
 
                     }
                 }
@@ -143,7 +148,7 @@ function changementDirection(toucheAppuye) {
 
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
-                            objLodeRunner.intY++;
+                            objLodeRunner.intY+=1.5;
                         }
 
                     }

@@ -139,7 +139,10 @@ function dessinerLodeRunner(){
                     if (spriteCount == 3)
                         objC2D.drawImage(objLodeRunner.Image,srcX3,srcY3,width3,height3, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
                     else if (spriteCount == 2)
+                    {
                         objC2D.drawImage(objLodeRunner.Image,srcX2,srcY2,width2,height2, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+                        touche=null;
+                    }
                         if(booStart==false)
                         touche=null;
                    // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);

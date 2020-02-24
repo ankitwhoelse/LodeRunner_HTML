@@ -98,4 +98,6 @@ function initLodeRunner(){
     objLodeEchelle = new Image();
     objLodeEchelle.src = "Personnages/LodeRunner/sprite_echelle.png";
 
+    // image déplacement gac
+
 }

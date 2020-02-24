@@ -30,6 +30,7 @@
     let temps=0;
     let spriteCount = 3;
     let touche=null;
+    let direction=0;
 
     // spritesheet 2
     var spriteWidth2 = 64;
@@ -65,7 +66,20 @@
     //		var right = true;
 
     var speed = 12;
-
+     // spritesheet 4
+     var spriteWidth4 = 64;
+    var spriteHeight4 = 32;
+    var rows4 = 1;
+    var cols4 = 2;
+    //var trackRight = 0; 
+    //var trackLeft = 1; 
+    var width4 = spriteWidth4 / cols4;
+    var height4 = spriteHeight4 / rows4;
+    var curFrame4 = 0;
+    var frameCount4 = 2;
+    var srcX4;
+    var srcY4;
+    // spritesheet 4 
 
 
     function gestionClavier() {
@@ -85,10 +99,13 @@
           case "ArrowUp":  
               changementDirection("haut");
               framesPerSecond = 15;
+              touche="haut";
+              console.log(spriteCount);
               break;
           case "ArrowDown":
               changementDirection("bas"); 
               framesPerSecond = 15;
+              touche="bas";
               break;
           case "z": 
               changementDirection("gauche"); 
