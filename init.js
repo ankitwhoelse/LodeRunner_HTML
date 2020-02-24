@@ -88,8 +88,8 @@ function initMurs() {
 function initLodeRunner(){ 
     console.log("allo");
     objImageLodeRunner = new Image();
-    objImageLodeRunner.src = 'Personnages/LodeRunner/loderunner_dpl_droite_1.png';
     objLodeRunner = new Object();
+    objImageLodeRunner.src = 'Personnages/LodeRunner/loderunner_dpl_droite_1.png';
     objLodeRunner.Image = objImageLodeRunner;
 
     if (tabDispo != null) {
