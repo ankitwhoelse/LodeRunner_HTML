@@ -33,17 +33,24 @@ function mettreAjourAnimation() {
     temps++;
 }
 
-function mettreAjourLodeRunner(toucheAppuye){
-     curFrame = ++curFrame % frameCount; 				
-    
-    objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
-    switch(toucheAppuye) {
+function mettreAjourLodeRunner(sprite){
+    if (spriteCount == 3 ) {
+        curFrame = ++curFrame % frameCount; 				
+        srcX = curFrame * width; 
+        srcY=0;
+        objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
+    } else if (spriteCount == 2) {
+        curFrame2 = ++curFrame2 % frameCount2; 				
+        srcX2 = curFrame2 * width2; 
+        srcY2=0;    
+        objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width2,height2); 
+    }
+    switch(sprite) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
 
             break;
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
-        srcX = curFrame * width; 
-        srcY=0;
+
             break;
 
         default: "idk";
@@ -94,6 +101,13 @@ function changementDirection(toucheAppuye) {
                         var ladderX = k*32 + 16;
                         var ladderY = i*32 + 32;
 
+                        if ( ( objLodeRunner.intX == ladderX && objLodeRunner.intX == ladderX ) &&
+                             ( objLodeRunner.intY - 32 <= ladderY && objLodeRunner.intY >= ladderY-32 )  ) {
+
+                            // LODE SUR UNE ECHELLE
+                            objLodeRunner.Image = objLodeEchelle;
+                            objLodeRunner.intY--;
+                        }
                             
                     }
                 }
@@ -110,13 +124,12 @@ function changementDirection(toucheAppuye) {
                         var ladderX = k*32 + 16;
                         var ladderY = i*32 + 32;
 
-                        if (objLodeRunner.intX == ladderX && 
-                            objLodeRunner.intY >= ladderY  && objLodeRunner.intX <= ladderX+32) {
+                        if ( ( objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX <= ladderX+16 ) &&
+                             ( objLodeRunner.intY <= ladderY && objLodeRunner.intY <= ladderY+16 ) ) {
+
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
-                            
-                            objLodeRunner.intY++;
-                            console.log(objLodeRunner)
+                            objLodeRunner.intY ++;
                         }
                             
                     }

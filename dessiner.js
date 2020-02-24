@@ -125,8 +125,6 @@ function dessinerTexte() {
 
 
 function dessinerLodeRunner(){
-
-
     objC2D.save();
 
     if (tabDispo != null) {
@@ -138,7 +136,10 @@ function dessinerLodeRunner(){
                         objLodeRunner.intX = k*32 + 16 + 32;
                         objLodeRunner.intY = i*32 + 32;
                     }
-                    objC2D.drawImage(objLodeRunner.Image,srcX,srcY,width,height, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+                    if (spriteCount == 3)
+                        objC2D.drawImage(objLodeRunner.Image,srcX,srcY,width,height, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+                    else if (spriteCount == 2)
+                        objC2D.drawImage(objLodeRunner.Image,srcX2,srcY2,width2,height2, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
                    // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
                 } 
             }
