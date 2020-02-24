@@ -84,7 +84,8 @@
 
     function gestionClavier() {
       console.log("appuyé sur: " + event.key);
-    
+      booStart=false;
+      framesPerSecond = 15;
       switch(event.key) {
           case "ArrowLeft": 
               changementDirection("gauche");
@@ -92,20 +93,16 @@
               break;
           case "ArrowRight": 
               touche="droite";
-              booStart=false;
-              framesPerSecond=15;
 
               changementDirection("droite");              
               break;
           case "ArrowUp":  
               changementDirection("haut");
-              framesPerSecond = 15;
               touche="haut";
               console.log(spriteCount);
               break;
           case "ArrowDown":
               changementDirection("bas"); 
-              framesPerSecond = 15;
               touche="bas";
               break;
           case "z": 
