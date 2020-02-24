@@ -42,52 +42,47 @@ function mettreAjourAnimation() {
 }
 
 function mettreAjourLodeRunner(sprite, touche) {
+
     if (booStart == true) {
-        curFrame3 = ++curFrame3 % frameCount3;
-        srcX3 = curFrame3 * width3;
-        srcY3 = 0;
-        objC2D.clearRect(objLodeRunner.intX, objLodeRunner.intY, width3, height3);
-    }
-
-
-    switch (sprite) {
-        case 2:      // mouvement sur sol/barre de franchissement et placer bombs
-        if(touche=="bas"||touche=="haut")
-        {
+        if (sprite == 3) {
+            curFrame3 = ++curFrame3 % frameCount3;
+            srcX3 = curFrame3 * width3;
+            srcY3 = 0;
+        } else if (sprite == 2) {
             curFrame2 = ++curFrame2 % frameCount2;
             srcX2 = curFrame2 * width2;
             srcY2 = 0;
-            objC2D.clearRect(objLodeRunner.intX, objLodeRunner.intY, width2, height2);
         }
-            break;
-        case 3:    // mouvement sur sol/barre de franchissement et placer bombs
-            if (touche == "droite") {
-                curFrame3 = ++curFrame3 % frameCount3;
-                srcX3 = curFrame3 * width3;
-                srcY3 = 0;
-                if(objLodeRunner.intX<(objCanvas.width-36))
-                objLodeRunner.intX += 5;
-                objC2D.clearRect(objLodeRunner.intX, objLodeRunner.intY, width3, height3);
-            }
-            break;
 
-        default: "idk";
-            break;
     }
 
-    // function mettreAjourLodeRunner(spriteCount){
-    //     if (spriteCount==3) {
-    //         curFrame = ++curFrame % frameCount; 				
-    //         srcX = curFrame * width; 
-    //         srcY=0;
-    //         objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width,height);
-    //     } else if (spriteCount ==2) {
-    //         curFrame2 = ++curFrame2 % frameCount2; 				
-    //         srcX2 = curFrame2 * width2; 
-    //         srcY2=0;    
-    //         objC2D.clearRect(objLodeRunner.intX,objLodeRunner.intY,width2,height2); 
-    //     }	
+    if (!booStart) {
+        switch (sprite) {
+            case 2:      // mouvement sur sol/barre de franchissement et placer bombs
+                if (touche == "haut" || touche == "bas") {
+                    curFrame2 = ++curFrame2 % frameCount2;
+                    srcX2 = curFrame2 * width2;
+                    srcY2 = 0;
+                }
+                break;
+            case 3:    // mouvement sur sol/barre de franchissement et placer bombs
+                if (touche == "droite") {
+                    curFrame3 = ++curFrame3 % frameCount3;
+                    srcX3 = curFrame3 * width3;
+                    srcY3 = 0;
+                    objLodeRunner.intX += 5;
+                } else if (touche == "gauche") {
+                    curFrame3 = ++curFrame3 % frameCount3;
+                    srcX3 = curFrame3 * width3;
+                    srcY3 = 0;
+                    objLodeRunner.intX -= 5;
+                }
+                break;
 
+            default: "idk";
+                break;
+        }
+    }
 
     /*  if(left && x>0){
           srcY = trackLeft * height; 
@@ -106,10 +101,14 @@ function changementDirection(toucheAppuye) {
     switch (toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
+            objLodeRunner.Image = objImageLodeRunner;
             break;
+
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
-            spriteCount = 3
+            spriteCount = 3;
+            objLodeRunner.Image = objImageLodeRunner;
             break;
+
         case "haut":      // echelles
             spriteCount = 2;
             for (var i = 0; i < tabDispo.length; i++) {
@@ -119,21 +118,18 @@ function changementDirection(toucheAppuye) {
                         var ladderX = k * 32 + 16;
                         var ladderY = i * 32 + 32;
 
-                        if ((objLodeRunner.intX == ladderX && objLodeRunner.intX == ladderX) &&
+                        if ((objLodeRunner.intX - 10 <= ladderX && objLodeRunner.intX +10 >= ladderX) &&
                             (objLodeRunner.intY - 32 <= ladderY && objLodeRunner.intY >= ladderY - 32)) {
 
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
                             objLodeRunner.intY-=1.5;
                         }
-                       
-
                     }
                 }
             }
-
-
             break;
+
         case "bas":       // echelles
             spriteCount = 2;
             for (var i = 0; i < tabDispo.length; i++) {
@@ -150,7 +146,6 @@ function changementDirection(toucheAppuye) {
                             objLodeRunner.Image = objLodeEchelle;
                             objLodeRunner.intY+=1.5;
                         }
-
                     }
                 }
             }
