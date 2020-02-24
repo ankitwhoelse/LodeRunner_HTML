@@ -1,15 +1,10 @@
 // Un cycle d'animation
-
-
 function animer() {
     setTimeout(function () {
         objCycleAnimation = requestAnimationFrame(animer);
         effacerDessin();
         mettreAjourAnimation();
         dessiner();
-        // animating/drawing code goes here
-
-
     }, 1000 / framesPerSecond);
 }
 
@@ -30,7 +25,7 @@ function mettreAjourAnimation() {
     if (temps == 5 && spriteCount == 3 && booStart == true) {
         mettreAjourLodeRunner(3, touche);
         temps = 0;
-    } else if (  spriteCount == 2) {
+    } else if (spriteCount == 2) {
         mettreAjourLodeRunner(2, touche);
         temps = 0;
     }
@@ -42,7 +37,6 @@ function mettreAjourAnimation() {
 }
 
 function mettreAjourLodeRunner(sprite, touche) {
-
     if (booStart == true) {
         if (sprite == 3) {
             curFrame3 = ++curFrame3 % frameCount3;
@@ -72,7 +66,6 @@ function mettreAjourLodeRunner(sprite, touche) {
                     curFrame3 = ++curFrame3 % frameCount3;
                     srcX3 = curFrame3 * width3;
                     srcY3 = 0;
-                    objLodeRunner.intX += 5;
                     }
                 } else if (touche == "gauche") {
                     if( objLodeRunner.intX>16){
@@ -80,11 +73,10 @@ function mettreAjourLodeRunner(sprite, touche) {
                     curFrame3 = ++curFrame3 % frameCount3;
                     srcX3 = curFrame3 * width3;
                     srcY3 = 0;
-                    objLodeRunner.intX -= 5;
-                    }
                 }
+                
                 break;
-
+            }
             default: "idk";
                 break;
         }
@@ -108,11 +100,19 @@ function changementDirection(toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
+            if (objLodeRunner.intX <= objCanvas.width - 36 && (objLodeRunner.intX >= 16))
+                objLodeRunner.intX -= 2;
             break;
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
+            if (objLodeRunner.intX <= objCanvas.width - 36 && (objLodeRunner.intX > 16))
+                objLodeRunner.intX += 2;
+
+                if (objLodeRunner.intX >= objCanvas.width-16)
+                    objLodeRunner.intX = objCanvas.width-17;
+
             break;
 
         case "haut":      // echelles
@@ -124,12 +124,12 @@ function changementDirection(toucheAppuye) {
                         var ladderX = k * 32 + 16;
                         var ladderY = i * 32 + 32;
 
-                        if ((objLodeRunner.intX - 10 <= ladderX && objLodeRunner.intX +10 >= ladderX) &&
+                        if ((objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX + 16 >= ladderX) &&
                             (objLodeRunner.intY - 32 <= ladderY && objLodeRunner.intY >= ladderY - 32)) {
 
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
-                            objLodeRunner.intY-=1.5;
+                            objLodeRunner.intY -= 1.5;
                         }
                     }
                 }
@@ -145,12 +145,12 @@ function changementDirection(toucheAppuye) {
                         var ladderX = k * 32 + 16;
                         var ladderY = i * 32 + 32;
 
-                        if ((objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX <= ladderX + 16) &&
-                            (objLodeRunner.intY <= ladderY && objLodeRunner.intY <= ladderY + 16)) {
+                        if ((objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX + 16 >= ladderX) &&
+                            (objLodeRunner.intY + 32 >= ladderY && objLodeRunner.intY <= ladderY + 32)) {
 
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
-                            objLodeRunner.intY+=1.5;
+                            objLodeRunner.intY += 1.5;
                         }
                     }
                 }

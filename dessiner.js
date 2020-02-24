@@ -133,7 +133,7 @@ function dessinerLodeRunner(){
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == "5") {
                     if (objLodeRunner.intY == 0 && objLodeRunner.intX == 0) {
-                        objLodeRunner.intX = k * 32 + 16 + 32;
+                        objLodeRunner.intX = k * 32 + 16;
                         objLodeRunner.intY = i * 32 + 32;
                     }
                     if (spriteCount == 3)
