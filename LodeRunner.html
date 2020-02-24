@@ -23,7 +23,32 @@
     var intPosX = 0;
     var intPosY = 0;
     var tabDispo = null;
-    lodeInit = 0;
+    let temps=0;
+			var spriteWidth = 96; 
+			var spriteHeight = 32; 
+			
+			var rows = 1; 
+			var cols = 3; 
+			
+		//	var trackRight = 0; 
+		//	var trackLeft = 1; 
+			
+			var width = spriteWidth/cols; 
+			var height = spriteHeight/rows; 
+			
+			var curFrame = 0; 
+			var frameCount = 3; 
+			
+		
+			var srcX; 
+			var srcY; 
+			
+		//	var left = false; 
+	//		var right = true;
+			
+			var speed = 12; 
+			
+		
     
     function gestionClavier() {
       console.log("appuyé sur: " + event.key);
