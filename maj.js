@@ -100,15 +100,17 @@ function changementDirection(toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
-            if ( (objLodeRunner.intX >= 16))
-                objLodeRunner.intX -= 2;
+            
+            if (objLodeRunner.intX > 16)
+                objLodeRunner.intX -= 5;    //test speed
             break;
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
-            if (objLodeRunner.intX <= objCanvas.width - 36 )
-                objLodeRunner.intX += 2;
+            
+            if (objLodeRunner.intX < objCanvas.width - 40)
+                objLodeRunner.intX += 5;    // test speed
 
                 if (objLodeRunner.intX >= objCanvas.width-16)
                     objLodeRunner.intX = objCanvas.width-17;
@@ -130,6 +132,8 @@ function changementDirection(toucheAppuye) {
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
                             objLodeRunner.intY -= 1.5;
+                            objLodeRunner.intX = ladderX;
+                            
                         }
                     }
                 }
@@ -141,17 +145,19 @@ function changementDirection(toucheAppuye) {
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
-                    if (tabDispo[i][k] == "2") {
-                        
-                        var ladderX = k * 32 + 16;
-                        var ladderY = i * 32 + 32;
+                    if (i+1 < tabDispo.length) {
+                        if (tabDispo[i+1][k] == "2") {
+                            var ladderX = k * 32 + 16;
+                            var ladderY = i * 32 + 32;
 
-                        if ((objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX + 16 >= ladderX) &&
-                            (objLodeRunner.intY + 32 >= ladderY && objLodeRunner.intY <= ladderY + 32)) {
+                            if ((objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX + 16 >= ladderX) &&
+                                (objLodeRunner.intY + 32 >= ladderY && objLodeRunner.intY <= ladderY + 32)) {
 
-                            // LODE SUR UNE ECHELLE
-                            objLodeRunner.Image = objLodeEchelle;
-                            objLodeRunner.intY += 1.5;
+                                // LODE SUR UNE ECHELLE
+                                objLodeRunner.Image = objLodeEchelle;
+                                objLodeRunner.intY += 1.5;
+                                objLodeRunner.intX = ladderX;
+                            }
                         }
                     }
                 }
