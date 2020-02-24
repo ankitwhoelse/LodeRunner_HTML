@@ -135,7 +135,7 @@ function dessinerLodeRunner(){
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == "5") {
                     if (objLodeRunner.intY == 0 && objLodeRunner.intX == 0) {
-                        objLodeRunner.intX = k*32 + 16;
+                        objLodeRunner.intX = k*32 + 16 + 32;
                         objLodeRunner.intY = i*32 + 32;
                     }
                     objC2D.drawImage(objLodeRunner.Image,srcX,srcY,width,height, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
