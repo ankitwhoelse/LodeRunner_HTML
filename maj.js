@@ -116,7 +116,7 @@ function changementDirection(toucheAppuye) {
                     objLodeRunner.intX = objCanvas.width-17;
 
             break;
-
+ 
         case "haut":      // echelles
             spriteCount = 2;
             for (var i = 0; i < tabDispo.length; i++) {
