@@ -94,15 +94,15 @@ function changementDirection(toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
-            if (objLodeRunner.intX <= objCanvas.width - 36 && (objLodeRunner.intX >= 16))
+            if (objLodeRunner.intX > 16)
                 objLodeRunner.intX -= 2;
             break;
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
-            if (objLodeRunner.intX <= objCanvas.width - 36 && (objLodeRunner.intX > 16))
-                objLodeRunner.intX += 2;
+            if (objLodeRunner.intX < objCanvas.width - 40)
+                objLodeRunner.intX += 5;
 
                 if (objLodeRunner.intX >= objCanvas.width-16)
                     objLodeRunner.intX = objCanvas.width-17;
