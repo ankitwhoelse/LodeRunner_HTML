@@ -36,6 +36,8 @@ function mettreAjourAnimation() {
     temps++;
 }
 
+let binTombe = false;
+
 function mettreAjourLodeRunner(sprite, touche) {
     if (booStart == true) {
         if (sprite == 3) {
@@ -61,22 +63,31 @@ function mettreAjourLodeRunner(sprite, touche) {
                 break;
             case 3:    // mouvement sur sol/barre de franchissement et placer bombs
                 if (touche == "droite") {
-                    if(objLodeRunner.intX< objCanvas.width-36 )
-                    {
-                    curFrame3 = ++curFrame3 % frameCount3;
-                    srcX3 = curFrame3 * width3;
-                    srcY3 = 0;
+                    if(objLodeRunner.intX< objCanvas.width-36 ) {
+                        curFrame3 = ++curFrame3 % frameCount3;
+                        srcX3 = curFrame3 * width3;
+                        srcY3 = 0;
+                    }
+                    if (binTombe) {
+                        console.log("tombe")
+                        objLodeRunner.intY += 5;
                     }
                 } else if (touche == "gauche") {
-                    if( objLodeRunner.intX>16){
-                    objLodeRunner.Image = objLodeRunnerGauche;
-                    curFrame3 = ++curFrame3 % frameCount3;
-                    srcX3 = curFrame3 * width3;
-                    srcY3 = 0;
-                }
+                    if (objLodeRunner.intX>16) {
+                        objLodeRunner.Image = objLodeRunnerGauche;
+                        curFrame3 = ++curFrame3 % frameCount3;
+                        srcX3 = curFrame3 * width3;
+                        srcY3 = 0;
+                    }
+                    if (binTombe) {
+                        console.log("tombe")
+                        objLodeRunner.intY += 5;
+                    }
+                }  
                 
+               
                 break;
-            }
+            
             default: "idk";
                 break;
         }
@@ -92,6 +103,8 @@ function mettreAjourLodeRunner(sprite, touche) {
       }*/
 }
 
+let binGauche = true;
+let binDroite = true;
 
 // Pour gerer le changement de direction
 function changementDirection(toucheAppuye) {
@@ -101,21 +114,56 @@ function changementDirection(toucheAppuye) {
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
             
-            if (objLodeRunner.intX > 16)
-                objLodeRunner.intX -= 5;    //test speed
-            break;
+            if (objLodeRunner.intX > 16 && binGauche==true) {
+                objLodeRunner.intX -= 5;    //test speed is 5
+                
+                if (objLodeRunner.intY%32 != 0)
+                    objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32)
+            }
+            
+            console.log("X: " + objLodeRunner.intX + "\nY: " + objLodeRunner.intY )
+
+            // VIDE EN DESSOUS DE LODE
+            var espaceSousLodeX = objLodeRunner.intX + 10;
+            var espaceSousLodeY = objLodeRunner.intY;
+
+            if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0") {
+                console.log("vide under")    
+                binGauche = false;
+                binTombe = true;
+            } else {
+                binGauche = true; 
+                binTombe = false;
+            }
+            
+            
+        break;
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
             
-            if (objLodeRunner.intX < objCanvas.width - 40)
-                objLodeRunner.intX += 5;    // test speed
+            if (objLodeRunner.intX < objCanvas.width - 40 && binDroite==true)
+                objLodeRunner.intX += 5;    // test speed is 5
 
                 if (objLodeRunner.intX >= objCanvas.width-16)
                     objLodeRunner.intX = objCanvas.width-17;
 
-            break;
+             // VIDE EN DESSOUS DE LODE
+             var espaceSousLodeX = objLodeRunner.intX - 10;
+             var espaceSousLodeY = objLodeRunner.intY;
+ 
+             if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0") {
+                 console.log("vide under")    
+                 binDroite = false;
+                 binTombe = true;
+             } else {
+                 binDroite = true; 
+                 binTombe = false;
+             }
+
+
+        break;
  
         case "haut":      // echelles
             spriteCount = 2;
@@ -131,7 +179,7 @@ function changementDirection(toucheAppuye) {
 
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
-                            objLodeRunner.intY -= 1.5;
+                            objLodeRunner.intY -= 2;
                             objLodeRunner.intX = ladderX;
                             
                         }
@@ -155,7 +203,7 @@ function changementDirection(toucheAppuye) {
 
                                 // LODE SUR UNE ECHELLE
                                 objLodeRunner.Image = objLodeEchelle;
-                                objLodeRunner.intY += 1.5;
+                                objLodeRunner.intY += 2;
                                 objLodeRunner.intX = ladderX;
                             }
                         }
