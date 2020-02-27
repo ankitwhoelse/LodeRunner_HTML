@@ -118,7 +118,7 @@ function changementDirection(toucheAppuye) {
                 objLodeRunner.intX -= 5;    //test speed is 5
                 
                 if (objLodeRunner.intY%32 != 0)
-                    objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32)
+                    objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32);
             }
             
             console.log("X: " + objLodeRunner.intX + "\nY: " + objLodeRunner.intY )
@@ -127,7 +127,8 @@ function changementDirection(toucheAppuye) {
             var espaceSousLodeX = objLodeRunner.intX + 10;
             var espaceSousLodeY = objLodeRunner.intY;
 
-            if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0") {
+            if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0" ||
+                    tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "3") {
                 console.log("vide under")    
                 binGauche = false;
                 binTombe = true;
@@ -153,7 +154,8 @@ function changementDirection(toucheAppuye) {
              var espaceSousLodeX = objLodeRunner.intX - 10;
              var espaceSousLodeY = objLodeRunner.intY;
  
-             if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0") {
+             if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0" ||
+                    tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "3") {
                  console.log("vide under")    
                  binDroite = false;
                  binTombe = true;
