@@ -98,8 +98,20 @@ function initLodeRunner(){
     objLodeEchelle = new Image();
     objLodeEchelle.src = "Personnages/LodeRunner/sprite_echelle.png";
 
-    // image déplacement gauche
+    // image bombe gauche
     objLodeRunnerGauche= new Image();
     objLodeRunnerGauche.src= "Personnages/LodeRunner/sprite_dpl_gauche.png";
+
+    // image bombe droite
+    objIMGLodeRunnerDroite = new Image();
+    objIMGLodeRunnerDroite.src = "Personnages/LodeRunner/loderunner_dpl_droite_1.png";
+
+    // image bomb 
+    objIMGBombe = new Image();
+    objIMGBombe.src = "images/bomb.gif";
+
+    // image lingot d'or
+    objImageOr = new Image();
+    objImageOr.src = "images/gold.png";
 
 }

@@ -28,18 +28,45 @@ function mettreAjourAnimation() {
     } else if (spriteCount == 2) {
         mettreAjourLodeRunner(2, touche);
         temps = 0;
+    } else if (spriteCount == 1) {
+        mettreAjourLodeRunner(1, touche);
+        temps = 0;
     }
+
+
     if (booStart == false) {
         mettreAjourLodeRunner(3, touche);
         temps = 0;
     }
     temps++;
+
+    if (tabDispo != null) {
+        // VIDE EN DESSOUS DE LODE
+        var espaceSousLodeX1 = objLodeRunner.intX;
+        var espaceSousLodeY = objLodeRunner.intY;
+
+        if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX1/32)] == "0" ||
+                tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX1/32)] == "3" )  {
+            
+            binGaucheDroite = false;
+            binTombe = true;
+        } else {
+            binGaucheDroite = true; 
+            binTombe = false;
+        }
+
+        if(binTombe) {
+            objLodeRunner.intY += 6;
+        }
+    }
+
 }
 
 let binTombe = false;
 
 function mettreAjourLodeRunner(sprite, touche) {
     if (booStart == true) {
+
         if (sprite == 3) {
             curFrame3 = ++curFrame3 % frameCount3;
             srcX3 = curFrame3 * width3;
@@ -48,12 +75,23 @@ function mettreAjourLodeRunner(sprite, touche) {
             curFrame2 = ++curFrame2 % frameCount2;
             srcX2 = curFrame2 * width2;
             srcY2 = 0;
+        } else if (sprite == 1) {
+            curFrame1 = ++curFrame1 % frameCount1;
+            srcX1 = curFrame1 * width1;
+            srcY1 = 0;
         }
 
     }
 
     if (!booStart) {
         switch (sprite) {
+            case 1:
+                if (touche== "gauche" || touche=="droite") {
+                    curFrame1 = ++curFrame1 % frameCount1;
+                    srcX1 = curFrame1 * width1;
+                    srcY1 = 0;
+                }
+                break;
             case 2:      // mouvement sur sol/barre de franchissement et placer bombs
                 if (touche == "haut" || touche == "bas") {
                     curFrame2 = ++curFrame2 % frameCount2;
@@ -79,13 +117,8 @@ function mettreAjourLodeRunner(sprite, touche) {
                         srcX3 = curFrame3 * width3;
                         srcY3 = 0;
                     }
-                    if (binTombe) {
-                        console.log("tombe")
-                        objLodeRunner.intY += 5;
-                    }
                 }  
-                
-               
+
                 break;
             
             default: "idk";
@@ -103,8 +136,7 @@ function mettreAjourLodeRunner(sprite, touche) {
       }*/
 }
 
-let binGauche = true;
-let binDroite = true;
+let binGaucheDroite = true;
 
 // Pour gerer le changement de direction
 function changementDirection(toucheAppuye) {
@@ -114,29 +146,12 @@ function changementDirection(toucheAppuye) {
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
             
-            if (objLodeRunner.intX > 16 && binGauche==true) {
+            if (objLodeRunner.intX > 16 && binGaucheDroite==true) {
                 objLodeRunner.intX -= 5;    //test speed is 5
                 
                 if (objLodeRunner.intY%32 != 0)
                     objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32);
             }
-            
-            console.log("X: " + objLodeRunner.intX + "\nY: " + objLodeRunner.intY )
-
-            // VIDE EN DESSOUS DE LODE
-            var espaceSousLodeX = objLodeRunner.intX + 10;
-            var espaceSousLodeY = objLodeRunner.intY;
-
-            if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0" ||
-                    tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "3") {
-                console.log("vide under")    
-                binGauche = false;
-                binTombe = true;
-            } else {
-                binGauche = true; 
-                binTombe = false;
-            }
-            
             
         break;
 
@@ -144,25 +159,12 @@ function changementDirection(toucheAppuye) {
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
             
-            if (objLodeRunner.intX < objCanvas.width - 40 && binDroite==true)
+            if (objLodeRunner.intX < objCanvas.width - 40 && binGaucheDroite==true) {
                 objLodeRunner.intX += 5;    // test speed is 5
 
-                if (objLodeRunner.intX >= objCanvas.width-16)
-                    objLodeRunner.intX = objCanvas.width-17;
-
-             // VIDE EN DESSOUS DE LODE
-             var espaceSousLodeX = objLodeRunner.intX - 10;
-             var espaceSousLodeY = objLodeRunner.intY;
- 
-             if (tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "0" ||
-                    tabDispo[Math.floor(espaceSousLodeY/32)][Math.floor(espaceSousLodeX/32)] == "3") {
-                 console.log("vide under")    
-                 binDroite = false;
-                 binTombe = true;
-             } else {
-                 binDroite = true; 
-                 binTombe = false;
-             }
+                if (objLodeRunner.intY%32 != 0)
+                    objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32);
+            }
 
 
         break;
@@ -212,6 +214,36 @@ function changementDirection(toucheAppuye) {
                     }
                 }
             }
+            break;
+
+            case "c":   // bombe a la droite
+                spriteCount = 1;
+                objLodeRunner.Image = objIMGLodeRunnerDroite;
+            
+                for (var i = 0; i < tabDispo.length; i++) {
+                    var ligneDispo = tabDispo[i];
+                    for (var k = 0; k < ligneDispo.length; k++) {
+                        if (i+1 < tabDispo.length) {
+                            if (tabDispo[i+1][k+1] == "1") {
+                                var briqueX = k * 32 + 16;
+                                var briqueY = i * 32 + 32;
+    
+                                if ((objLodeRunner.intX - 16 <= briqueX && objLodeRunner.intX + 16 >= briqueX) &&
+                                    (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
+                                        
+                                        objC2D.drawImage(objIMGBombe, (k+1) * 32 + 16, i * 32 + 32, 32, 32);
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                break;
+
+                
+            case "z":   // bombe a la gauche
+                
             break;
 
         default: "idk";

@@ -32,6 +32,20 @@
     let touche=null;
     let direction=0;
     
+    // spritesheet 1
+    var spriteWidth1 = 32;
+    var spriteHeight1 = 32;
+    var rows1 = 1;
+    var cols1 = 1;
+    //var trackRight = 0; 
+    //var trackLeft = 1; 
+    var width1 = spriteWidth1 / cols1;
+    var height1 = spriteHeight1 / rows1;
+    var curFrame1 = 0;
+    var frameCount1 = 1;
+    var srcX1;
+    var srcY1;
+    // spritesheet 1 
 
     // spritesheet 2
     var spriteWidth2 = 64;
@@ -108,14 +122,14 @@
               touche="bas";
               break;
           case "z": 
-              changementDirection("gauche"); 
+              changementDirection("z"); 
               break;
           case "c":  
-              changementDirection("droite"); 
+              changementDirection("c"); 
               break;
           default: 
-          console.log("bad key - Billie Eilish")
-          break;
+              console.log("bad key - Billie Eilish")
+              break;
       }
 
     }
