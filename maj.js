@@ -164,6 +164,24 @@ function changementDirection(toucheAppuye) {
 
                 if (objLodeRunner.intY%32 != 0)
                     objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32);
+
+                for (var i = 0; i < tabDispo.length; i++) {
+                    var ligneDispo = tabDispo[i];
+                    for (var k = 0; k < ligneDispo.length; k++) {
+                        if (tabDispo[i][k] == "6") {
+                            var goldX = k * 32 + 16;
+                            var goldY = i * 32 + 32;
+    
+                            if ((objLodeRunner.intX - 16 <= goldX && objLodeRunner.intX + 16 >= goldX) &&
+                                (objLodeRunner.intY - 32 <= goldY && objLodeRunner.intY >= goldY - 32)) {
+    
+                                console.log("picked up gold");
+                                tabDispo[i][k] = "0";
+                                intLingotOr++;
+                            }
+                        }
+                    }
+                }                
             }
 
 

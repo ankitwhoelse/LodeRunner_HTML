@@ -5,3 +5,4 @@ Légende de dispositions.txt
 # Barre = 3
 # Beton = 4
 # Lode Runner = 5
+# Or = 6

@@ -11,7 +11,7 @@ function dessiner() {
     // ajouter une fonction qui enleve les briques/ajoute gold en utilisant le 
     //    même tableau2D, pour enlever briques, on ajoute par dessus l'image nobrick.png
     //dessinerVide();
-    //dessinerOr();
+    dessinerOr();
     dessinerTexte();
     dessinerLodeRunner();
 }
@@ -46,8 +46,6 @@ function dessinerMurs() {
 // Pour dessiner la base de beton du jeu
 function dessinerBeton() {
     objC2D.save();
-    objImageBeton = new Image();
-    objImageBeton.src = 'images/beton.png'
 
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
@@ -63,11 +61,10 @@ function dessinerBeton() {
     objC2D.restore();
 }
 
-// Pour dessiner les briques du jeu
+// Pour dessiner les briques du jeu 
+//    et ajouter lingots d'or
 function dessinerBriques() {
     objC2D.save();
-    objImageBrique = new Image();
-    objImageBrique.src = 'images/brick.png'
 
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
@@ -86,10 +83,6 @@ function dessinerBriques() {
 // Pour dessiner les echelles et les barres 
 function dessinerEchellesBarres() {
     objC2D.save();
-    objImageBarre = new Image();
-    objImageBarre.src = 'images/barre.png'
-    objImageEchelle = new Image();
-    objImageEchelle.src = 'images/ladder.png'
 
     if (tabDispo != null) {
         for (var i = 0; i < tabDispo.length; i++) {
@@ -107,7 +100,24 @@ function dessinerEchellesBarres() {
     objC2D.restore();
 }
 
-// Pour dessiner les éléments de texte
+function dessinerOr() {
+    objC2D.save();
+
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "6") {
+                    objC2D.drawImage(objImageOr, k * 32 + 16, i * 32 + 32, 32, 32);
+                }
+            }
+        }
+    }
+
+}
+
+
+// Pour dessiner les éléments textes
 function dessinerTexte() {
     objC2D.save();
 
@@ -120,6 +130,39 @@ function dessinerTexte() {
     objC2D.textAlign = 'center';
     objC2D.strokeText('Lode Runner par Ribensky/Ankit', objCanvas.width / 2, 25);
     objC2D.fillText('Lode Runner par Ribensky/Ankit', objCanvas.width / 2, 25);
+    objC2D.closePath();
+
+    // Texte de pointage
+    objC2D.beginPath();
+    objC2D.fillStyle = "yellow";
+    objC2D.strokeStyle = "orange";
+    objC2D.lineWidth = 1;
+    objC2D.font = '30pt Impact'; // Police de caractères
+    objC2D.textAlign = 'center';
+    objC2D.fillText('Points : ' + pad(intPoints, 5), objCanvas.width / 6, objCanvas.height-40);
+    objC2D.strokeText('Points : ' + pad(intPoints, 5), objCanvas.width / 6, objCanvas.height-40);
+    objC2D.closePath();
+
+    // Texte de niveau
+    objC2D.beginPath();
+    objC2D.fillStyle = "yellow";
+    objC2D.strokeStyle = "orange";
+    objC2D.lineWidth = 1;
+    objC2D.font = '30pt Impact'; // Police de caractères
+    objC2D.textAlign = 'center';
+    objC2D.fillText('Niveau : ' + pad(intNiveau,2), objCanvas.width / 2, objCanvas.height-40);
+    objC2D.strokeText('Niveau : ' + pad(intNiveau,2), objCanvas.width / 2, objCanvas.height-40);
+    objC2D.closePath();
+
+    // Texte de vies restantes
+    objC2D.beginPath();
+    objC2D.fillStyle = "yellow";
+    objC2D.strokeStyle = "orange";
+    objC2D.lineWidth = 1;
+    objC2D.font = '30pt Impact'; // Police de caractères
+    objC2D.textAlign = 'center';
+    objC2D.fillText('Vies : ' + pad(intVies,2), objCanvas.width-164, objCanvas.height-40);
+    objC2D.strokeText('Vies : ' + pad(intVies,2), objCanvas.width-164, objCanvas.height-40);
     objC2D.closePath();
 }
 

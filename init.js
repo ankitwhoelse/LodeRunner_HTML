@@ -7,6 +7,7 @@ function initAnimation() {
     if (tabDispo == null) {
         initMurs();
         initLodeRunner();
+        initImages();
         dessiner(); // Dessiner une première fois
         animer();  // animer 
     }
@@ -23,7 +24,31 @@ function initDisposition() {
             }
         );
         console.log(tabDispo)
+
+        // AJOUTER LINGOT D'OR A RANDOM ENDROITS SUR LA MAP
+        let rand1 = Math.floor(Math.random() * 10);
+        let rand2 = Math.floor(Math.random() * 10);
+
+        if (tabDispo != null) {
+            for (var i = 0; i < tabDispo.length; i++) {
+                var ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (tabDispo[i][k] == "1") {
+                        
+                        rand2 = Math.floor(Math.random() * 10);
+                        if ((rand1 == rand2) && intLingotOr != 0) {
+                            if (tabDispo[i-1][k] == "0") {
+                                tabDispo[i-1][k] = 6;
+                                intLingotOr--;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     });
+
+    
 }
 
     // Construire les murs
@@ -76,14 +101,6 @@ function initMurs() {
     objMur.strCouleur = 'gray';
     tabObjMurs.push(objMur);
 
-    // L'espace du jeu TEST
-    // objMur = new Object();
-    // objMur.intXDebut = 16;
-    // objMur.intYDebut = 32;
-    // objMur.intXFin = 16 + 896;
-    // objMur.intYFin = 32 + 544;
-    // objMur.strCouleur = 'blue';
-    // tabObjMurs.push(objMur);
 } 
 
 function initLodeRunner(){ 
@@ -93,7 +110,11 @@ function initLodeRunner(){
     objLodeRunner.Image = objImageLodeRunner;
     objLodeRunner.intX = 0;
     objLodeRunner.intY = 0;
-    
+
+
+}
+
+function initImages() {
     // initialisation des images
     objLodeEchelle = new Image();
     objLodeEchelle.src = "Personnages/LodeRunner/sprite_echelle.png";
@@ -114,4 +135,19 @@ function initLodeRunner(){
     objImageOr = new Image();
     objImageOr.src = "images/gold.png";
 
+    // image brique
+    objImageBrique = new Image();
+    objImageBrique.src = 'images/brick.png'
+
+    // image beton
+    objImageBeton = new Image();
+    objImageBeton.src = 'images/beton.png'
+
+    // image barre
+    objImageBarre = new Image();
+    objImageBarre.src = 'images/barre.png'
+    
+    // image echelle
+    objImageEchelle = new Image();
+    objImageEchelle.src = 'images/ladder.png'
 }
