@@ -30,6 +30,7 @@ function initDisposition() {
 }
 
 function initLingotOr() {
+
     // AJOUTER LINGOT D'OR A RANDOM ENDROITS SUR LA MAP
     let rand1 = Math.floor(Math.random() * 10);
     let rand2 = Math.floor(Math.random() * 10);
@@ -51,7 +52,7 @@ function initLingotOr() {
             }
         }
     }
-
+  
     intLingotOr = 5;
 }
 

@@ -124,7 +124,7 @@ function dessinerEchelleEscape() {
 function dessinerOr() {
     objC2D.save();
 
-    if (tabDispo != null) {
+    if (tabDispo != null && binNextLevel==true) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {

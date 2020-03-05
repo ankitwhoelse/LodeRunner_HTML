@@ -37,6 +37,7 @@
     var intNiveau = 1;
     var intLingotOr = 5;
     var intLingotOrRamasse = 0;
+    var binNextLevel = true;
 
     // spritesheet 1
     var spriteWidth1 = 32;
@@ -104,37 +105,59 @@
 
 
     function gestionClavier() {
-      console.log("appuyé sur: " + event.key);
       booStart=false;
       framesPerSecond = 15;
 
       switch(event.key) {
           case "ArrowLeft": 
-              framesPerSecond=15;
               changementDirection("gauche");
               touche="gauche";
               break;
+
+          case "a":
+              changementDirection("gauche");
+              touche="gauche";
+              break;
+
           case "ArrowRight": 
               touche="droite";
-
               changementDirection("droite");              
               break;
+
+          case "d":
+              touche="droite";
+              changementDirection("droite");  
+              break;
+
           case "ArrowUp":  
               changementDirection("haut");
               touche="haut";
               break;
+
+          case "w":
+              changementDirection("haut");
+              touche="haut";
+              break;
+
           case "ArrowDown":
               changementDirection("bas"); 
               touche="bas";
               break;
+
+          case "s":
+              changementDirection("bas"); 
+              touche="bas";
+              break;
+
           case "z": 
               changementDirection("z"); 
               break;
+
           case "c":  
               changementDirection("c"); 
               break;
+
           default: 
-              console.log("bad key - Billie Eilish")
               break;
       }
 

@@ -172,7 +172,7 @@ function changementDirection(toucheAppuye) {
                                 intLingotOrRamasse++;
                                 tabDispo[i][k] = "0";
                                 intPoints += 250;
-                                console.log("picked up gold : " + intLingotOr);
+                                console.log("picked up gold : " + intLingotOrRamasse);
                             }
                         }
                     }
@@ -206,7 +206,7 @@ function changementDirection(toucheAppuye) {
                                 intLingotOrRamasse++;
                                 tabDispo[i][k] = "0";
                                 intPoints += 250;
-                                console.log("picked up gold : " + intLingotOr);
+                                console.log("picked up gold : " + intLingotOrRamasse);
                             }
                         }
                     }
@@ -233,18 +233,20 @@ function changementDirection(toucheAppuye) {
                             objLodeRunner.intY -= 2;
                             objLodeRunner.intX = ladderX;
                             
-                            console.log(objLodeRunner.intX + ":" + objLodeRunner.intY);
                             if (objLodeRunner.intY < 32) {
                                 console.log("exit level")
-                                
+                                binNextLevel = true;
+
                                 intNiveau++;
                                 intPoints += 1500;
-                                intLingotOrRamasse=0;
-                                intLingotOr=5;
+                                intLingotOr= 5;
+                                intLingotOrRamasse -= 5;
                                 objLodeRunner.intY = 0;
                                 objLodeRunner.intX = 0;
                                 dessiner();
                                 dessinerLodeRunner();
+                                
+                                console.log("new level")
                             }
 
                         }
