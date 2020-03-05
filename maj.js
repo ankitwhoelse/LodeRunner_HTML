@@ -61,7 +61,7 @@ function mettreAjourAnimation() {
         }
 
         if(binTombe) {
-            objLodeRunner.intY += 6;
+            objLodeRunner.intY += 7;
         }
     }
 
