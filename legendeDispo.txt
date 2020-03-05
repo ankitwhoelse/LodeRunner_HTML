@@ -6,3 +6,4 @@ Légende de dispositions.txt
 # Beton = 4
 # Lode Runner = 5
 # Or = 6
+# EchelleEscape = 7

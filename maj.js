@@ -22,6 +22,7 @@ function effacerDessin() {
 
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
+
     if (temps == 5 && spriteCount == 3 && booStart == true) {
         mettreAjourLodeRunner(3, touche);
         temps = 0;
@@ -33,6 +34,10 @@ function mettreAjourAnimation() {
         temps = 0;
     }
 
+    if (intLingotOr==0) {
+        intLingotOr = 5;
+        initLingotOr();
+    }
 
     if (booStart == false) {
         mettreAjourLodeRunner(3, touche);
@@ -151,6 +156,27 @@ function changementDirection(toucheAppuye) {
                 
                 if (objLodeRunner.intY%32 != 0)
                     objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32);
+
+                    // lingot d'or
+                for (var i = 0; i < tabDispo.length; i++) {
+                    var ligneDispo = tabDispo[i];
+                    for (var k = 0; k < ligneDispo.length; k++) {
+                        if (tabDispo[i][k] == "6") {
+                            var goldX = k * 32 + 16;
+                            var goldY = i * 32 + 32;
+    
+                            if ((objLodeRunner.intX - 16 <= goldX && objLodeRunner.intX + 16 >= goldX) &&
+                                (objLodeRunner.intY - 32 <= goldY && objLodeRunner.intY >= goldY - 32)) {
+    
+                                intLingotOr--;
+                                intLingotOrRamasse++;
+                                tabDispo[i][k] = "0";
+                                intPoints += 250;
+                                console.log("picked up gold : " + intLingotOr);
+                            }
+                        }
+                    }
+                } 
             }
             
         break;
@@ -165,6 +191,7 @@ function changementDirection(toucheAppuye) {
                 if (objLodeRunner.intY%32 != 0)
                     objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY%32);
 
+                    // lingot d'or
                 for (var i = 0; i < tabDispo.length; i++) {
                     var ligneDispo = tabDispo[i];
                     for (var k = 0; k < ligneDispo.length; k++) {
@@ -175,9 +202,11 @@ function changementDirection(toucheAppuye) {
                             if ((objLodeRunner.intX - 16 <= goldX && objLodeRunner.intX + 16 >= goldX) &&
                                 (objLodeRunner.intY - 32 <= goldY && objLodeRunner.intY >= goldY - 32)) {
     
-                                console.log("picked up gold");
+                                intLingotOr--;
+                                intLingotOrRamasse++;
                                 tabDispo[i][k] = "0";
-                                intLingotOr++;
+                                intPoints += 250;
+                                console.log("picked up gold : " + intLingotOr);
                             }
                         }
                     }
@@ -192,7 +221,7 @@ function changementDirection(toucheAppuye) {
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
-                    if (tabDispo[i][k] == "2") {
+                    if (tabDispo[i][k] == "2" || tabDispo[i][k] == "7") {
                         var ladderX = k * 32 + 16;
                         var ladderY = i * 32 + 32;
 
@@ -204,6 +233,20 @@ function changementDirection(toucheAppuye) {
                             objLodeRunner.intY -= 2;
                             objLodeRunner.intX = ladderX;
                             
+                            console.log(objLodeRunner.intX + ":" + objLodeRunner.intY);
+                            if (objLodeRunner.intY < 32) {
+                                console.log("exit level")
+                                
+                                intNiveau++;
+                                intPoints += 1500;
+                                intLingotOrRamasse=0;
+                                intLingotOr=5;
+                                objLodeRunner.intY = 0;
+                                objLodeRunner.intX = 0;
+                                dessiner();
+                                dessinerLodeRunner();
+                            }
+
                         }
                     }
                 }
@@ -216,7 +259,7 @@ function changementDirection(toucheAppuye) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if (i+1 < tabDispo.length) {
-                        if (tabDispo[i+1][k] == "2") {
+                        if (tabDispo[i+1][k] == "2" || tabDispo[i+1][k] == "7") {
                             var ladderX = k * 32 + 16;
                             var ladderY = i * 32 + 32;
 
@@ -249,7 +292,7 @@ function changementDirection(toucheAppuye) {
                                 if ((objLodeRunner.intX - 16 <= briqueX && objLodeRunner.intX + 16 >= briqueX) &&
                                     (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
                                         
-                                        objC2D.drawImage(objIMGBombe, (k+1) * 32 + 16, i * 32 + 32, 32, 32);
+                                    objC2D.drawImage(objIMGBombe, (k+1) * 32 + 16, i * 32 + 32, 32, 32);
                                 }
                             }
                         }

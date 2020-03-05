@@ -14,6 +14,10 @@ function dessiner() {
     dessinerOr();
     dessinerTexte();
     dessinerLodeRunner();
+
+    if (intLingotOrRamasse > 4) {
+        dessinerEchelleEscape();
+    }
 }
 
 // Pour dessiner l'image de fond
@@ -100,6 +104,23 @@ function dessinerEchellesBarres() {
     objC2D.restore();
 }
 
+function dessinerEchelleEscape() {
+    objC2D.save();
+
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "7") {
+                    objC2D.drawImage(objImageEchelle, k * 32 + 16, i * 32 + 32, 32, 32);
+                }
+            }
+        }
+    }
+
+    objC2D.restore();
+}
+
 function dessinerOr() {
     objC2D.save();
 
@@ -115,7 +136,6 @@ function dessinerOr() {
     }
 
 }
-
 
 // Pour dessiner les éléments textes
 function dessinerTexte() {
@@ -139,8 +159,8 @@ function dessinerTexte() {
     objC2D.lineWidth = 1;
     objC2D.font = '30pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('Points : ' + pad(intPoints, 5), objCanvas.width / 6, objCanvas.height-40);
-    objC2D.strokeText('Points : ' + pad(intPoints, 5), objCanvas.width / 6, objCanvas.height-40);
+    objC2D.fillText('Points : ' + pad(intPoints, 6), objCanvas.width / 6, objCanvas.height-40);
+    objC2D.strokeText('Points : ' + pad(intPoints, 6), objCanvas.width / 6, objCanvas.height-40);
     objC2D.closePath();
 
     // Texte de niveau

@@ -24,31 +24,35 @@ function initDisposition() {
             }
         );
         console.log(tabDispo)
+        initLingotOr();
+    });
+    
+}
 
-        // AJOUTER LINGOT D'OR A RANDOM ENDROITS SUR LA MAP
-        let rand1 = Math.floor(Math.random() * 10);
-        let rand2 = Math.floor(Math.random() * 10);
+function initLingotOr() {
+    // AJOUTER LINGOT D'OR A RANDOM ENDROITS SUR LA MAP
+    let rand1 = Math.floor(Math.random() * 10);
+    let rand2 = Math.floor(Math.random() * 10);
 
-        if (tabDispo != null) {
-            for (var i = 0; i < tabDispo.length; i++) {
-                var ligneDispo = tabDispo[i];
-                for (var k = 0; k < ligneDispo.length; k++) {
-                    if (tabDispo[i][k] == "1") {
-                        
-                        rand2 = Math.floor(Math.random() * 10);
-                        if ((rand1 == rand2) && intLingotOr != 0) {
-                            if (tabDispo[i-1][k] == "0") {
-                                tabDispo[i-1][k] = 6;
-                                intLingotOr--;
-                            }
+    if (tabDispo != null) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "1") {
+                    
+                    rand2 = Math.floor(Math.random() * 10);
+                    if ((rand1 == rand2) && intLingotOr != 0) {
+                        if (tabDispo[i-1][k] == "0") {
+                            tabDispo[i-1][k] = 6;
+                            intLingotOr--;
                         }
                     }
                 }
             }
         }
-    });
+    }
 
-    
+    intLingotOr = 5;
 }
 
     // Construire les murs
