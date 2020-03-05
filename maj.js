@@ -62,7 +62,24 @@ function mettreAjourAnimation() {
 
         if(binTombe) {
             objLodeRunner.intY += 7;
+            objLodeRunner.Image=objLodeChute;
+            spriteCount=2;
+            curFrame2 = ++curFrame2 % frameCount2;
+            srcX2 = curFrame2 * width2;
+            srcY2 = 0;
+            if(booStart)
+            {
+                objLodeRunner.Image=objImageLodeRunner;
+                spriteCount=3;
+            }
+            
         }
+        /*else
+        {
+            objLodeRunner.Image=objImageLodeRunner;
+            spriteCount=3;
+        }*/
+        
     }
 
 }

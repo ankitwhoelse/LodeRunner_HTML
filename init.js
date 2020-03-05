@@ -19,7 +19,7 @@ function initDisposition() {
     // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
     // remplacer la
     $.get("dispositions.txt", function(data) {
-        tabDispo = data.split("\r\n").map( function(el) {
+        tabDispo = data.split("\n").map( function(el) {
              return el.split(";");
             }
         );
@@ -123,7 +123,11 @@ function initImages() {
     // initialisation des images
     objLodeEchelle = new Image();
     objLodeEchelle.src = "Personnages/LodeRunner/sprite_echelle.png";
-
+    
+    // image chute 
+    objLodeChute = new Image();
+    objLodeChute.src = "Personnages/LodeRunner/sprite_chute.png";
+   
     // image bombe gauche
     objLodeRunnerGauche= new Image();
     objLodeRunnerGauche.src= "Personnages/LodeRunner/sprite_dpl_gauche.png";
