@@ -6,14 +6,29 @@ function initAnimation() {
 
     if (tabDispo == null) {
         initMurs();
-        initLodeRunner();
         initImages();
+        initLodeRunner();
         dessiner(); // Dessiner une première fois
         animer();  // animer 
     }
 }
 
-// Initialiser la disposition initiale dans un tableau
+// Initialiser la disposition initiale dans un tableau = WINDOWS 10
+function initDisposition() {
+    // apprendre a faire la lecture de fichier
+    // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
+    // remplacer la
+    $.get("dispositions.txt", function(data) {
+        tabDispo = data.split("\r\n").map( function(el) {
+             return el.split(";");
+            }
+        );
+        console.log(tabDispo)
+        initLingotOr();
+    });
+}
+/*
+// Initialiser la disposition initiale dans un tableau = MAC OSX
 function initDisposition() {
     // apprendre a faire la lecture de fichier
     // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
@@ -26,8 +41,8 @@ function initDisposition() {
         console.log(tabDispo)
         initLingotOr();
     });
-    
 }
+*/
 
 function initLingotOr() {
 
@@ -121,7 +136,7 @@ function initImages() {
     objImageLodeRunner.src = 'Personnages/LodeRunner/sprite_dpl_droite.png';
 
     objImageGarde1 = new Image();
-    objImageGarde1.src = ''
+    objImageGarde1.src = '';
 
     // image echelle
     objLodeEchelle = new Image();
