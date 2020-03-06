@@ -2,18 +2,13 @@
 function dessiner() {
     dessinerFond();
     dessinerMurs();
-    // creer une fonction dessinerXYZ:
-    //  qui va lire le tableau2D, puis va appeler les 3 fonctions si-dessous
-    //  dépendament de ce qui est neccessaire pour dessiner un objet a la fois
     dessinerBeton();
     dessinerBriques();
     dessinerEchellesBarres();
-    // ajouter une fonction qui enleve les briques/ajoute gold en utilisant le 
-    //    même tableau2D, pour enlever briques, on ajoute par dessus l'image nobrick.png
-    //dessinerVide();
     dessinerOr();
     dessinerTexte();
     dessinerLodeRunner();
+    dessinerGarde();
 
     if (intLingotOrRamasse > 4) {
         dessinerEchelleEscape();
@@ -135,6 +130,7 @@ function dessinerOr() {
         }
     }
 
+    objC2D.restore();
 }
 
 // Pour dessiner les éléments textes
@@ -201,12 +197,11 @@ function dessinerLodeRunner(){
                     }
                     if (spriteCount == 3)
                         objC2D.drawImage(objLodeRunner.Image,srcX3,srcY3,width3,height3, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
-                    else if (spriteCount == 2)
-                    {
+                    else if (spriteCount == 2)  {
                         objC2D.drawImage(objLodeRunner.Image,srcX2,srcY2,width2,height2, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
                         touche=null;
                     }
-                        if(booStart==false)
+                    if(booStart==false)
                         touche=null;
                    // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
                 } 
@@ -214,9 +209,5 @@ function dessinerLodeRunner(){
         }
     }
 
-
-
     objC2D.restore();
-
-
 }

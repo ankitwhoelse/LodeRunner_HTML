@@ -13,6 +13,7 @@
   <script type='text/javascript' src="init.js"></script>
   <script type='text/javascript' src="maj.js"></script>
   <script type='text/javascript' src="dessiner.js"></script>
+  <script type='text/javascript' src="garde.js"></script>
   <script type='text/javascript' src="fonctions.js"></script>
   <script type="text/javascript">
 
@@ -36,9 +37,12 @@
     var intVies = 5;
     var intNiveau = 1;
     var intLingotOr = 5;
+    var intGardeCompte = 5;
     var intLingotOrRamasse = 0;
     var binNextLevel = true;
     var binDecrocherBarre=false;
+
+
     // spritesheet 1
     var spriteWidth1 = 32;
     var spriteHeight1 = 32;
@@ -166,7 +170,7 @@
   </script>
 </head>
 
-<body onload="initAnimation()">
+<body bgcolor="F5DEB3" onload="initAnimation()">
   <canvas id="monCanvas" width="928" height="672" tabIndex="1" onkeydown="gestionClavier()">
     Votre navigateur ne supporte pas la balise canvas
   </canvas>

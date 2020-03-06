@@ -5,15 +5,16 @@ function initAnimation() {
     initDisposition();
 
     if (tabDispo == null) {
-        initMurs();
         initImages();
+        initMurs();
         initLodeRunner();
+        //initGarde();
         dessiner(); // Dessiner une première fois
         animer();  // animer 
     }
 }
 
-// Initialiser la disposition initiale dans un tableau = WINDOWS 10
+// Initialiser la disposition initiale dans un tableau => WINDOWS 10
 function initDisposition() {
     // apprendre a faire la lecture de fichier
     // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
@@ -25,10 +26,11 @@ function initDisposition() {
         );
         console.log(tabDispo)
         initLingotOr();
+        initGardePosition();
     });
 }
 /*
-// Initialiser la disposition initiale dans un tableau = MAC OSX
+// Initialiser la disposition initiale dans un tableau => MAC OSX
 function initDisposition() {
     // apprendre a faire la lecture de fichier
     // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
@@ -45,22 +47,23 @@ function initDisposition() {
 */
 
 function initLingotOr() {
-
     // AJOUTER LINGOT D'OR A RANDOM ENDROITS SUR LA MAP
     let rand1 = Math.floor(Math.random() * 10);
     let rand2 = Math.floor(Math.random() * 10);
 
     if (tabDispo != null) {
-        for (var i = 0; i < tabDispo.length; i++) {
-            var ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (tabDispo[i][k] == "1") {
-                    
-                    rand2 = Math.floor(Math.random() * 10);
-                    if ((rand1 == rand2) && intLingotOr != 0) {
-                        if (tabDispo[i-1][k] == "0") {
-                            tabDispo[i-1][k] = 6;
-                            intLingotOr--;
+        while (intLingotOr > 0) {
+            for (var i = 0; i < tabDispo.length; i++) {
+                var ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (tabDispo[i][k] == "1") {
+                        
+                        rand2 = Math.floor(Math.random() * 10);
+                        if ((rand1 == rand2) && intLingotOr != 0) {
+                            if (tabDispo[i-1][k] == "0") {
+                                tabDispo[i-1][k] = 6;
+                                intLingotOr--;
+                            }
                         }
                     }
                 }
@@ -71,7 +74,35 @@ function initLingotOr() {
     intLingotOr = 5;
 }
 
-    // Construire les murs
+function initGardePosition() {
+    // Ajouter gardes sur des positions randoms
+    let rand1 = Math.floor(Math.random() * 10);
+    let rand2 = Math.floor(Math.random() * 10);
+
+    if (tabDispo != null) {
+        while (intGardeCompte > 0) {
+            for (var i = 0; i < tabDispo.length-3; i++) {
+                var ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (tabDispo[i][k] == "1") {
+                        
+                        rand2 = Math.floor(Math.random() * 10);
+                        if ((rand1 == rand2) && intGardeCompte != 0) {
+                            if (tabDispo[i-1][k] == "0") {
+                                tabDispo[i-1][k] = 8;
+                                intGardeCompte--;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    intGardeCompte = 5 + intNiveau%5 + Math.floor(intNiveau/5);
+}
+
+// Construire les murs
 function initMurs() {
     tabObjMurs = new Array();
     let objMur = null;
@@ -123,6 +154,7 @@ function initMurs() {
 
 } 
 
+// Initialiser LodeRunner
 function initLodeRunner(){ 
     objLodeRunner = new Object();
     objLodeRunner.Image = objImageLodeRunner;
@@ -130,13 +162,28 @@ function initLodeRunner(){
     objLodeRunner.intY = 0;
 }
 
+
+// Initialiser toutes les images
 function initImages() {
     // image LodeRunner
     objImageLodeRunner = new Image();
     objImageLodeRunner.src = 'Personnages/LodeRunner/sprite_dpl_droite.png';
 
-    objImageGarde1 = new Image();
-    objImageGarde1.src = '';
+    // image gardeTEST
+    objImageGardeT = new Image();
+    objImageGardeT.src = 'Personnages/GardeVert/New Piskel-41.png.png';
+
+    // image gardeV (vert)
+    objImageGardeV = new Image();
+    objImageGardeV.src = 'Personnages/GardeVert/sprite_dpl_droite_gardeVert.png';
+
+    // image gardeM (mauve)
+    objImageGardeM = new Image();
+    //objImageGardeM.src = 'Personnages/GardeVert/sprite_dpl_droite_gardeVert.png';
+        
+    // image gardeR (rouge)
+    objImageGardeR = new Image();
+    //objImageGardeR.src = 'Personnages/GardeVert/sprite_dpl_droite_gardeVert.png';
 
     // image echelle
     objLodeEchelle = new Image();

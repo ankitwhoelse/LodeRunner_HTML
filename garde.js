@@ -5,10 +5,42 @@
 // dessiner
 
 function initGarde() {
-    objImageLodeRunner = new Image();
-    objLodeRunner = new Object();
-    objImageLodeRunner.src = 'Personnages/LodeRunner/sprite_dpl_droite.png';
-    objLodeRunner.Image = objImageLodeRunner;
-    objLodeRunner.intX = 0;
-    objLodeRunner.intY = 0;
+    objGarde1 = new Object();
+    objGarde1.Image = objImageGardeV;
+    objGarde1.intX = 15*32;
+    objGarde1.intY = 10*32;
+    objGarde1.vitesse = 3;
+
+}
+
+function deplacementGarde() {
+    // Advanced AI... aka une tonne de if else
+
+    var espaceSousGardeX = objGarde1.intX;
+    var espaceSousGardeY = objGarde1.intY;
+
+    if (tabDispo[Math.floor(espaceSousGardeY / 32)][Math.floor(espaceSousGardeX / 32)] == "0" ||
+        tabDispo[Math.floor(espaceSousGardeY / 32)][Math.floor(espaceSousGardeX / 32)] == "3") {
+
+    } else {
+
+    }
+
+}
+
+function dessinerGarde() {
+    objC2D.save();
+
+    if (tabDispo != null && binNextLevel==true) {
+        for (var i = 0; i < tabDispo.length; i++) {
+            var ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == 8) {
+                    objC2D.drawImage(objImageGardeT, k * 32 + 16, i * 32 + 32, 32, 32);
+                }
+            }
+        }
+    }
+
+    objC2D.restore();
 }

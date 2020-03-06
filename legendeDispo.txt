@@ -7,3 +7,4 @@ Légende de dispositions.txt
 # Lode Runner = 5
 # Or = 6
 # EchelleEscape = 7
+# Garde = 8
