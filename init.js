@@ -127,6 +127,18 @@ function initImages() {
     // image chute 
     objLodeChute = new Image();
     objLodeChute.src = "Personnages/LodeRunner/sprite_chute.png";
+
+    // image barre droite 
+    objLodeBarreDroite = new Image();
+    objLodeBarreDroite.src = "Personnages/LodeRunner/sprite_barre_droite.png";
+    
+    // image barre gauche 
+    objLodeBarreGauche = new Image();
+    objLodeBarreGauche.src = "Personnages/LodeRunner/sprite_barre_gauche.png";
+   
+    // image barre droite 
+    objLodeBarreDroite= new Image();
+    objLodeBarreDroite.src = "Personnages/LodeRunner/sprite_barre_droite.png";
    
     // image bombe gauche
     objLodeRunnerGauche= new Image();
