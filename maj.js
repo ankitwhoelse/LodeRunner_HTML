@@ -45,7 +45,7 @@ function mettreAjourAnimation() {
     }
     temps++;
 
-    if (tabDispo != null && binBarre == false) {
+    if (tabDispo != null && binBarre == false ) {
         // VIDE EN DESSOUS DE LODE
         var espaceSousLodeX1 = objLodeRunner.intX;
         var espaceSousLodeY = objLodeRunner.intY;
@@ -57,6 +57,7 @@ function mettreAjourAnimation() {
         } else {
             binGaucheDroite = true;
             binTombe = false;
+            binDecrocherBarre=false;
         }
 
         if (binTombe) {
@@ -70,11 +71,10 @@ function mettreAjourAnimation() {
                 objLodeRunner.Image = objImageLodeRunner;
                 spriteCount = 3;
             }
-            else if(tabDispo[Math.floor(objLodeRunner.intY/ 32) - 1][Math.floor(objLodeRunner.intX/ 32)] == "3")
-            {
+            else if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "3"&&binDecrocherBarre==false) {
                 binGaucheDroite = true;
                 binTombe = false;
-                binBarre=true;
+                binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
             }
 
@@ -171,7 +171,7 @@ function changementDirection(toucheAppuye) {
             var espaceHautLodeX1 = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX1 / 32)] == "3") {
-                console.log("barre");
+                //console.log("barre");
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
                 objLodeRunner.intX -= 5;
@@ -217,7 +217,7 @@ function changementDirection(toucheAppuye) {
             var espaceHautLodeX1 = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX1 / 32)] == "3") {
-                console.log("barre");
+               // console.log("barre");
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
                 objLodeRunner.intX += 5;
@@ -258,17 +258,18 @@ function changementDirection(toucheAppuye) {
             break;
 
         case "haut":      // echelles
-            spriteCount = 2;
+
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if (tabDispo[i][k] == "2" || tabDispo[i][k] == "7") {
+
                         var ladderX = k * 32 + 16;
                         var ladderY = i * 32 + 32;
 
                         if ((objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX + 16 >= ladderX) &&
                             (objLodeRunner.intY - 32 <= ladderY && objLodeRunner.intY >= ladderY - 32)) {
-
+                            spriteCount = 2;
                             // LODE SUR UNE ECHELLE
                             objLodeRunner.Image = objLodeEchelle;
                             objLodeRunner.intY -= 2;
@@ -277,8 +278,10 @@ function changementDirection(toucheAppuye) {
                             if (objLodeRunner.intY < 32) {
                                 console.log("exit level")
                                 binNextLevel = true;
-                                spriteCount=3;
-                                booStart=true;
+                                spriteCount = 3;
+                                objLodeRunner.Image = objImageLodeRunner
+                                booStart = true;
+                                framesPerSecond = 60;
                                 intNiveau++;
                                 intPoints += 1500;
                                 intLingotOr = 5;
@@ -298,18 +301,26 @@ function changementDirection(toucheAppuye) {
             break;
 
         case "bas":       // echelles
-            spriteCount = 2;
+            if (binBarre)
+            {
+                binBarre=false;
+                binTombe=true;
+                binDecrocherBarre=true;
+                //objLodeRunner.intY=objLodeRunner.intY+17;
+            }
+            
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if (i + 1 < tabDispo.length) {
+
                         if (tabDispo[i + 1][k] == "2" || tabDispo[i + 1][k] == "7") {
                             var ladderX = k * 32 + 16;
                             var ladderY = i * 32 + 32;
 
                             if ((objLodeRunner.intX - 16 <= ladderX && objLodeRunner.intX + 16 >= ladderX) &&
                                 (objLodeRunner.intY + 32 >= ladderY && objLodeRunner.intY <= ladderY + 32)) {
-
+                                spriteCount = 2;
                                 // LODE SUR UNE ECHELLE
                                 objLodeRunner.Image = objLodeEchelle;
                                 objLodeRunner.intY += 2;
