@@ -78,6 +78,7 @@ function initGardePosition() {
     // Ajouter gardes sur des positions randoms
     let rand1 = Math.floor(Math.random() * 10);
     let rand2 = Math.floor(Math.random() * 10);
+    let gardesInitial = intGardeCompte;
 
     if (tabDispo != null) {
         while (intGardeCompte > 0) {
@@ -99,7 +100,7 @@ function initGardePosition() {
         }
     }
 
-    intGardeCompte = 5 + intNiveau%5 + Math.floor(intNiveau/5);
+    intGardeCompte = gardesInitial;
 }
 
 // Construire les murs

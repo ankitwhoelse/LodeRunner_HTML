@@ -23,6 +23,8 @@ function effacerDessin() {
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
 
+    deplacementGarde();
+
     if (temps == 5 && spriteCount == 3 && booStart == true) {
         mettreAjourLodeRunner(3, touche);
         temps = 0;
@@ -284,6 +286,7 @@ function changementDirection(toucheAppuye) {
                                 booStart = true;
                                 framesPerSecond = 60;
                                 intNiveau++;
+                                intGardeCompte++;
                                 intPoints += 1500;
                                 intLingotOr = -1;
                                 intLingotOrRamasse -= 5;

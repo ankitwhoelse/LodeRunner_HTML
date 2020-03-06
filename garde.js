@@ -15,22 +15,18 @@ function initGarde() {
 
 function deplacementGarde() {
     // Advanced AI... aka une tonne de if else
+    let posLodeX = objLodeRunner.intX;
+    let posLodeY = objLodeRunner.intY;
 
-    var espaceSousGardeX = objGarde1.intX;
-    var espaceSousGardeY = objGarde1.intY;
-
-    if (tabDispo[Math.floor(espaceSousGardeY / 32)][Math.floor(espaceSousGardeX / 32)] == "0" ||
-        tabDispo[Math.floor(espaceSousGardeY / 32)][Math.floor(espaceSousGardeX / 32)] == "3") {
-
-    } else {
-
-    }
+    
+ 
 
 }
 
 function dessinerGarde() {
     objC2D.save();
 
+    sprite = 3;
     if (tabDispo != null && binNextLevel==true) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
