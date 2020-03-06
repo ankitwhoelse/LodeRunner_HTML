@@ -109,18 +109,21 @@ function initMurs() {
 } 
 
 function initLodeRunner(){ 
-    objImageLodeRunner = new Image();
     objLodeRunner = new Object();
-    objImageLodeRunner.src = 'Personnages/LodeRunner/sprite_dpl_droite.png';
     objLodeRunner.Image = objImageLodeRunner;
     objLodeRunner.intX = 0;
     objLodeRunner.intY = 0;
-
-
 }
 
 function initImages() {
-    // initialisation des images
+    // image LodeRunner
+    objImageLodeRunner = new Image();
+    objImageLodeRunner.src = 'Personnages/LodeRunner/sprite_dpl_droite.png';
+
+    objImageGarde1 = new Image();
+    objImageGarde1.src = ''
+
+    // image echelle
     objLodeEchelle = new Image();
     objLodeEchelle.src = "Personnages/LodeRunner/sprite_echelle.png";
     
