@@ -16,9 +16,6 @@ function initAnimation() {
 
 // Initialiser la disposition initiale dans un tableau => WINDOWS 10
 function initDisposition() {
-    // apprendre a faire la lecture de fichier
-    // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
-    // remplacer la
     $.get("dispositions.txt", function(data) {
         tabDispo = data.split("\r\n").map( function(el) {
              return el.split(";");
@@ -32,9 +29,6 @@ function initDisposition() {
 /*
 // Initialiser la disposition initiale dans un tableau => MAC OSX
 function initDisposition() {
-    // apprendre a faire la lecture de fichier
-    // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
-    // remplacer la
     $.get("dispositions.txt", function(data) {
         tabDispo = data.split("\n").map( function(el) {
              return el.split(";");

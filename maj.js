@@ -25,6 +25,7 @@ function mettreAjourAnimation() {
 
     if (Math.floor(objGarde1.intX/32)==Math.floor(objLodeRunner.intX/32)&&Math.floor(objGarde1.intY/32)==Math.floor(objLodeRunner.intY/32)) {
         console.log("dead")
+        audio5.play();
         spriteCount = 3;
         objLodeRunner.Image = objImageLodeRunner;
         booStart = true;
@@ -53,12 +54,20 @@ function mettreAjourAnimation() {
         temps = 0;
     }
 
+    // CREER DES NOUVEAUX LINGOTS D'OR
     if (intLingotOr == -1) {
         intLingotOr = 5;
         initLingotOr();
     }
 
+    // GAME OVER
     if (intVies==0 || binGameOver) {
+        audio10.pause();
+        if (audioGameOver) {
+            audio6.play();
+            audio11.play();
+        }
+        audioGameOver = false;
         spriteCount = 2;
         curFrame2 = ++curFrame2 % frameCount2;
         srcX2 = curFrame2 * width2;
@@ -164,8 +173,8 @@ function mettreAjourLodeRunner(sprite, touche) {
                         srcY3 = 0;
                     }
                     if (binTombe) {
-                        console.log("tombe")
                         objLodeRunner.intY += 5;
+                        audio2.play();
                     }
                 } else if (touche == "gauche") {
                     if (objLodeRunner.intX > 16) {
@@ -174,6 +183,10 @@ function mettreAjourLodeRunner(sprite, touche) {
                         curFrame3 = ++curFrame3 % frameCount3;
                         srcX3 = curFrame3 * width3;
                         srcY3 = 0;
+                    }
+                    if (binTombe) {
+                        objLodeRunner.intY += 5;
+                        audio2.play();
                     }
                 }
 
@@ -213,6 +226,7 @@ function changementDirection(toucheAppuye) {
 
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX / 32)] == "3") {
                 //console.log("barre");
+                audio13.play();
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
                 objLodeRunner.intX -= 5;
@@ -223,6 +237,7 @@ function changementDirection(toucheAppuye) {
 
                 if (objLodeRunner.intX > 16 && binGaucheDroite == true) {
                     objLodeRunner.intX -= 5;    //test speed is 5
+                    audio15.play();
 
                     if (objLodeRunner.intY % 32 != 0)
                         objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY % 32);
@@ -261,6 +276,7 @@ function changementDirection(toucheAppuye) {
             var espaceHautLodeY = objLodeRunner.intY;
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX / 32)] == "3") {
                 // console.log("barre");
+                audio13.play();
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
                 objLodeRunner.intX += 5;
@@ -271,6 +287,7 @@ function changementDirection(toucheAppuye) {
 
                 if (objLodeRunner.intX < objCanvas.width - 40 && binGaucheDroite == true) {
                     objLodeRunner.intX += 5;    // test speed is 5
+                    audio15.play();
 
                     if (objLodeRunner.intY % 32 != 0)
                         objLodeRunner.intY = objLodeRunner.intY - (objLodeRunner.intY % 32);
@@ -315,12 +332,14 @@ function changementDirection(toucheAppuye) {
                             (objLodeRunner.intY - 32 <= ladderY && objLodeRunner.intY >= ladderY - 32)) {
                             spriteCount = 2;
                             // LODE SUR UNE ECHELLE
+                            audio14a.play();
                             objLodeRunner.Image = objLodeEchelle;
                             objLodeRunner.intY -= 2;
                             objLodeRunner.intX = ladderX;
 
                             if (objLodeRunner.intY < 32) {
                                 console.log("exit level")
+                                audio7.play();
                                 binNextLevel = true;
                                 spriteCount = 3;
                                 objLodeRunner.Image = objImageLodeRunner
@@ -366,6 +385,7 @@ function changementDirection(toucheAppuye) {
                                 (objLodeRunner.intY + 32 >= ladderY && objLodeRunner.intY <= ladderY + 32)) {
                                 spriteCount = 2;
                                 // LODE SUR UNE ECHELLE
+                                audio14b.play();
                                 objLodeRunner.Image = objLodeEchelle;
                                 objLodeRunner.intY += 2;
                                 objLodeRunner.intX = ladderX;
@@ -374,6 +394,7 @@ function changementDirection(toucheAppuye) {
                     }
                 }
             }
+
             break;
 
         case "c":   // bombe a la droite
@@ -392,17 +413,38 @@ function changementDirection(toucheAppuye) {
                                 (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
 
                                 objC2D.drawImage(objIMGBombe, (k + 1) * 32 + 16, i * 32 + 32, 32, 32);
+                                audio3.play();
                             }
                         }
                     }
                 }
             }
 
-
             break;
 
 
         case "z":   // bombe a la gauche
+            spriteCount = 1;
+            objLodeRunner.Image = objIMGLodeRunnerDroite;
+
+            for (var i = 0; i < tabDispo.length; i++) {
+                var ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (i + 1 < tabDispo.length) {
+                        if (tabDispo[i + 1][k + 1] == "1") {
+                            var briqueX = k * 32 + 16;
+                            var briqueY = i * 32 + 32;
+
+                            if ((objLodeRunner.intX - 16 <= briqueX && objLodeRunner.intX + 16 >= briqueX) &&
+                                (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
+
+                                objC2D.drawImage(objIMGBombe, (k - 1) * 32 + 16, i * 32 + 32, 32, 32);
+                                audio3.play();
+                            }
+                        }
+                    }
+                }
+            }
 
             break;
 

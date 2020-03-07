@@ -1,19 +1,21 @@
 --MC 1.14 soundpack
 trouve les sons pour:
 
-1	runner rammase gold		(1.ogg)
-2	runner tombe			(2.ogg)
-3	runner creuse un trou 	(3.ogg)
-4	trou se auto-rempli		(4.ogg)
-5	runner perd une vie		(5.ogg) 
-6	runner perd all vies	(6.ogg)
-7	runner a terminer lvl	(7.ogg)
+1	runner rammase gold		(1.ogg)	done
+2	runner tombe			(2.ogg) done mais pas tres bon
+3	runner creuse un trou 	(3.ogg) done
+4	trou se auto-rempli		(4.ogg) 
+5	runner perd une vie		(5.ogg) done
+6	runner perd all vies	(6.ogg) done
+7	runner a terminer lvl	(7.ogg) done
 8	garde tombe dans trou	(8.ogg)	
-9	garde meurt				(9.ogg)
-10	game play sound			(10.ogg)
-11 	game over sound			(11.ogg)
-12	echelle finale			(12.ogg)
-13	barre franchissement	(13.ogg)
-14	echelle monte/descend	(14.ogg)
+9	garde meurt				(9.ogg) 
+10	game play sound			(10.ogg) done
+11 	game over sound			(11.ogg) done
+12	echelle finale			(12.ogg) done
+13	barre franchissement	(13.ogg) done
+14	echelle monte/descend	(14a.ogg/14b.oog) done
+15	runner court			(15.ogg) done
 
+downloads: 
 https://www.mediafire.com/file/2x1d234nxmdl746/MSP_1.14.zip/file

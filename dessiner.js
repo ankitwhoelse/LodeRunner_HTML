@@ -14,8 +14,11 @@ function dessiner() {
     dessinerGarde();
 
     if (intLingotOrRamasse > 4) {
+        if (audioEchelleF)
+            audio12.play();
+        audioEchelleF = false;
         dessinerEchelleEscape();
-    }
+    } 
 }
 
 // Pour dessiner l'image de fond
