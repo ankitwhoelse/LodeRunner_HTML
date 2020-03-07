@@ -53,7 +53,7 @@ function dessinerGarde() {
                         objGarde1.intY = i * 32 + 32;
                     }
                     //if (spriteCount == 3)
-                        objC2D.drawImage(objGarde1.Image,srcX4,srcY4,width4,height4, objGarde1.intX,objGarde1.intY, 32, 32);
+                        objC2D.drawImage(objGarde1.Image,srcX3,srcY3,width3,height3, objGarde1.intX,objGarde1.intY, 32, 32);
                         
                 }
             }

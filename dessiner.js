@@ -183,6 +183,29 @@ function dessinerTexte() {
 }
 
 
+function dessinerGameOver() {
+    // gray box
+    objC2D.save();
+        objC2D.beginPath();                         objC2D.moveTo(16,objCanvas.height-16);
+        objC2D.lineTo(16,objCanvas.height - 96);    objC2D.lineTo(objCanvas.width-16, objCanvas.height - 96);
+        objC2D.lineTo(objCanvas.width-16, objCanvas.height-16);
+        objC2D.fillStyle = 'gray';      objC2D.strokeStyle='red';
+        objC2D.fill();                  objC2D.stroke();
+    objC2D.restore();
+
+    // Texte de GAME-OVER
+    objC2D.beginPath();
+    objC2D.fillStyle = "yellow";
+    objC2D.strokeStyle = "red";
+    objC2D.lineWidth = 1;
+    objC2D.font = '30pt Impact'; // Police de caractères
+    objC2D.textAlign = 'center';
+    objC2D.fillText('Game-Over ' + pad(intPoints,6), objCanvas.width / 2, objCanvas.height-40);
+    objC2D.strokeText('Game-Over : ' + pad(intPoints,6), objCanvas.width / 2, objCanvas.height-40);
+    objC2D.closePath();
+}
+
+
 function dessinerLodeRunner(){
     objC2D.save();
 
