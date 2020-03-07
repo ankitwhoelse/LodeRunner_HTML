@@ -17,9 +17,19 @@ function deplacementGarde() {
     // Advanced AI... aka une tonne de if else
     let posLodeX = objLodeRunner.intX;
     let posLodeY = objLodeRunner.intY;
+
+    let posGardeX = objGarde1.intX;
     let posGardeY = objGarde1.intY;
+
+    // meme niveau axeY
+    if (posLodeX > posGardeX && posLodeY == posGardeY) {
+        objGarde1.intX++;
+    } else if (posLodeX > posGardeX && posLodeY == posGardeY) { 
+        objGarde1.intX--;
+    }
+
+    // different niveau (garde cherche escalier)
     
- 
 
 }
 
