@@ -8,7 +8,7 @@ function initAnimation() {
         initImages();
         initMurs();
         initLodeRunner();
-        //initGarde();
+        initGarde();
         dessiner(); // Dessiner une première fois
         animer();  // animer 
     }

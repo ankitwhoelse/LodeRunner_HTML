@@ -210,6 +210,9 @@ function changementDirection(toucheAppuye) {
                             }
                         }
                     }
+
+                    // collision garde
+                    
                 }
             }
             break;
