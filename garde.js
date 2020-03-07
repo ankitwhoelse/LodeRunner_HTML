@@ -42,7 +42,13 @@ function dessinerGarde() {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == 8) {
-                    objC2D.drawImage(objImageGardeT, k * 32 + 16, i * 32 + 32, 32, 32);
+                    //if (booStart) {
+                        objGarde1.intX = k * 32 + 16;
+                        objGarde1.intY = i * 32 + 32;
+                    //}
+                    //if (spriteCount == 3)
+                        objC2D.drawImage(objGarde1.Image,srcX3,srcY3,width3,height3, objGarde1.intX,objGarde1.intY, 32, 32);
+                        
                 }
             }
         }
