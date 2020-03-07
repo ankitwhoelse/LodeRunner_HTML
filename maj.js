@@ -187,6 +187,7 @@ function changementDirection(toucheAppuye) {
             //Si lode touche un garde
             if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "8") {
                 console.log("dead")
+                audio5.play();
                 spriteCount = 3;
                 objLodeRunner.Image = objImageLodeRunner;
                 booStart = true;
@@ -236,6 +237,7 @@ function changementDirection(toucheAppuye) {
                                     intLingotOrRamasse++;
                                     tabDispo[i][k] = "0";
                                     intPoints += 250;
+                                    audio1.play();
                                     console.log("picked up gold : " + intLingotOrRamasse);
                                 }
                             }
@@ -253,6 +255,7 @@ function changementDirection(toucheAppuye) {
             
             if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "8") {
                 console.log("dead")
+                audio5.play();
                 spriteCount = 3;
                 objLodeRunner.Image = objImageLodeRunner;
                 booStart = true;
@@ -301,6 +304,7 @@ function changementDirection(toucheAppuye) {
                                     intLingotOrRamasse++;
                                     tabDispo[i][k] = "0";
                                     intPoints += 250;
+                                    audio1.play();
                                     console.log("picked up gold : " + intLingotOrRamasse);
                                 }
                             }
