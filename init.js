@@ -20,7 +20,7 @@ function initDisposition() {
     // creer un tableau 2d (28x17) avec ce qui se trouverait dans la case
     // remplacer la
     $.get("dispositions.txt", function(data) {
-        tabDispo = data.split("\r\n").map( function(el) {
+        tabDispo = data.split("\n").map( function(el) {
              return el.split(";");
             }
         );
