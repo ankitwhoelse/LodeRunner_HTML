@@ -47,7 +47,7 @@ function mettreAjourAnimation() {
     }
     temps++;
 
-    if (tabDispo != null && binBarre == false ) {
+    if (tabDispo != null && binBarre == false) {
         // VIDE EN DESSOUS DE LODE
         var espaceSousLodeX = objLodeRunner.intX;
         var espaceSousLodeY = objLodeRunner.intY;
@@ -59,7 +59,7 @@ function mettreAjourAnimation() {
         } else {
             binGaucheDroite = true;
             binTombe = false;
-            binDecrocherBarre=false;
+            binDecrocherBarre = false;
         }
 
         if (binTombe) {
@@ -73,7 +73,7 @@ function mettreAjourAnimation() {
                 objLodeRunner.Image = objImageLodeRunner;
                 spriteCount = 3;
             }
-            else if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "3"&&binDecrocherBarre==false) {
+            else if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "3" && binDecrocherBarre == false) {
                 binGaucheDroite = true;
                 binTombe = false;
                 binBarre = true;
@@ -168,15 +168,30 @@ function changementDirection(toucheAppuye) {
 
     switch (toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
-         console.log(tabDispo[Math.floor(objLodeRunner.intY / 32)-1][Math.floor(objLodeRunner.intX / 32)]);
-         //Si lode touche un garde
-         if (tabDispo[Math.floor(objLodeRunner.intY / 32)-1][Math.floor(objLodeRunner.intX / 32)] == "8")
-            location.reload();
+            
             spriteCount = 3;
-           
+            //console.log(tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)]);
+
+            //Si lode touche un garde
+            if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "8") {
+                console.log("dead")
+                spriteCount = 3;
+                objLodeRunner.Image = objImageLodeRunner;
+                booStart = true;
+                framesPerSecond = 60;
+                intLingotOr = 5;
+                intPoints -= intLingotOrRamasse*250;
+                intLingotOrRamasse = 0;
+                objLodeRunner.intY = 0;
+                objLodeRunner.intX = 0;
+                initDisposition();
+                dessiner();
+                dessinerLodeRunner();
+                intVies--;
+            }
+            
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
-
 
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX / 32)] == "3") {
                 //console.log("barre");
@@ -214,19 +229,37 @@ function changementDirection(toucheAppuye) {
                             }
                         }
                     }
+
+                    // collision garde
+
                 }
             }
             break;
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
-        if (tabDispo[Math.floor(objLodeRunner.intY / 32)-1][Math.floor(objLodeRunner.intX / 32)] == "8")
-        location.reload();
             spriteCount = 3;
-            console.log(Math.floor(objLodeRunner.intY / 32));
+            
+            if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "8") {
+                console.log("dead")
+                spriteCount = 3;
+                objLodeRunner.Image = objImageLodeRunner;
+                booStart = true;
+                framesPerSecond = 60;
+                intLingotOr = 5;
+                intPoints -= intLingotOrRamasse*250;
+                intLingotOrRamasse = 0;
+                objLodeRunner.intY = 0;
+                objLodeRunner.intX = 0;
+                initDisposition();
+                dessiner();
+                dessinerLodeRunner();
+                intVies--;
+            }
+            
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX / 32)] == "3") {
-               // console.log("barre");
+                // console.log("barre");
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
                 objLodeRunner.intX += 5;
@@ -311,14 +344,13 @@ function changementDirection(toucheAppuye) {
             break;
 
         case "bas":       // echelles
-            if (binBarre)
-            {
-                binBarre=false;
-                binTombe=true;
-                binDecrocherBarre=true;
+            if (binBarre) {
+                binBarre = false;
+                binTombe = true;
+                binDecrocherBarre = true;
                 //objLodeRunner.intY=objLodeRunner.intY+17;
             }
-            
+
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {

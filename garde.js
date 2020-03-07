@@ -17,9 +17,7 @@ function deplacementGarde() {
     // Advanced AI... aka une tonne de if else
     let posLodeX = objLodeRunner.intX;
     let posLodeY = objLodeRunner.intY;
-    curFrame4 = ++curFrame4 % frameCount4;
-            srcX4 = curFrame4 * width4;
-            srcY4 = 0;
+    let posGardeY = objGarde1.intY;
     
  
 
