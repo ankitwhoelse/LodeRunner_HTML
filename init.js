@@ -152,7 +152,6 @@ function initMurs() {
     objMur.intYFin = objCanvas.height - 96;
     objMur.strCouleur = 'gray';
     tabObjMurs.push(objMur);
-
 } 
 
 // Initialiser LodeRunner

@@ -41,6 +41,10 @@ function mettreAjourAnimation() {
         initLingotOr();
     }
 
+    if (intVies==0) {
+        dessinerGameOver();
+    }
+
     if (booStart == false) {
         mettreAjourLodeRunner(3, touche);
         temps = 0;
