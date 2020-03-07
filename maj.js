@@ -168,8 +168,12 @@ function changementDirection(toucheAppuye) {
 
     switch (toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
+         console.log(tabDispo[Math.floor(objLodeRunner.intY / 32)-1][Math.floor(objLodeRunner.intX / 32)]);
+         //Si lode touche un garde
+         if (tabDispo[Math.floor(objLodeRunner.intY / 32)-1][Math.floor(objLodeRunner.intX / 32)] == "8")
+            location.reload();
             spriteCount = 3;
-            console.log(Math.floor(objLodeRunner.intY / 32));
+           
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
 
@@ -215,6 +219,8 @@ function changementDirection(toucheAppuye) {
             break;
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
+        if (tabDispo[Math.floor(objLodeRunner.intY / 32)-1][Math.floor(objLodeRunner.intX / 32)] == "8")
+        location.reload();
             spriteCount = 3;
             console.log(Math.floor(objLodeRunner.intY / 32));
             var espaceHautLodeX = objLodeRunner.intX;
