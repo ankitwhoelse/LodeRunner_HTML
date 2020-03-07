@@ -20,9 +20,15 @@ function deplacementGarde() {
 
     let posGardeX = objGarde1.intX;
     let posGardeY = objGarde1.intY;
-
+   
     // meme niveau axeY
     if (posLodeX > posGardeX && posLodeY == posGardeY) {
+        spriteCount=3;
+        sprite=3;
+     objLodeRunner.Image = objLodeRunnerGauche;
+    curFrame4 = ++curFrame4 % frameCount4;
+    srcX4 = curFrame4 * width4;
+    srcY4 = 0;
         objGarde1.intX++;
     } else if (posLodeX > posGardeX && posLodeY == posGardeY) { 
         objGarde1.intX--;
@@ -42,10 +48,10 @@ function dessinerGarde() {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == 8) {
-                    //if (booStart) {
+                    if (booStart) {
                         objGarde1.intX = k * 32 + 16;
                         objGarde1.intY = i * 32 + 32;
-                    //}
+                    }
                     //if (spriteCount == 3)
                         objC2D.drawImage(objGarde1.Image,srcX4,srcY4,width4,height4, objGarde1.intX,objGarde1.intY, 32, 32);
                         

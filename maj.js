@@ -23,6 +23,23 @@ function effacerDessin() {
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
 
+    if (Math.floor(objGarde1.intX/32)==Math.floor(objLodeRunner.intX/32)&&Math.floor(objGarde1.intY/32)==Math.floor(objLodeRunner.intY/32)) {
+        console.log("dead")
+        spriteCount = 3;
+        objLodeRunner.Image = objImageLodeRunner;
+        booStart = true;
+        framesPerSecond = 60;
+        intLingotOr = 5;
+        intPoints -= intLingotOrRamasse*250;
+        intLingotOrRamasse = 0;
+        objLodeRunner.intY = 0;
+        objLodeRunner.intX = 0;
+        initDisposition();
+        dessiner();
+        dessinerLodeRunner();
+        intVies--;
+    }
+
     deplacementGarde();
 
     if (temps == 5 && spriteCount == 3 && booStart == true) {
@@ -95,6 +112,10 @@ function mettreAjourLodeRunner(sprite, touche) {
             curFrame3 = ++curFrame3 % frameCount3;
             srcX3 = curFrame3 * width3;
             srcY3 = 0;
+            //garde1
+            curFrame4 = ++curFrame4 % frameCount4;
+            srcX4 = curFrame4 * width4;
+            srcY4 = 0;
         } else if (sprite == 2) {
             curFrame2 = ++curFrame2 % frameCount2;
             srcX2 = curFrame2 * width2;
@@ -173,22 +194,7 @@ function changementDirection(toucheAppuye) {
             //console.log(tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)]);
 
             //Si lode touche un garde
-            if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "8") {
-                console.log("dead")
-                spriteCount = 3;
-                objLodeRunner.Image = objImageLodeRunner;
-                booStart = true;
-                framesPerSecond = 60;
-                intLingotOr = 5;
-                intPoints -= intLingotOrRamasse*250;
-                intLingotOrRamasse = 0;
-                objLodeRunner.intY = 0;
-                objLodeRunner.intX = 0;
-                initDisposition();
-                dessiner();
-                dessinerLodeRunner();
-                intVies--;
-            }
+            
             
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
@@ -238,24 +244,6 @@ function changementDirection(toucheAppuye) {
 
         case "droite":    // mouvement sur sol/barre de franchissement et placer bombs
             spriteCount = 3;
-            
-            if (tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)] == "8") {
-                console.log("dead")
-                spriteCount = 3;
-                objLodeRunner.Image = objImageLodeRunner;
-                booStart = true;
-                framesPerSecond = 60;
-                intLingotOr = 5;
-                intPoints -= intLingotOrRamasse*250;
-                intLingotOrRamasse = 0;
-                objLodeRunner.intY = 0;
-                objLodeRunner.intX = 0;
-                initDisposition();
-                dessiner();
-                dessinerLodeRunner();
-                intVies--;
-            }
-            
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX / 32)] == "3") {
