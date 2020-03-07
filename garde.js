@@ -17,7 +17,9 @@ function deplacementGarde() {
     // Advanced AI... aka une tonne de if else
     let posLodeX = objLodeRunner.intX;
     let posLodeY = objLodeRunner.intY;
-
+    curFrame4 = ++curFrame4 % frameCount4;
+            srcX4 = curFrame4 * width4;
+            srcY4 = 0;
     
  
 
@@ -32,7 +34,13 @@ function dessinerGarde() {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == 8) {
-                    objC2D.drawImage(objImageGardeT, k * 32 + 16, i * 32 + 32, 32, 32);
+                    //if (booStart) {
+                        objImageGardeT.intX = k * 32 + 16;
+                        objImageGardeT.intY = i * 32 + 32;
+                    //}
+                    //if (spriteCount == 3)
+                        objC2D.drawImage(objImageGardeT.Image,srcX4,srcY4,width4,height4, objImageGardeT.intX,objImageGardeT.intY, 32, 32);
+                        
                 }
             }
         }
