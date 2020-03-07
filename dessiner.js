@@ -6,7 +6,10 @@ function dessiner() {
     dessinerBriques();
     dessinerEchellesBarres();
     dessinerOr();
-    dessinerTexte();
+    if (!binGameOver)
+        dessinerTexte();
+    else
+        dessinerGameOver();
     dessinerLodeRunner();
     dessinerGarde();
 
@@ -189,19 +192,32 @@ function dessinerGameOver() {
         objC2D.beginPath();                         objC2D.moveTo(16,objCanvas.height-16);
         objC2D.lineTo(16,objCanvas.height - 96);    objC2D.lineTo(objCanvas.width-16, objCanvas.height - 96);
         objC2D.lineTo(objCanvas.width-16, objCanvas.height-16);
-        objC2D.fillStyle = 'gray';      objC2D.strokeStyle='red';
-        objC2D.fill();                  objC2D.stroke();
+        objC2D.fillStyle = 'gray';      objC2D.strokeStyle='white';
+        objC2D.fill();                  objC2D.lineWidth = 5;   objC2D.stroke();
     objC2D.restore();
 
     // Texte de GAME-OVER
+    objC2D.save();
     objC2D.beginPath();
-    objC2D.fillStyle = "yellow";
-    objC2D.strokeStyle = "red";
-    objC2D.lineWidth = 1;
-    objC2D.font = '30pt Impact'; // Police de caractères
+    objC2D.fillStyle = "white";
+    objC2D.font = '40pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('Game-Over ' + pad(intPoints,6), objCanvas.width / 2, objCanvas.height-40);
-    objC2D.strokeText('Game-Over : ' + pad(intPoints,6), objCanvas.width / 2, objCanvas.height-40);
+    objC2D.fillText('GAME-OVER : ' + pad(intPoints,6) + " Points", objCanvas.width/2, objCanvas.height-35);
+    objC2D.strokeStyle = "red";     objC2D.lineWidth = 4;
+    objC2D.strokeText('GAME-OVER : ' + pad(intPoints,6) + " Points", objCanvas.width/2 +1, objCanvas.height-35 );  
+    objC2D.strokeStyle = "cyan";    objC2D.lineWidth = 2;
+    objC2D.strokeText('GAME-OVER : ' + pad(intPoints,6) + " Points", objCanvas.width/2 -1, objCanvas.height-35 );
+    objC2D.closePath();   
+    objC2D.restore();
+
+    objC2D.beginPath();
+    objC2D.strokeStyle = 'gray';
+    objC2D.fillStyle = "white";
+    objC2D.lineWidth = 8;
+    objC2D.font = '25pt Verdana'; // Police de caractères
+    objC2D.textAlign = 'center';
+    objC2D.strokeText('Veuillez appuyer sur la touche F5', objCanvas.width / 2, 28);
+    objC2D.fillText('Veuillez appuyer sur la touche F5', objCanvas.width / 2, 28);
     objC2D.closePath();
 }
 

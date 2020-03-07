@@ -41,8 +41,16 @@ function mettreAjourAnimation() {
         initLingotOr();
     }
 
-    if (intVies==0) {
+    if (intVies==0 || binGameOver) {
+        spriteCount = 2;
+        curFrame2 = ++curFrame2 % frameCount2;
+        srcX2 = curFrame2 * width2;
+        srcY2 = 0;
+        objLodeRunner.Image = objLodeEchelle;
+        binGameOver = true;
         dessinerGameOver();
+        booStart=true;
+        binGaucheDroite = false;
     }
 
     if (booStart == false) {
