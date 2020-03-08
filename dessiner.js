@@ -245,6 +245,10 @@ function dessinerLodeRunner(){
                         objC2D.drawImage(objLodeRunner.Image,srcX2,srcY2,width2,height2, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
                         touche=null;
                     }
+                    else if (spriteCount == 1)  {
+                        objC2D.drawImage(objLodeRunner.Image,objLodeRunner.intX,objLodeRunner.intY, 32, 32);
+                        touche=null;
+                    }
                     if(booStart==false)
                         touche=null;
                    // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
