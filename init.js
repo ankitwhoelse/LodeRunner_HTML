@@ -23,7 +23,6 @@ function initDisposition() {
         console.log(tabDispo)
         initLingotOr();
         initGardePosition();
-        console.log("garde pos");
         initGarde();
     });
 }

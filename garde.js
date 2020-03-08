@@ -9,7 +9,6 @@ function initGarde() {
     let objGarde = null;
 
     if (tabDispo != null && tabGardien != null) {
-        console.log("initGarde")
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
@@ -40,15 +39,16 @@ function deplacementGarde() {
         let posGardeX = objGarde.intX;
         let posGardeY = objGarde.intY;
 
+        // MOUVEMENT BASIC DROITE / GAUCHE   ||   Artificial intelligence alpha 1.2
         if (tabDispo != null) {
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if ([i - 1] > 0) {
                         if (tabDispo[i-1][k] == "2") {
-                            if (posLodeX > posGardeX)
+                            if (posLodeX > posGardeX && tabDispo[i][k+1] != "1")
                                 intMouvement = 1;
-                            else if (posLodeX < posGardeX)
+                            else if (posLodeX < posGardeX  && tabDispo[i][k-1] != "1")
                                 intMouvement = 2;
                         }
                     }
@@ -61,11 +61,11 @@ function deplacementGarde() {
             let ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (i + 1 < tabDispo.length) {
-                    if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2") {
+                    if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2" && tabDispo[i][k] == "0") {
                         let videX = k * 32 + 16;
                         let videY = i * 32 + 32;
 
-                        if (posLodeY > posGardeY) {
+                        if (posLodeY > posGardeY || posLodeY < posGardeY || posLodeY == posGardeY) {
                             if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
                                 (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
                                     intMouvement = 4;
@@ -85,8 +85,8 @@ function deplacementGarde() {
                     let ladderY = i * 32 + 32;
 
                     if (posLodeY < posGardeY) {
-                        if ((objGarde.intX - 16 <= ladderX && objGarde.intX + 16 >= ladderX) &&
-                            (objGarde.intY - 32 <= ladderY && objGarde.intY >= ladderY - 32)) {
+                        if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
+                            (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                 intMouvement = 3;
                                 objGarde.intX = ladderX;
                         }
@@ -105,8 +105,8 @@ function deplacementGarde() {
                         let ladderY = i * 32 + 32;
 
                         if (posLodeY > posGardeY) {
-                            if ((objGarde.intX - 16 <= ladderX && objGarde.intX + 16 >= ladderX) &&
-                                (objGarde.intY + 32 >= ladderY && objGarde.intY <= ladderY + 32)) {
+                            if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
+                                (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                     intMouvement = 4;
                                     objGarde.intX = ladderX;
                             }

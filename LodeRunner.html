@@ -112,7 +112,6 @@
     function gestionClavier() {
       booStart=false;
       framesPerSecond = 15;
-
       switch(event.key) {
           case "ArrowLeft": 
               changementDirection("gauche");
@@ -163,7 +162,15 @@
           
               break;
 
+          case "Escape":
+            let intXL = objLodeRunner.intX;
+            let intYL = objLodeRunner.intY;
+            booStart=true;
+            objLodeRunner.intX=intXL;
+            objLodeRunner.intY=intYL;
+            break;
           default: 
+
               break;
       }
 

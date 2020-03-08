@@ -23,30 +23,33 @@ function effacerDessin() {
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
 
-    for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
-        let objGarde = tabGardien[intNoGarde];
-        
-        if (Math.floor(objGarde.intX/32)==Math.floor(objLodeRunner.intX/32)&&Math.floor(objGarde.intY/32)==Math.floor(objLodeRunner.intY/32)) {
-            console.log("dead")
-            audio5.play();
-            spriteCount = 3;
-            objLodeRunner.Image = objImageLodeRunner;
-            booStart = true;
-            framesPerSecond = 60;
-            intLingotOr = 5;
-            intPoints -= intLingotOrRamasse*250;
-            intLingotOrRamasse = 0;
-            objLodeRunner.intY = 0;
-            objLodeRunner.intX = 0;
-            initDisposition();
-            dessiner();
-            dessinerLodeRunner();
-            intVies--;
+    if (tabGardien != null) {
+        for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
+            let objGarde = tabGardien[intNoGarde];
+
+            if (Math.floor(objGarde.intX / 32) == Math.floor(objLodeRunner.intX / 32) && Math.floor(objGarde.intY / 32) == Math.floor(objLodeRunner.intY / 32)) {
+                console.log("dead")
+                audio5.play();
+                spriteCount = 3;
+                objLodeRunner.Image = objImageLodeRunner;
+                booStart = true;
+                framesPerSecond = 60;
+                intLingotOr = 5;
+                intPoints -= intLingotOrRamasse * 250;
+                intLingotOrRamasse = 0;
+                objLodeRunner.intY = 0;
+                objLodeRunner.intX = 0;
+                initDisposition();
+                dessiner();
+                dessinerLodeRunner();
+                intVies--;
+            }
+
         }
-        
     }
 
-    deplacementGarde();
+    if (!booStart)
+        deplacementGarde();
 
     if (temps == 5 && spriteCount == 3 && booStart == true) {
         mettreAjourLodeRunner(3, touche);
@@ -66,7 +69,7 @@ function mettreAjourAnimation() {
     }
 
     // GAME OVER
-    if (intVies==0 || binGameOver) {
+    if (intVies == 0 || binGameOver) {
         audio10.pause();
         if (audioGameOver) {
             audio6.play();
@@ -80,7 +83,7 @@ function mettreAjourAnimation() {
         objLodeRunner.Image = objLodeEchelle;
         binGameOver = true;
         dessinerGameOver();
-        booStart=true;
+        booStart = true;
         binGaucheDroite = false;
     }
 
@@ -219,13 +222,13 @@ function changementDirection(toucheAppuye) {
 
     switch (toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
-            
+
             spriteCount = 3;
             //console.log(tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)]);
 
             //Si lode touche un garde
-            
-            
+
+
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
 
@@ -282,7 +285,6 @@ function changementDirection(toucheAppuye) {
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
                 objLodeRunner.intX += 5;
-
             }
             else {
                 objLodeRunner.Image = objImageLodeRunner;
