@@ -3,12 +3,11 @@ function initAnimation() {
     objCanvas.focus();
     objC2D = objCanvas.getContext('2d');
     initDisposition();
-
+    
     if (tabDispo == null) {
         initImages();
         initMurs();
         initLodeRunner();
-        initGarde();
         dessiner(); // Dessiner une première fois
         animer();  // animer 
     }
@@ -24,6 +23,8 @@ function initDisposition() {
         console.log(tabDispo)
         initLingotOr();
         initGardePosition();
+        console.log("garde pos");
+        initGarde();
     });
 }
 /*

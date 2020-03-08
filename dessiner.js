@@ -6,13 +6,14 @@ function dessiner() {
     dessinerBriques();
     dessinerEchellesBarres();
     dessinerOr();
+    dessinerLodeRunner();
+    dessinerGarde();
+    
     if (!binGameOver)
         dessinerTexte();
     else
         dessinerGameOver();
-    dessinerLodeRunner();
-    dessinerGarde();
-
+    
     if (intLingotOrRamasse > 4) {
         if (audioEchelleF)
             audio12.play();

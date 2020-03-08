@@ -23,22 +23,27 @@ function effacerDessin() {
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
 
-    if (Math.floor(objGarde1.intX/32)==Math.floor(objLodeRunner.intX/32)&&Math.floor(objGarde1.intY/32)==Math.floor(objLodeRunner.intY/32)) {
-        console.log("dead")
-        audio5.play();
-        spriteCount = 3;
-        objLodeRunner.Image = objImageLodeRunner;
-        booStart = true;
-        framesPerSecond = 60;
-        intLingotOr = 5;
-        intPoints -= intLingotOrRamasse*250;
-        intLingotOrRamasse = 0;
-        objLodeRunner.intY = 0;
-        objLodeRunner.intX = 0;
-        initDisposition();
-        dessiner();
-        dessinerLodeRunner();
-        intVies--;
+    for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
+        let objGarde = tabGardien[intNoGarde];
+        
+        if (Math.floor(objGarde.intX/32)==Math.floor(objLodeRunner.intX/32)&&Math.floor(objGarde.intY/32)==Math.floor(objLodeRunner.intY/32)) {
+            console.log("dead")
+            audio5.play();
+            spriteCount = 3;
+            objLodeRunner.Image = objImageLodeRunner;
+            booStart = true;
+            framesPerSecond = 60;
+            intLingotOr = 5;
+            intPoints -= intLingotOrRamasse*250;
+            intLingotOrRamasse = 0;
+            objLodeRunner.intY = 0;
+            objLodeRunner.intX = 0;
+            initDisposition();
+            dessiner();
+            dessinerLodeRunner();
+            intVies--;
+        }
+        
     }
 
     deplacementGarde();
