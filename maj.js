@@ -37,21 +37,21 @@ function mettreAjourAnimation() {
         tabDispo[bombeDroite.intI+ 1][bombeDroite.intK + 1] = "1";
         //mort
         audio5.play();
-                spriteCount = 3;
-                objLodeRunner.Image = objImageLodeRunner;
-                booStart = true;
-                binBombeDroite = false;
-                binBombeGauche = false;
-                framesPerSecond = 60;
-                intLingotOr = 5;
-                intPoints -= intLingotOrRamasse * 250;
-                intLingotOrRamasse = 0;
-                objLodeRunner.intY = 0;
-                objLodeRunner.intX = 0;
-                initDisposition();
-                dessiner();
-                dessinerLodeRunner();
-                intVies--;
+        spriteCount = 3;
+        objLodeRunner.Image = objImageLodeRunner;
+        booStart = true;
+        binBombeDroite = false;
+        binBombeGauche = false;
+        framesPerSecond = 60;
+        intLingotOr = 5;
+        intPoints -= intLingotOrRamasse * 250;
+        intLingotOrRamasse = 0;
+        objLodeRunner.intY = 0;
+        objLodeRunner.intX = 0;
+        initDisposition();
+        dessiner();
+        dessinerLodeRunner();
+        intVies--;
         binBriqueDroite=false;
     }
     if (tempsBombeGauche == 15 && binBombeGauche) {
