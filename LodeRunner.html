@@ -19,7 +19,16 @@
     let objCanvas = null;
     let objC2D = null;
     let objCycleAnimation = null;
-
+    let binBombeGauche=false;
+    let binBriqueGauche=false;
+    let bombeGauche=new Object();
+    let tempsBombeGauche=0;
+    let tempsBombeDroite=0;
+    let tempsBriqueGauche=0;
+    let tempsBriqueDroite=0;
+    let binBombeDroite=false;
+    let binBriqueDroite=false;
+    let bombeDroite=new Object();
     let objLodeRunner = null;
     let objGarde1=null;
     let objImageFond = null;
@@ -106,7 +115,20 @@
     var frameCount4 = 3;
     var srcX4=curFrame4 * width4;
     var srcY4=0;
-    // spritesheet 4 
+    // spritesheet 4
+    
+    // spritesheet 5 bombe explose
+    var spriteWidth5 = 96;
+    var spriteHeight5 = 96;
+    var rows5 = 3;
+    var cols5 = 1;
+    var width5 = spriteWidth5 / cols5;
+    var height5 = spriteHeight5 / rows5;
+    var curFrame5 = 0;
+    var frameCount5 = 2;
+    var srcX5=curFrame5 * width5;
+    var srcY5=0;
+    // spritesheet 5
 
 
     function gestionClavier() {

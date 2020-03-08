@@ -16,7 +16,7 @@ function initAnimation() {
 // Initialiser la disposition initiale dans un tableau => WINDOWS 10
 function initDisposition() {
     $.get("dispositions.txt", function(data) {
-        tabDispo = data.split("\r\n").map( function(el) {
+        tabDispo = data.split("\n").map( function(el) {
              return el.split(";");
             }
         );
@@ -218,6 +218,10 @@ function initImages() {
     // image brique
     objImageBrique = new Image();
     objImageBrique.src = 'images/brick.png'
+
+    // image brique explose
+    objImageBriqueExplose = new Image();
+    objImageBriqueExplose.src = 'images/brick decay.png';
 
     // image beton
     objImageBeton = new Image();

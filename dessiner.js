@@ -8,6 +8,7 @@ function dessiner() {
     dessinerOr();
     dessinerLodeRunner();
     dessinerGarde();
+    dessinerBombe();
     
     if (!binGameOver)
         dessinerTexte();
@@ -253,4 +254,17 @@ function dessinerLodeRunner(){
     }
 
     objC2D.restore();
+}
+function dessinerBombe(){
+
+    if(binBombeDroite==true)
+    {
+        objC2D.drawImage(objIMGBombe,bombeDroite.intX,bombeDroite.intY,bombeDroite.intLargeur,bombeDroite.intHauteur);
+    }
+
+    if(binBombeGauche==true)
+    {
+        objC2D.drawImage(objIMGBombe,bombeGauche.intX,bombeGauche.intY,bombeGauche.intLargeur,bombeGauche.intHauteur);
+    }
+
 }

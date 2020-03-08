@@ -22,7 +22,37 @@ function effacerDessin() {
 
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
+    tempsBombeDroite++;
+    tempsBriqueDroite++;
+    tempsBombeGauche++;
+    tempsBriqueGauche++;
+    if (tempsBombeDroite==15&&binBombeDroite)
+    {
+        binBombeDroite=false;
+        tabDispo[bombeDroite.intI+ 1][bombeDroite.intK + 1] = "0";
+        tempsBriqueDroite=0;
+        binBriqueDroite=true;
+    }
+    if(tempsBriqueDroite==60)
+    {
+        tabDispo[bombeDroite.intI+ 1][bombeDroite.intK + 1] = "1";
+        binBriqueDroite=false;
+    }
+    if (tempsBombeGauche==15&&binBombeGauche)
+    {
+        binBombeGauche=false;
+        tabDispo[bombeGauche.intI+ 1][bombeGauche.intK - 1] = "0";
+        tempsBriqueGauche=0;
+        binBriqueGauche=true;
+    }
+    
+    if(tempsBriqueGauche==60)
+    {
+        tabDispo[bombeGauche.intI+ 1][bombeGauche.intK - 1] = "1";
+        binBriqueGauche=false;
+    }
 
+    
     if (tabGardien != null) {
         for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
             let objGarde = tabGardien[intNoGarde];
@@ -33,6 +63,8 @@ function mettreAjourAnimation() {
                 spriteCount = 3;
                 objLodeRunner.Image = objImageLodeRunner;
                 booStart = true;
+                binBombeDroite = false;
+                binBombeGauche = false;
                 framesPerSecond = 60;
                 intLingotOr = 5;
                 intPoints -= intLingotOrRamasse * 250;
@@ -103,8 +135,10 @@ function mettreAjourAnimation() {
             binGaucheDroite = false;
             binTombe = true;
         } else {
+            
             binGaucheDroite = true;
             binTombe = false;
+            
             binDecrocherBarre = false;
         }
 
@@ -124,6 +158,10 @@ function mettreAjourAnimation() {
                 binTombe = false;
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
+            }
+            if(binBriqueDroite||binBriqueGauche)
+            {
+                binGaucheDroite=false;
             }
 
         }
@@ -148,6 +186,10 @@ function mettreAjourLodeRunner(sprite, touche) {
         } else if (sprite == 2) {
             curFrame2 = ++curFrame2 % frameCount2;
             srcX2 = curFrame2 * width2;
+            srcY2 = 0;
+
+            curFrame5 = ++curFrame5 % frameCount5;
+            srcX5 = curFrame5 * width2;
             srcY2 = 0;
         } else if (sprite == 1) {
             curFrame1 = ++curFrame1 % frameCount1;
@@ -402,9 +444,8 @@ function changementDirection(toucheAppuye) {
             break;
 
         case "c":   // bombe a la droite
-            spriteCount = 1;
-            objLodeRunner.Image = objIMGLodeRunnerDroite;
-
+            spriteCount = 2;
+            objLodeRunner.Image = objImageLodeRunner;
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
@@ -415,8 +456,18 @@ function changementDirection(toucheAppuye) {
 
                             if ((objLodeRunner.intX - 16 <= briqueX && objLodeRunner.intX + 16 >= briqueX) &&
                                 (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
-
-                                objC2D.drawImage(objIMGBombe, (k + 1) * 32 + 16, i * 32 + 32, 32, 32);
+                                //tabDispo[i + 1][k + 1] = "0";
+                                binBombeDroite = true;
+                                tempsBombeDroite=0;
+                                bombeDroite.intI=i;
+                                bombeDroite.intK=k;
+                                bombeDroite.intX = (k + 1) * 32 + 16;
+                                bombeDroite.intY = i * 32 + 32;
+                                bombeDroite.intLargeur = 32;
+                                bombeDroite.intHauteur = 32;
+                                objC2D.drawImage(objIMGBombe, bombeDroite.intX, bombeDroite.intY, bombeDroite.intLargeur, bombeDroite.intHauteur);
+                                objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY, 32, 32);
+                                //objC2D.drawImage(objIMGBombe, (k + 1) * 32 + 16, i * 32 + 32, 32, 32);
                                 audio3.play();
                             }
                         }
@@ -428,21 +479,30 @@ function changementDirection(toucheAppuye) {
 
 
         case "z":   // bombe a la gauche
-            spriteCount = 1;
-            objLodeRunner.Image = objIMGLodeRunnerDroite;
+            spriteCount = 2;
+            objLodeRunner.Image = objImageLodeRunner;
 
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if (i + 1 < tabDispo.length) {
-                        if (tabDispo[i + 1][k + 1] == "1") {
+                        if (tabDispo[i + 1][k - 1] == "1") {
                             var briqueX = k * 32 + 16;
                             var briqueY = i * 32 + 32;
 
                             if ((objLodeRunner.intX - 16 <= briqueX && objLodeRunner.intX + 16 >= briqueX) &&
                                 (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
-
-                                objC2D.drawImage(objIMGBombe, (k - 1) * 32 + 16, i * 32 + 32, 32, 32);
+                                bombeGauche.intI=i;
+                                bombeGauche.intK=k;
+                                binBombeGauche = true;
+                                tempsBombeGauche=0;
+                                bombeGauche.intX = (k - 1) * 32 + 16;
+                                bombeGauche.intY = i * 32 + 32;
+                                bombeGauche.intLargeur = 32;
+                                bombeGauche.intHauteur = 32;
+                                //objC2D.drawImage(objIMGBombe, (k - 1) * 32 + 16, i * 32 + 32, 32, 32);
+                                objC2D.drawImage(objIMGBombe, bombeGauche.intX, bombeGauche.intY, bombeGauche.intLargeur, bombeGauche.intHauteur);
+                                objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeGauche.intX, bombeGauche.intY, 32, 32);
                                 audio3.play();
                             }
                         }
