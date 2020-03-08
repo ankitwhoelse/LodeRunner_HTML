@@ -34,10 +34,10 @@ function mettreAjourAnimation() {
     }
     if (tempsBriqueDroite == 60) {
         tabDispo[bombeDroite.intI + 1][bombeDroite.intK + 1] = "1";
-        if (LodeTrou == true) {
+        if (binLodeTrou == true) {
             //mort
             audio5.play();
-            LodeTrou = false;
+            binLodeTrou = false;
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
             booStart = true;
@@ -65,9 +65,9 @@ function mettreAjourAnimation() {
 
     if (tempsBriqueGauche == 60) {
         tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "1";
-        if (LodeTrou == true) {
+        if (binLodeTrou == true) {
             audio5.play();
-            LodeTrou = false;
+            binLodeTrou = false;
             spriteCount = 3;
             objLodeRunner.Image = objImageLodeRunner;
             booStart = true;
@@ -173,7 +173,7 @@ function mettreAjourAnimation() {
         else if (tabDispo[Math.floor(espaceSousLodeY / 32)][Math.floor(espaceSousLodeX / 32)] == "4") {
 
             binGaucheDroite = false;
-            LodeTrou = true;
+            binLodeTrou = true;
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
             if (intPositionBloque == 0) {
