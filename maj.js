@@ -33,7 +33,7 @@ function mettreAjourAnimation() {
         tempsBriqueDroite=0;
         binBriqueDroite=true;
     }
-    if(tempsBriqueDroite==60)
+    if(tempsBriqueDroite==60 && tabDispo!=null)
     {
         tabDispo[bombeDroite.intI+ 1][bombeDroite.intK + 1] = "1";
         //mort
