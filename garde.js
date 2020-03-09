@@ -332,16 +332,16 @@ function deplacementGarde() {
         }
         switch (intMouvement) {
             case 1: // mouvement a DROITE
-                objGarde.intX += 2;
+                objGarde.intX += 3;
                 break;
             case 2: // mouvement a GAUCHE
-                objGarde.intX -= 2;
+                objGarde.intX -= 3;
                 break;
             case 3: // mouvement en HAUT
-                objGarde.intY -= 2;
+                objGarde.intY -= 3;
                 break;
             case 4: // mouvement en BAS
-                objGarde.intY += 2;
+                objGarde.intY += 4;
                 break;
         }
     }
