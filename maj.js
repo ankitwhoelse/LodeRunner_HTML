@@ -56,8 +56,9 @@ function mettreAjourAnimation() {
             dessiner();
             dessinerLodeRunner();
             intVies--;
-            tabBombes.shift();
+            
         }
+        tabBombes.pop();
        // binBriqueDroite = false;
     } 
    
