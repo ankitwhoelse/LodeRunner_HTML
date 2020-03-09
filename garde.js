@@ -28,6 +28,9 @@ function initGarde() {
                     objGarde.or = false;
                     objGarde.intX = (k) * 32;
                     objGarde.intY = (i + 1) * 32;
+                    objGarde.initIntX = objGarde.intX;
+                    objGarde.initIntY = objGarde.intY;
+                    objGarde.intPositionBloqueGarde = 0;
                     objGarde.Trou = false;
                     tabGardien.push(objGarde);
                     tabDispo[i][k] = 0;
@@ -52,15 +55,16 @@ function deplacementGarde() {
         let posGardeX = objGarde.intX;
         let posGardeY = objGarde.intY;
 
-
+        // GARDE TOMBE DANS UN TROU
         if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4") {
-            if (objGarde.or)
+            
+            if (objGarde.or) // if garde possede un lingot, il l'échappe
                 tabDispo[Math.floor(objGarde.intY / 32) - 2][Math.floor(objGarde.intX / 32)] = "6";
 
             objGarde.Trou = true;
 
             objGarde.Image = objImageGardeVChuteTrou;
-            if (intPositionBloqueGarde == 0) {
+            if (objGarde.intPositionBloqueGarde == 0) {
                 if (binBriqueDroite) {
                     objGarde.intX = objGarde.intX + 10;
                     objGarde.intY = objGarde.intY - 5;
@@ -69,8 +73,16 @@ function deplacementGarde() {
                     objGarde.intX = objGarde.intX - 10;
                     objGarde.intY = objGarde.intY - 5;
                 }
+                objGarde.intPositionBloqueGarde++;
+                intPoints += 75;
 
-                intPositionBloqueGarde++;
+            } else if (tabDispo[Math.floor(objGarde.intY / 32) - 1][Math.floor(objGarde.intX / 32)] == "1") {
+                objGarde.intX = objGarde.initIntX;
+                objGarde.intY = objGarde.initIntY;
+                objGarde.Image = objImageGardeVGauche;
+                objGarde.intPositionBloqueGarde = 0;
+                intPoints += 75;
+                objGarde.Trou = false;
             }
 
         }
