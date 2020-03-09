@@ -72,7 +72,7 @@ function deplacementGarde() {
                 else if (binBriqueGauche) {
                     objGarde.intX = objGarde.intX - 10;
                     objGarde.intY = objGarde.intY - 5;
-                }
+                }+
                 objGarde.intPositionBloqueGarde++;
                 intPoints += 75;
 
