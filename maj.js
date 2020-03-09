@@ -8,7 +8,7 @@ function animer() {
     }, 1000 / framesPerSecond);
 }
 
-// ArrÃªter l'animation
+// Arrêter l'animation
 function arreterAnimation() {
     if (objCycleAnimation != null)
         cancelAnimationFrame(objCycleAnimation);
@@ -20,10 +20,10 @@ function effacerDessin() {
     objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
 }
 
-// Pour mettre Ã  jour l'animation
+// Pour mettre à jour l'animation
 function mettreAjourAnimation() {
     for (let i = 0; i < tabBombes.length; i++) {
-
+       
         tabBombes[i].tempsBombeDroite++;
         tabBombes[i].tempsBriqueDroite++;
         if (tabBombes[i].tempsBombeDroite == 15) {
@@ -56,27 +56,12 @@ function mettreAjourAnimation() {
                 dessinerLodeRunner();
                 intVies--;
 
-                tabBombes[i].tempsBombeDroite++;
-                tabBombes[i].tempsBriqueDroite++;
-                if (tabBombes[i].tempsBombeDroite == 15) {
-                    //binBombeDroite = false;
-
-                    tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "0";
-                    //objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY+16, 32, 32);
-                    tabBombes[i].tempsBriqueDroite = 0;
-                    // binBriqueDroite = true;
-                }
-                // binBriqueDroite = false;
-                tabBombes.shift();
             }
-
+            // binBriqueDroite = false;
+            tabBombes.shift();
         }
-        tabBombes.splice(i, 1);
-        // binBriqueDroite = false;
-        //tabBombes.shift();
+
     }
-
-
 
     if (tempsBombeGauche == 15 && binBombeGauche) {
         binBombeGauche = false;
@@ -198,9 +183,9 @@ function mettreAjourAnimation() {
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
             if (intPositionBloque == 0) {
-
-                objLodeRunner.intX = Math.floor(objLodeRunner.intX / 32) * 32 + 16;
-                objLodeRunner.intY = Math.floor(objLodeRunner.intY / 32) * 32 - 1.2;
+               
+                     objLodeRunner.intX = Math.floor(objLodeRunner.intX/32)*32  + 16;
+                     objLodeRunner.intY = Math.floor(objLodeRunner.intY/32)*32  - 1.2;
                 /* else if (binBriqueGauche) {
                      objLodeRunner.intX = objLodeRunner.intX - 10;
                      objLodeRunner.intY = objLodeRunner.intY - 5;
@@ -538,7 +523,7 @@ function changementDirection(toucheAppuye) {
                                 (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
                                 //tabDispo[i + 1][k + 1] = "0";
                                 //binBombeDroite = true;
-                                let bombeDroite = new Object();
+                                let bombeDroite= new Object();
                                 bombeDroite.tempsBombeDroite = 0;
                                 bombeDroite.intI = i;
                                 bombeDroite.intK = k;
