@@ -50,8 +50,8 @@ function deplacementGarde() {
 
         let posGardeX = objGarde.intX;
         let posGardeY = objGarde.intY;
-
-
+        
+            // garde dans un trou
         if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4") {
             if (objGarde.or)
                 tabDispo[Math.floor(objGarde.intY / 32) - 2][Math.floor(objGarde.intX / 32)] = "6";
