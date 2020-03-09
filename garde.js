@@ -14,7 +14,7 @@ function initGarde() {
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == 8) {
                     objGarde = new Object();
-                    objGarde.Image = objImageGardeV;
+                    objGarde.Image = objImageGardeVDroite;
                     objGarde.intX = (k) * 32;
                     objGarde.intY = (i + 1) * 32;
                     tabGardien.push(objGarde);
@@ -46,10 +46,17 @@ function deplacementGarde() {
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if ([i - 1] > 0) {
                         if (tabDispo[i-1][k] == "2") {
-                            if (posLodeX > posGardeX && tabDispo[i][k+1] != "1")
+                            if (posLodeX > posGardeX && tabDispo[i][k-1] != "1")
+                            {
                                 intMouvement = 1;
-                            else if (posLodeX < posGardeX  && tabDispo[i][k-1] != "1")
+                                objGarde.Image = objImageGardeVDroite;
+                            }
+                            else if (posLodeX < posGardeX  && tabDispo[i][k+1] != "1")
+                            {
                                 intMouvement = 2;
+                                objGarde.Image = objImageGardeVGauche;
+                            }
+                                
                         }
                     }
                 }
@@ -69,6 +76,8 @@ function deplacementGarde() {
                             if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
                                 (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
                                     intMouvement = 4;
+                                    spriteCount=2
+                                    objGarde.Image = objImageGardeVChute;
                             }
                         }
                     }
@@ -89,6 +98,7 @@ function deplacementGarde() {
                             (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                 intMouvement = 3;
                                 objGarde.intX = ladderX;
+                                objGarde.Image = objImageGardeVEchelle;
                         }
                     }
                 }
@@ -109,6 +119,7 @@ function deplacementGarde() {
                                 (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                     intMouvement = 4;
                                     objGarde.intX = ladderX;
+                                    objGarde.Image = objImageGardeVEchelle;
                             }
                         }
                     }
