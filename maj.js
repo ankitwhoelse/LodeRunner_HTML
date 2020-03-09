@@ -22,47 +22,50 @@ function effacerDessin() {
 
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
-    for(let i=0;i<tabBombes.length;i++)
+    if (tabBombes.length!=0)
     {
-        bombeDroite=tabBombes[i];
-       bombeDroite.tempsBombeDroite++;
-       bombeDroite.tempsBriqueDroite++;
-    if (bombeDroite.tempsBombeDroite == 15 ) {
-        //binBombeDroite = false;
-        
-        tabDispo[bombeDroite.intI + 1][bombeDroite.intK + 1] = "0";
-        //objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY+16, 32, 32);
-        bombeDroite.tempsBriqueDroite = 0;
-       // binBriqueDroite = true;
-    }
-    if ( bombeDroite.tempsBriqueDroite == 60) {
-        tabDispo[bombeDroite.intI + 1][bombeDroite.intK + 1] = "1";
-        if (binLodeTrou == true) {
-            //mort
-            audio5.play();
-            binLodeTrou = false;
-            spriteCount = 3;
-            objLodeRunner.Image = objImageLodeRunner;
-            booStart = true;
-            binBombeDroite = false;
-            binBombeGauche = false;
-            framesPerSecond = 60;
-            intLingotOr = 5;
-            intPoints -= intLingotOrRamasse * 250;
-            intLingotOrRamasse = 0;
-            objLodeRunner.intY = 0;
-            objLodeRunner.intX = 0;
-            initDisposition();
-            dessiner();
-            dessinerLodeRunner();
-            intVies--;
-            
+    for (let i = 0; i < tabBombes.length; i++) {
+       
+      
+        tabBombes[i].tempsBombeDroite++;
+        tabBombes[i].tempsBriqueDroite++;
+        if (tabBombes[i].tempsBombeDroite == 15) {
+            //binBombeDroite = false;
+
+            tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "0";
+            //objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY+16, 32, 32);
+            tabBombes[i].tempsBriqueDroite = 0;
+            // binBriqueDroite = true;
         }
-        tabBombes.pop();
-       // binBriqueDroite = false;
-       tabBombes.shift();
-    } 
-   
+        if (tabBombes[i].tempsBriqueDroite >= 60) {
+            tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "1";
+            if (binLodeTrou == true && Math.floor(objLodeRunner.intX/32)+1==tabBombes[i].intX&&Math.floor(objLodeRunner.intY/32)==tabBombes[i].intY+1) {
+                //mort
+                audio5.play();
+                binLodeTrou = false;
+                spriteCount = 3;
+                objLodeRunner.Image = objImageLodeRunner;
+                booStart = true;
+                binBombeDroite = false;
+                binBombeGauche = false;
+                framesPerSecond = 60;
+                intLingotOr = 5;
+                intPoints -= intLingotOrRamasse * 250;
+                intLingotOrRamasse = 0;
+                objLodeRunner.intY = 0;
+                objLodeRunner.intX = 0;
+                initDisposition();
+                dessiner();
+                dessinerLodeRunner();
+                intVies--;
+
+            }
+            tabBombes.splice(i, 1);
+            // binBriqueDroite = false;
+            //tabBombes.shift();
+        }
+
+    }
 }
     if (tempsBombeGauche == 15 && binBombeGauche) {
         binBombeGauche = false;
@@ -95,7 +98,7 @@ function mettreAjourAnimation() {
         binBriqueGauche = false;
     }
 
-   
+
     if (tabGardien != null) {
         for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
             let objGarde = tabGardien[intNoGarde];
@@ -185,14 +188,14 @@ function mettreAjourAnimation() {
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
             if (intPositionBloque == 0) {
-               /* if (tabBombes) {
-                    objLodeRunner.intX = objLodeRunner.intX + 10;
-                    objLodeRunner.intY = objLodeRunner.intY - 5;
-                }*/
-               /* else if (binBriqueGauche) {
-                    objLodeRunner.intX = objLodeRunner.intX - 10;
-                    objLodeRunner.intY = objLodeRunner.intY - 5;
-                }*/
+            
+                objLodeRunner.intX = objLodeRunner.intX + 10;
+                objLodeRunner.intY = objLodeRunner.intY - 3;
+                 
+                /* else if (binBriqueGauche) {
+                     objLodeRunner.intX = objLodeRunner.intX - 10;
+                     objLodeRunner.intY = objLodeRunner.intY - 5;
+                 }*/
                 intPositionBloque++;
             }
 
@@ -228,9 +231,9 @@ function mettreAjourAnimation() {
                 binGaucheDroite = false;
                 binTombe = false;
             }
-          /*  if (binBriqueDroite || binBriqueGauche) {
-                binGaucheDroite = false;
-            }*/
+            /*  if (binBriqueDroite || binBriqueGauche) {
+                  binGaucheDroite = false;
+              }*/
 
         }
 
@@ -353,7 +356,7 @@ function changementDirection(toucheAppuye) {
                 binBarre = false;
                 objLodeRunner.Image = objImageLodeRunner;
 
-                if (objLodeRunner.intX > 16 && binGaucheDroite == true ) {
+                if (objLodeRunner.intX > 16 && binGaucheDroite == true) {
                     objLodeRunner.intX -= 5;    //test speed is 5
                     audio15.play();
 
@@ -526,6 +529,7 @@ function changementDirection(toucheAppuye) {
                                 (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
                                 //tabDispo[i + 1][k + 1] = "0";
                                 //binBombeDroite = true;
+                                let bombeDroite= new Object();
                                 bombeDroite.tempsBombeDroite = 0;
                                 bombeDroite.intI = i;
                                 bombeDroite.intK = k;
@@ -533,11 +537,11 @@ function changementDirection(toucheAppuye) {
                                 bombeDroite.intY = i * 32 + 32;
                                 bombeDroite.intLargeur = 32;
                                 bombeDroite.intHauteur = 32;
-                                bombeDroite.tempsBriqueDroite=0;
+                                bombeDroite.tempsBriqueDroite = 0;
                                 objC2D.drawImage(objIMGBombe, bombeDroite.intX, bombeDroite.intY, bombeDroite.intLargeur, bombeDroite.intHauteur);
                                 tabBombes.push(bombeDroite);
-                                console.log("tab bombe "+tabBombes);
-                               // objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY, 32, 32);
+                                console.log("tab bombe " + tabBombes);
+                                // objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY, 32, 32);
                                 //objC2D.drawImage(objIMGBombe, (k + 1) * 32 + 16, i * 32 + 32, 32, 32);
                                 audio3.play();
                             }
