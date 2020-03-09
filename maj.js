@@ -62,7 +62,7 @@ function mettreAjourAnimation() {
         }
 
     }
-
+}
     if (tempsBombeGauche == 15 && binBombeGauche) {
         binBombeGauche = false;
         tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "0";
@@ -94,6 +94,7 @@ function mettreAjourAnimation() {
         binBriqueGauche = false;
     }
 
+    // contact avec garde
     if (tabGardien != null) {
         for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
             let objGarde = tabGardien[intNoGarde];
@@ -233,7 +234,7 @@ function mettreAjourAnimation() {
 
     }
 
-}
+
 
 let binTombe = false;
 
@@ -329,18 +330,12 @@ function changementDirection(toucheAppuye) {
 
     switch (toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
-
             spriteCount = 3;
-            //console.log(tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)]);
-
-            //Si lode touche un garde
-
 
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
 
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX / 32)] == "3") {
-                //console.log("barre");
                 audio13.play();
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
@@ -430,7 +425,6 @@ function changementDirection(toucheAppuye) {
             break;
 
         case "haut":      // echelles
-
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
@@ -463,6 +457,8 @@ function changementDirection(toucheAppuye) {
                                 intLingotOrRamasse -= 5;
                                 objLodeRunner.intY = 0;
                                 objLodeRunner.intX = 0;
+                                initGardePosition();
+                                initGarde();
                                 dessiner();
                                 dessinerLodeRunner();
 
