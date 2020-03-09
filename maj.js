@@ -22,51 +22,50 @@ function effacerDessin() {
 
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
-    if (tabBombes.length!=0)
-    {
-    for (let i = 0; i < tabBombes.length; i++) {
-       
-      
-        tabBombes[i].tempsBombeDroite++;
-        tabBombes[i].tempsBriqueDroite++;
-        if (tabBombes[i].tempsBombeDroite == 15) {
-            //binBombeDroite = false;
+    if (tabBombes.length != 0) {
+        for (let i = 0; i < tabBombes.length; i++) {
 
-            tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "0";
-            //objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY+16, 32, 32);
-            tabBombes[i].tempsBriqueDroite = 0;
-            // binBriqueDroite = true;
-        }
-        if (tabBombes[i].tempsBriqueDroite >= 60) {
-            tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "1";
-            if (binLodeTrou == true && Math.floor(objLodeRunner.intX/32)+1==tabBombes[i].intX&&Math.floor(objLodeRunner.intY/32)==tabBombes[i].intY+1) {
-                //mort
-                audio5.play();
-                binLodeTrou = false;
-                spriteCount = 3;
-                objLodeRunner.Image = objImageLodeRunner;
-                booStart = true;
-                binBombeDroite = false;
-                binBombeGauche = false;
-                framesPerSecond = 60;
-                intLingotOr = 5;
-                intPoints -= intLingotOrRamasse * 250;
-                intLingotOrRamasse = 0;
-                objLodeRunner.intY = 0;
-                objLodeRunner.intX = 0;
-                initDisposition();
-                dessiner();
-                dessinerLodeRunner();
-                intVies--;
 
+            tabBombes[i].tempsBombeDroite++;
+            tabBombes[i].tempsBriqueDroite++;
+            if (tabBombes[i].tempsBombeDroite == 15) {
+                //binBombeDroite = false;
+
+                tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "0";
+                //objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY+16, 32, 32);
+                tabBombes[i].tempsBriqueDroite = 0;
+                // binBriqueDroite = true;
             }
-            tabBombes.splice(i, 1);
-            // binBriqueDroite = false;
-            //tabBombes.shift();
-        }
+            if (tabBombes[i].tempsBriqueDroite >= 60) {
+                tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "1";
+                if (binLodeTrou == true && Math.floor(objLodeRunner.intX / 32) + 1 == tabBombes[i].intX && Math.floor(objLodeRunner.intY / 32) == tabBombes[i].intY + 1) {
+                    //mort
+                    audio5.play();
+                    binLodeTrou = false;
+                    spriteCount = 3;
+                    objLodeRunner.Image = objImageLodeRunner;
+                    booStart = true;
+                    binBombeDroite = false;
+                    binBombeGauche = false;
+                    framesPerSecond = 60;
+                    intLingotOr = 5;
+                    intPoints -= intLingotOrRamasse * 250;
+                    intLingotOrRamasse = 0;
+                    objLodeRunner.intY = 0;
+                    objLodeRunner.intX = 0;
+                    initDisposition();
+                    dessiner();
+                    dessinerLodeRunner();
+                    intVies--;
 
+                }
+                tabBombes.splice(i, 1);
+                // binBriqueDroite = false;
+                //tabBombes.shift();
+            }
+
+        }
     }
-}
     if (tempsBombeGauche == 15 && binBombeGauche) {
         binBombeGauche = false;
         tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "0";
@@ -188,10 +187,10 @@ function mettreAjourAnimation() {
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
             if (intPositionBloque == 0) {
-            
+
                 objLodeRunner.intX = objLodeRunner.intX + 10;
                 objLodeRunner.intY = objLodeRunner.intY - 3;
-                 
+
                 /* else if (binBriqueGauche) {
                      objLodeRunner.intX = objLodeRunner.intX - 10;
                      objLodeRunner.intY = objLodeRunner.intY - 5;
@@ -524,7 +523,7 @@ function changementDirection(toucheAppuye) {
                                 (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
                                 //tabDispo[i + 1][k + 1] = "0";
                                 //binBombeDroite = true;
-                                let bombeDroite= new Object();
+                                let bombeDroite = new Object();
                                 bombeDroite.tempsBombeDroite = 0;
                                 bombeDroite.intI = i;
                                 bombeDroite.intK = k;
