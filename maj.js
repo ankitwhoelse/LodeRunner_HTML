@@ -60,6 +60,7 @@ function mettreAjourAnimation() {
         }
         tabBombes.pop();
        // binBriqueDroite = false;
+       tabBombes.shift();
     } 
    
 }

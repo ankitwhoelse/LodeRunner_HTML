@@ -16,7 +16,7 @@ function initAnimation() {
 // Initialiser la disposition initiale dans un tableau => WINDOWS 10
 function initDisposition() {
     $.get("dispositions.txt", function(data) {
-        tabDispo = data.split("\n").map( function(el) {
+        tabDispo = data.split("\r\n").map( function(el) {
              return el.split(";");
             }
         );
@@ -75,10 +75,10 @@ function initGardePosition() {
     let gardesInitial = intGardeCompte;
 
     if (tabDispo != null) {
-        while (intGardeCompte > 0) {
+        while (intGardeCompte != 0) {
             for (var i = 0; i < tabDispo.length-3; i++) {
                 var ligneDispo = tabDispo[i];
-                for (var k = 0; k < ligneDispo.length; k++) {
+                for (var k = 1; k < ligneDispo.length-1; k++) {
                     if (tabDispo[i][k] == "1") {
                         
                         rand2 = Math.floor(Math.random() * 10);
