@@ -1,4 +1,5 @@
 // Un cycle d'animation
+// de base
 function animer() {
     setTimeout(function () {
         objCycleAnimation = requestAnimationFrame(animer);
@@ -8,7 +9,7 @@ function animer() {
     }, 1000 / framesPerSecond);
 }
 
-// Arrêter l'animation
+// Arrï¿½ter l'animation
 function arreterAnimation() {
     if (objCycleAnimation != null)
         cancelAnimationFrame(objCycleAnimation);
@@ -20,7 +21,7 @@ function effacerDessin() {
     objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
 }
 
-// Pour mettre à jour l'animation
+// Pour mettre ï¿½ jour l'animation
 function mettreAjourAnimation() {
     for (let i = 0; i < tabBombes.length; i++) {
        
