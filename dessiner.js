@@ -259,14 +259,18 @@ function dessinerLodeRunner() {
 
     objC2D.restore();
 }
-function dessinerBombe() {
-
-    if (binBombeDroite == true) {
-        objC2D.drawImage(objIMGBombe, bombeDroite.intX, bombeDroite.intY, bombeDroite.intLargeur, bombeDroite.intHauteur);
+function dessinerBombe(){
+if(tabBombes.length!=0)
+{
+    for(let i=0;i<tabBombes.length;i++)
+    {
+        if(tabBombes[i].tempsBombeDroite<15)
+        objC2D.drawImage(objIMGBombe,tabBombes[i].intX,tabBombes[i].intY,tabBombes[i].intLargeur,tabBombes[i].intHauteur);
     }
-
-    if (binBombeGauche == true) {
-        objC2D.drawImage(objIMGBombe, bombeGauche.intX, bombeGauche.intY, bombeGauche.intLargeur, bombeGauche.intHauteur);
+}
+    if(binBombeGauche==true)
+    {
+        objC2D.drawImage(objIMGBombe,bombeGauche.intX,bombeGauche.intY,bombeGauche.intLargeur,bombeGauche.intHauteur);
     }
 
 }
