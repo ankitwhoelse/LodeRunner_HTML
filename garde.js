@@ -85,7 +85,9 @@ function deplacementGarde() {
                     var ligneDispo = tabDispo[i];
                     for (var k = 0; k < ligneDispo.length; k++) {
 
-                        if (posGardeY > posLodeY && ([i - 1] > 0)) { // garde plus bas on map
+                        if (posGardeY > posLodeY && ([i - 1] > 0)) { 
+                            // garde plus bas on map
+
                             if (tabDispo[i][k] == "2") {
                                 let ladderX = k * 32 + 16;
                                 let ladderY = i * 32 + 32;
@@ -95,44 +97,31 @@ function deplacementGarde() {
                                 objGarde.frameCount = 3;
 
                                 if (ladderX < objCanvas.width/2 && posLodeX < objCanvas.width/2) {
+                                    // left side
 
                                     if (ladderX >= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                         intMouvement = 1;   // droite
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVDroiteOr;
-                                        else
-                                            objGarde.Image = objImageGardeVDroite;
-
+                                        break;
                                     } else if (ladderX <= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                         intMouvement = 2;   // gauche
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVGaucheOr;
-                                        else
-                                            objGarde.Image = objImageGardeVGauche;
+                                        break;
                                     }
                                 } else if (ladderX > objCanvas.width/2 && posLodeX > objCanvas.width/2) {
-
-                                    if (ladderX >= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
-                                        intMouvement = 1;   // droite
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVDroiteOr;
-                                        else
-                                            objGarde.Image = objImageGardeVDroite;
-
-                                    } else if (ladderX <= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
+                                    // right side
+                                    
+                                    if (ladderX <= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                         intMouvement = 2;   // gauche
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVGaucheOr;
-                                        else
-                                            objGarde.Image = objImageGardeVGauche;
+                                        break;
+                                    } else if (ladderX >= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
+                                        intMouvement = 1;   // droite
+                                        break;
                                     }
                                 }
                             }
-                        } else if (posGardeY < posLodeY && ([i + 1] < tabDispo.length)) {  // garde plus haut on map
+
+                        } else if (posGardeY < posLodeY && ([i + 1] < tabDispo.length)) {  
+                            // garde plus haut on map
+
                             if (tabDispo[i+1][k] == "2" && tabDispo[i][k] == "0" || tabDispo[i+1][k] == "0" && tabDispo[i][k] == "0") {
                                 let ladderX = k * 32 + 16;
                                 let ladderY = i * 32 + 32;
@@ -141,41 +130,24 @@ function deplacementGarde() {
                                 objGarde.spriteWidth = 96;
                                 objGarde.frameCount = 3;
 
-                                if (ladderX < objCanvas.width/2 && posLodeX < objCanvas.width/2) {
+                                if (ladderX < objCanvas.width/2 && posLodeX < objCanvas.width/2) {  
+                                    // left side
 
-                                    if (ladderX >= posGardeX && (objGarde.intY + 32 >= ladderY && objGarde.intY <= ladderY + 32)) {
+                                    if (ladderX >= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                         intMouvement = 1;   // droite
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVDroiteOr;
-                                        else
-                                            objGarde.Image = objImageGardeVDroite;
                                     }
-                                    else if (ladderX <= posGardeX && (objGarde.intY + 32 >= ladderY && objGarde.intY <= ladderY + 32)) {
+                                    else if (ladderX <= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                         intMouvement = 2;   // gauche
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVGaucheOr;
-                                        else
-                                            objGarde.Image = objImageGardeVGauche;
                                     }
                                 } else if (ladderX > objCanvas.width/2 && posLodeX > objCanvas.width/2) { 
+                                    // right side
                                     
-                                    if (ladderX >= posGardeX && (objGarde.intY + 32 >= ladderY && objGarde.intY <= ladderY + 32)) {
-                                        intMouvement = 1;   // droite
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVDroiteOr;
-                                        else
-                                            objGarde.Image = objImageGardeVDroite;
-                                    }
-                                    else if (ladderX <= posGardeX && (objGarde.intY + 32 >= ladderY && objGarde.intY <= ladderY + 32)) {
+                                    if (ladderX <= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                         intMouvement = 2;   // gauche
-
-                                        if (objGarde.or)
-                                            objGarde.Image = objImageGardeVGaucheOr;
-                                        else
-                                            objGarde.Image = objImageGardeVGauche;
+                                        break;
+                                    }
+                                    else if (ladderX >= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                        intMouvement = 1;   // droite
                                     }
                                 }
                             }
@@ -186,19 +158,23 @@ function deplacementGarde() {
 
                             if (posGardeX > posLodeX) {
                                 intMouvement = 2;
-                                if (objGarde.or)
-                                    objGarde.Image = objImageGardeVGaucheOr;
-                                else
-                                    objGarde.Image = objImageGardeVGauche;
                                 break;
                             } else if (posGardeX < posLodeX) {
                                 intMouvement = 1;
-                                if (objGarde.or)
-                                    objGarde.Image = objImageGardeVDroiteOr;
-                                else
-                                    objGarde.Image = objImageGardeVDroite;
-                                break;
                             }
+                        }
+
+                        if (intMouvement == 1) {
+                            if (objGarde.or)
+                                objGarde.Image = objImageGardeVDroiteOr;
+                            else
+                                objGarde.Image = objImageGardeVDroite;
+                        break;
+                        } else if (intMouvement == 2) {
+                            if (objGarde.or)
+                                objGarde.Image = objImageGardeVGaucheOr;
+                            else
+                                objGarde.Image = objImageGardeVGauche;
                         }
 
                     }

@@ -62,7 +62,7 @@ function mettreAjourAnimation() {
         }
 
     }
-    
+
     if (tempsBombeGauche == 15 && binBombeGauche) {
         binBombeGauche = false;
         tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "0";
@@ -489,8 +489,8 @@ function changementDirection(toucheAppuye) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
                     if (i + 1 < tabDispo.length) {
-
                         if (tabDispo[i + 1][k] == "2" || tabDispo[i + 1][k] == "7") {
+
                             var ladderX = k * 32 + 16;
                             var ladderY = i * 32 + 32;
 
