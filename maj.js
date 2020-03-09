@@ -22,49 +22,6 @@ function effacerDessin() {
 
 // Pour mettre à jour l'animation
 function mettreAjourAnimation() {
-<<<<<<< HEAD
-    for (let i = 0; i < tabBombes.length; i++) {
-        bombeDroite = tabBombes[i];
-        bombeDroite.tempsBombeDroite++;
-        bombeDroite.tempsBriqueDroite++;
-        if (bombeDroite.tempsBombeDroite == 15) {
-            //binBombeDroite = false;
-
-            tabDispo[bombeDroite.intI + 1][bombeDroite.intK + 1] = "0";
-            //objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY+16, 32, 32);
-            bombeDroite.tempsBriqueDroite = 0;
-            // binBriqueDroite = true;
-        }
-        if (bombeDroite.tempsBriqueDroite == 60) {
-            tabDispo[bombeDroite.intI + 1][bombeDroite.intK + 1] = "1";
-            if (binLodeTrou == true) {
-                //mort
-                audio5.play();
-                binLodeTrou = false;
-                spriteCount = 3;
-                objLodeRunner.Image = objImageLodeRunner;
-                booStart = true;
-                binBombeDroite = false;
-                binBombeGauche = false;
-                framesPerSecond = 60;
-                intLingotOr = 5;
-                intPoints -= intLingotOrRamasse * 250;
-                intLingotOrRamasse = 0;
-                objLodeRunner.intY = 0;
-                objLodeRunner.intX = 0;
-                initDisposition();
-                dessiner();
-                dessinerLodeRunner();
-                intVies--;
-
-            }
-            // binBriqueDroite = false;
-            tabBombes.shift();
-        }
-
-    }
-
-=======
     if (tabBombes.length!=0)
     {
     for (let i = 0; i < tabBombes.length; i++) {
@@ -110,7 +67,6 @@ function mettreAjourAnimation() {
 
     }
 }
->>>>>>> 48933a0daf548bc8d201a033d84a4854304552d5
     if (tempsBombeGauche == 15 && binBombeGauche) {
         binBombeGauche = false;
         tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "0";
@@ -142,11 +98,7 @@ function mettreAjourAnimation() {
         binBriqueGauche = false;
     }
 
-<<<<<<< HEAD
     // contact avec garde
-=======
-
->>>>>>> 48933a0daf548bc8d201a033d84a4854304552d5
     if (tabGardien != null) {
         for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
             let objGarde = tabGardien[intNoGarde];
@@ -236,17 +188,10 @@ function mettreAjourAnimation() {
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
             if (intPositionBloque == 0) {
-<<<<<<< HEAD
-                /* if (tabBombes) {
-                     objLodeRunner.intX = objLodeRunner.intX + 10;
-                     objLodeRunner.intY = objLodeRunner.intY - 5;
-                 }*/
-=======
             
                 objLodeRunner.intX = objLodeRunner.intX + 10;
                 objLodeRunner.intY = objLodeRunner.intY - 3;
                  
->>>>>>> 48933a0daf548bc8d201a033d84a4854304552d5
                 /* else if (binBriqueGauche) {
                      objLodeRunner.intX = objLodeRunner.intX - 10;
                      objLodeRunner.intY = objLodeRunner.intY - 5;
@@ -390,18 +335,12 @@ function changementDirection(toucheAppuye) {
 
     switch (toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
-
             spriteCount = 3;
-            //console.log(tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)]);
-
-            //Si lode touche un garde
-
 
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;
 
             if (tabDispo[Math.floor(espaceHautLodeY / 32) - 1][Math.floor(espaceHautLodeX / 32)] == "3") {
-                //console.log("barre");
                 audio13.play();
                 binBarre = true;
                 objLodeRunner.Image = objLodeBarreGauche;
@@ -491,7 +430,6 @@ function changementDirection(toucheAppuye) {
             break;
 
         case "haut":      // echelles
-
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
@@ -524,6 +462,8 @@ function changementDirection(toucheAppuye) {
                                 intLingotOrRamasse -= 5;
                                 objLodeRunner.intY = 0;
                                 objLodeRunner.intX = 0;
+                                initGardePosition();
+                                initGarde();
                                 dessiner();
                                 dessinerLodeRunner();
 

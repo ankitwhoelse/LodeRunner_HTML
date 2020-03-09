@@ -30,6 +30,7 @@ function initGarde() {
                     objGarde.intY = (i + 1) * 32;
                     objGarde.Trou = false;
                     tabGardien.push(objGarde);
+                    tabDispo[i][k] = 0;
                 }
             }
         }
@@ -85,16 +86,17 @@ function deplacementGarde() {
                     var ligneDispo = tabDispo[i];
                     for (var k = 0; k < ligneDispo.length; k++) {
 
+                        objGarde.cols = 3;
+                        objGarde.spriteWidth = 96;
+                        objGarde.frameCount = 3;
+
                         if (posGardeY > posLodeY && ([i - 1] > 0)) { 
                             // garde plus bas on map
 
                             if (tabDispo[i][k] == "2") {
                                 let ladderX = k * 32 + 16;
                                 let ladderY = i * 32 + 32;
-                                
-                                objGarde.cols = 3;
-                                objGarde.spriteWidth = 96;
-                                objGarde.frameCount = 3;
+
 
                                 if (ladderX < objCanvas.width/2 && posLodeX < objCanvas.width/2) {
                                     // left side
@@ -126,10 +128,6 @@ function deplacementGarde() {
                                 let ladderX = k * 32 + 16;
                                 let ladderY = i * 32 + 32;
 
-                                objGarde.cols = 3;
-                                objGarde.spriteWidth = 96;
-                                objGarde.frameCount = 3;
-
                                 if (ladderX < objCanvas.width/2 && posLodeX < objCanvas.width/2) {  
                                     // left side
 
@@ -152,9 +150,6 @@ function deplacementGarde() {
                                 }
                             }
                         } else if (posGardeY == posLodeY) { // garde au meme niveau on map
-                            objGarde.cols = 3;
-                            objGarde.spriteWidth = 96;
-                            objGarde.frameCount = 3;
 
                             if (posGardeX > posLodeX) {
                                 intMouvement = 2;
@@ -169,7 +164,6 @@ function deplacementGarde() {
                                 objGarde.Image = objImageGardeVDroiteOr;
                             else
                                 objGarde.Image = objImageGardeVDroite;
-                        break;
                         } else if (intMouvement == 2) {
                             if (objGarde.or)
                                 objGarde.Image = objImageGardeVGaucheOr;
@@ -267,6 +261,8 @@ function deplacementGarde() {
                             else
                                 objGarde.Image = objImageGardeVEchelle;
                         }
+                    } else {
+
                     }
                 }
             }
