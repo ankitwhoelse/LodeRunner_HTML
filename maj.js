@@ -343,7 +343,7 @@ function changementDirection(toucheAppuye) {
                 binBarre = false;
                 objLodeRunner.Image = objImageLodeRunner;
 
-                if (objLodeRunner.intX > 16 && binGaucheDroite == true) {
+                if (objLodeRunner.intX > 16 && binGaucheDroite == true ) {
                     objLodeRunner.intX -= 5;    //test speed is 5
                     audio15.play();
 
