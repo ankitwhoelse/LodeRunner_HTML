@@ -102,7 +102,6 @@ function deplacementGarde() {
                                     else
                                         objGarde.Image = objImageGardeVDroite;
 
-                                    break;
                                 }
                                 else if (ladderX <= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                     intMouvement = 2;
@@ -111,11 +110,10 @@ function deplacementGarde() {
                                         objGarde.Image = objImageGardeVGaucheOr;
                                     else
                                         objGarde.Image = objImageGardeVGauche;
-                                    break;
                                 }
                             }
                         } else if (posGardeY < posLodeY && ([i + 1] < tabDispo.length)) {  // garde plus haut on map
-                            if (tabDispo[i + 1][k] == "2") {
+                            if (tabDispo[i+1][k] == "2" && tabDispo[i][k] == "0") {
                                 let ladderX = k * 32 + 16;
                                 let ladderY = i * 32 + 32;
 
@@ -123,7 +121,7 @@ function deplacementGarde() {
                                 objGarde.spriteWidth = 96;
                                 objGarde.frameCount = 3;
 
-                                if (ladderX >= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                if (ladderX >= posGardeX && (objGarde.intY + 32 >= ladderY && objGarde.intY <= ladderY + 32)) {
                                     intMouvement = 1;
 
                                     if (objGarde.or)
@@ -132,7 +130,7 @@ function deplacementGarde() {
                                         objGarde.Image = objImageGardeVDroite;
                                     break;
                                 }
-                                else if (ladderX <= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                else if (ladderX <= posGardeX && (objGarde.intY + 32 >= ladderY && objGarde.intY <= ladderY + 32)) {
                                     intMouvement = 2;
 
                                     if (objGarde.or)
