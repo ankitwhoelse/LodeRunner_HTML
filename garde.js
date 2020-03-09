@@ -54,7 +54,7 @@ function deplacementGarde() {
 
         if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4") {
             if (objGarde.or)
-                tabDispo[Math.floor(objGarde.intY / 32)-2][Math.floor(objGarde.intX / 32)] = "6";
+                tabDispo[Math.floor(objGarde.intY / 32) - 2][Math.floor(objGarde.intX / 32)] = "6";
 
             objGarde.Trou = true;
 
@@ -78,87 +78,168 @@ function deplacementGarde() {
             objGarde.curFrame = ++objGarde.curFrame % objGarde.frameCount;
             objGarde.srcX = objGarde.curFrame * objGarde.width;
             objGarde.srcY = 0;
-            // MOUVEMENT BASIC DROITE / GAUCHE   ||   Artificial intelligence alpha 1.2
+
+            // MOUVEMENT BASIC DROITE / GAUCHE   ||   Artificial intelligence alpha 0.4
             if (tabDispo != null) {
                 for (var i = 0; i < tabDispo.length; i++) {
                     var ligneDispo = tabDispo[i];
                     for (var k = 0; k < ligneDispo.length; k++) {
-                        if ([i - 1] > 0) {
-                            if (tabDispo[i - 1][k] == "2") {
-                                if (posLodeX > posGardeX && tabDispo[i][k + 1] != "1") {
 
+                        if (posGardeY > posLodeY && ([i - 1] > 0)) { // garde plus bas on map
+                            if (tabDispo[i][k] == "2") {
+                                let ladderX = k * 32 + 16;
+                                let ladderY = i * 32 + 32;
+
+                                objGarde.cols = 3;
+                                objGarde.spriteWidth = 96;
+                                objGarde.frameCount = 3;
+
+                                if (ladderX >= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                     intMouvement = 1;
+
                                     if (objGarde.or)
                                         objGarde.Image = objImageGardeVDroiteOr;
                                     else
                                         objGarde.Image = objImageGardeVDroite;
-                                    objGarde.cols = 3;
-                                    objGarde.spriteWidth = 96;
-                                    objGarde.frameCount = 3;
+
+                                    break;
                                 }
-                                else if (posLodeX < posGardeX && tabDispo[i][k - 1] != "1") {
-                                    objGarde.cols = 3;
-                                    objGarde.spriteWidth = 96;
-                                    objGarde.frameCount = 3;
+                                else if (ladderX <= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                     intMouvement = 2;
+
                                     if (objGarde.or)
                                         objGarde.Image = objImageGardeVGaucheOr;
                                     else
                                         objGarde.Image = objImageGardeVGauche;
-
-
+                                    break;
                                 }
-
                             }
-                        }
-                    }
-                }
-            }
+                        } else if (posGardeY < posLodeY && ([i + 1] < tabDispo.length)) {  // garde plus haut on map
+                            if (tabDispo[i + 1][k] == "2") {
+                                let ladderX = k * 32 + 16;
+                                let ladderY = i * 32 + 32;
 
+                                objGarde.cols = 3;
+                                objGarde.spriteWidth = 96;
+                                objGarde.frameCount = 3;
 
+                                if (ladderX >= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                    intMouvement = 1;
 
-            // MOUVEMENT VERS LE BAS (TOMBER)
-            for (var i = 0; i < tabDispo.length; i++) {
-                let ligneDispo = tabDispo[i];
-                for (var k = 0; k < ligneDispo.length; k++) {
-                    if (i + 1 < tabDispo.length) {
-                        if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2" && tabDispo[i][k] == "0") {
-                            let videX = k * 32 + 16;
-                            let videY = i * 32 + 32;
-
-                            if (posLodeY > posGardeY || posLodeY < posGardeY || posLodeY == posGardeY) {
-                                if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
-                                    (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
-                                    objGarde.cols = 2;
-                                    objGarde.spriteWidth = 64;
-                                    objGarde.frameCount = 2;
-                                    intMouvement = 4;
                                     if (objGarde.or)
-                                        objGarde.Image = objImageGardeVChuteOr;
+                                        objGarde.Image = objImageGardeVDroiteOr;
                                     else
-                                        objGarde.Image = objImageGardeVChute;
+                                        objGarde.Image = objImageGardeVDroite;
+                                    break;
+                                }
+                                else if (ladderX <= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                    intMouvement = 2;
+
+                                    if (objGarde.or)
+                                        objGarde.Image = objImageGardeVGaucheOr;
+                                    else
+                                        objGarde.Image = objImageGardeVGauche;
+                                    break;
                                 }
                             }
+                        } else if (posGardeY == posLodeY) { // garde au meme niveau on map
+                            objGarde.cols = 3;
+                            objGarde.spriteWidth = 96;
+                            objGarde.frameCount = 3;
+
+                            if (posGardeX > posLodeX) {
+                                intMouvement = 2;
+                                if (objGarde.or)
+                                    objGarde.Image = objImageGardeVGaucheOr;
+                                else
+                                    objGarde.Image = objImageGardeVGauche;
+                                break;
+                            } else if (posGardeX < posLodeX) {
+                                intMouvement = 1;
+                                if (objGarde.or)
+                                    objGarde.Image = objImageGardeVDroiteOr;
+                                else
+                                    objGarde.Image = objImageGardeVDroite;
+                                break;
+                            }
                         }
+
                     }
                 }
             }
+        }
 
-            // MOUVEMENT VERS LE HAUT (ECHELLE)
-            for (var i = 0; i < tabDispo.length; i++) {
-                let ligneDispo = tabDispo[i];
-                for (var k = 0; k < ligneDispo.length; k++) {
-                    if (tabDispo[i][k] == "2") {
-                        let ladderX = k * 32 + 16;
-                        let ladderY = i * 32 + 32;
 
-                        if (posLodeY < posGardeY) {
-                            if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
-                                (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
+
+        // MOUVEMENT VERS LE BAS (TOMBER)
+        for (var i = 0; i < tabDispo.length; i++) {
+            let ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (i + 1 < tabDispo.length) {
+                    if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2" && tabDispo[i][k] == "0") {
+                        let videX = k * 32 + 16;
+                        let videY = i * 32 + 32;
+
+                        if (posLodeY > posGardeY || posLodeY < posGardeY || posLodeY == posGardeY) {
+                            if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
+                                (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
                                 objGarde.cols = 2;
                                 objGarde.spriteWidth = 64;
                                 objGarde.frameCount = 2;
-                                intMouvement = 3;
+                                intMouvement = 4;
+                                if (objGarde.or)
+                                    objGarde.Image = objImageGardeVChuteOr;
+                                else
+                                    objGarde.Image = objImageGardeVChute;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // MOUVEMENT VERS LE HAUT (ECHELLE)
+        for (var i = 0; i < tabDispo.length; i++) {
+            let ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (tabDispo[i][k] == "2") {
+                    let ladderX = k * 32 + 16;
+                    let ladderY = i * 32 + 32;
+
+                    if (posLodeY < posGardeY) {
+                        if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
+                            (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
+                            objGarde.cols = 2;
+                            objGarde.spriteWidth = 64;
+                            objGarde.frameCount = 2;
+                            intMouvement = 3;
+                            objGarde.intX = ladderX;
+                            if (objGarde.or)
+                                objGarde.Image = objImageGardeVEchelleOr;
+                            else
+                                objGarde.Image = objImageGardeVEchelle;
+                        }
+                    }
+                }
+            }
+        }
+
+        // MOUVEMENT VERS LE BAS (ECHELLE)
+        for (var i = 0; i < tabDispo.length; i++) {
+            let ligneDispo = tabDispo[i];
+            for (var k = 0; k < ligneDispo.length; k++) {
+                if (i + 1 < tabDispo.length) {
+                    if (tabDispo[i + 1][k] == "2") {
+                        let ladderX = k * 32 + 16;
+                        let ladderY = i * 32 + 32;
+
+                        if (posLodeY > posGardeY) {
+                            if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
+                                (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                objGarde.cols = 2;
+                                objGarde.spriteWidth = 64;
+                                objGarde.frameCount = 2;
+                                intMouvement = 4;
                                 objGarde.intX = ladderX;
                                 if (objGarde.or)
                                     objGarde.Image = objImageGardeVEchelleOr;
@@ -169,77 +250,50 @@ function deplacementGarde() {
                     }
                 }
             }
-
-            // MOUVEMENT VERS LE BAS (ECHELLE)
-            for (var i = 0; i < tabDispo.length; i++) {
-                let ligneDispo = tabDispo[i];
-                for (var k = 0; k < ligneDispo.length; k++) {
-                    if (i + 1 < tabDispo.length) {
-                        if (tabDispo[i + 1][k] == "2") {
-                            let ladderX = k * 32 + 16;
-                            let ladderY = i * 32 + 32;
-
-                            if (posLodeY > posGardeY) {
-                                if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
-                                    (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
-                                    objGarde.cols = 2;
-                                    objGarde.spriteWidth = 64;
-                                    objGarde.frameCount = 2;
-                                    intMouvement = 4;
-                                    objGarde.intX = ladderX;
-                                    if (objGarde.or)
-                                        objGarde.Image = objImageGardeVEchelleOr;
-                                    else
-                                        objGarde.Image = objImageGardeVEchelle;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            // lingot d'or
-            if (!objGarde.or) {
-                for (var i = 0; i < tabDispo.length; i++) {
-                    var ligneDispo = tabDispo[i];
-                    for (var k = 0; k < ligneDispo.length; k++) {
-                        if (tabDispo[i][k] == "6") {
-                            var goldX = k * 32 + 16;
-                            var goldY = i * 32 + 32;
-
-                            if ((objGarde.intX - 16 <= goldX && objGarde.intX + 16 >= goldX) &&
-                                (objGarde.intY - 32 <= goldY && objGarde.intY >= goldY - 32)) {
-                                objGarde.or = true;
-                                intLingotOr--;
-                                //intLingotOrRamasse++;
-                                tabDispo[i][k] = "0";
-                                //intPoints += 250;
-                                audio1.play();
-                                // console.log("picked up gold : " + intLingotOrRamasse);
-                            }
-                        }
-                    }
-                }
-            }
-            switch (intMouvement) {
-                case 1: // mouvement a DROITE
-
-                    objGarde.intX += 2;
-                    break;
-                case 2: // mouvement a GAUCHE
-
-                    objGarde.intX -= 2;
-                    break;
-                case 3: // mouvement en HAUT
-                    objGarde.intY -= 2;
-                    break;
-                case 4: // mouvement en BAS
-                    objGarde.intY += 2;
-                    break;
-            }
-
         }
+        // lingot d'or
+        if (!objGarde.or) {
+            for (var i = 0; i < tabDispo.length; i++) {
+                var ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (tabDispo[i][k] == "6") {
+                        var goldX = k * 32 + 16;
+                        var goldY = i * 32 + 32;
+
+                        if ((objGarde.intX - 16 <= goldX && objGarde.intX + 16 >= goldX) &&
+                            (objGarde.intY - 32 <= goldY && objGarde.intY >= goldY - 32)) {
+                            objGarde.or = true;
+                            intLingotOr--;
+                            //intLingotOrRamasse++;
+                            tabDispo[i][k] = "0";
+                            //intPoints += 250;
+                            audio1.play();
+                            // console.log("picked up gold : " + intLingotOrRamasse);
+                        }
+                    }
+                }
+            }
+        }
+        switch (intMouvement) {
+            case 1: // mouvement a DROITE
+
+                objGarde.intX += 2;
+                break;
+            case 2: // mouvement a GAUCHE
+
+                objGarde.intX -= 2;
+                break;
+            case 3: // mouvement en HAUT
+                objGarde.intY -= 2;
+                break;
+            case 4: // mouvement en BAS
+                objGarde.intY += 2;
+                break;
+        }
+
     }
 }
+
 
 function dessinerGarde() {
     sprite = 3;

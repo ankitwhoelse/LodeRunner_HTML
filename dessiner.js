@@ -9,18 +9,18 @@ function dessiner() {
     dessinerLodeRunner();
     dessinerGarde();
     dessinerBombe();
-    
+
     if (!binGameOver)
         dessinerTexte();
     else
         dessinerGameOver();
-    
+
     if (intLingotOrRamasse > 4) {
         if (audioEchelleF)
             audio12.play();
         audioEchelleF = false;
         dessinerEchelleEscape();
-    } 
+    }
 }
 
 // Pour dessiner l'image de fond
@@ -127,7 +127,7 @@ function dessinerEchelleEscape() {
 function dessinerOr() {
     objC2D.save();
 
-    if (tabDispo != null && binNextLevel==true) {
+    if (tabDispo != null && binNextLevel == true) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
@@ -163,8 +163,8 @@ function dessinerTexte() {
     objC2D.lineWidth = 1;
     objC2D.font = '30pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('Points : ' + pad(intPoints, 6), objCanvas.width / 6, objCanvas.height-40);
-    objC2D.strokeText('Points : ' + pad(intPoints, 6), objCanvas.width / 6, objCanvas.height-40);
+    objC2D.fillText('Points : ' + pad(intPoints, 6), objCanvas.width / 6, objCanvas.height - 40);
+    objC2D.strokeText('Points : ' + pad(intPoints, 6), objCanvas.width / 6, objCanvas.height - 40);
     objC2D.closePath();
 
     // Texte de niveau
@@ -174,8 +174,8 @@ function dessinerTexte() {
     objC2D.lineWidth = 1;
     objC2D.font = '30pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('Niveau : ' + pad(intNiveau,2), objCanvas.width / 2, objCanvas.height-40);
-    objC2D.strokeText('Niveau : ' + pad(intNiveau,2), objCanvas.width / 2, objCanvas.height-40);
+    objC2D.fillText('Niveau : ' + pad(intNiveau, 2), objCanvas.width / 2, objCanvas.height - 40);
+    objC2D.strokeText('Niveau : ' + pad(intNiveau, 2), objCanvas.width / 2, objCanvas.height - 40);
     objC2D.closePath();
 
     // Texte de vies restantes
@@ -185,8 +185,8 @@ function dessinerTexte() {
     objC2D.lineWidth = 1;
     objC2D.font = '30pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('Vies : ' + pad(intVies,2), objCanvas.width-164, objCanvas.height-40);
-    objC2D.strokeText('Vies : ' + pad(intVies,2), objCanvas.width-164, objCanvas.height-40);
+    objC2D.fillText('Vies : ' + pad(intVies, 2), objCanvas.width - 164, objCanvas.height - 40);
+    objC2D.strokeText('Vies : ' + pad(intVies, 2), objCanvas.width - 164, objCanvas.height - 40);
     objC2D.closePath();
 }
 
@@ -194,11 +194,11 @@ function dessinerTexte() {
 function dessinerGameOver() {
     // gray box
     objC2D.save();
-        objC2D.beginPath();                         objC2D.moveTo(16,objCanvas.height-16);
-        objC2D.lineTo(16,objCanvas.height - 96);    objC2D.lineTo(objCanvas.width-16, objCanvas.height - 96);
-        objC2D.lineTo(objCanvas.width-16, objCanvas.height-16);
-        objC2D.fillStyle = 'gray';      objC2D.strokeStyle='white';
-        objC2D.fill();                  objC2D.lineWidth = 5;   objC2D.stroke();
+    objC2D.beginPath(); objC2D.moveTo(16, objCanvas.height - 16);
+    objC2D.lineTo(16, objCanvas.height - 96); objC2D.lineTo(objCanvas.width - 16, objCanvas.height - 96);
+    objC2D.lineTo(objCanvas.width - 16, objCanvas.height - 16);
+    objC2D.fillStyle = 'gray'; objC2D.strokeStyle = 'white';
+    objC2D.fill(); objC2D.lineWidth = 5; objC2D.stroke();
     objC2D.restore();
 
     // Texte de GAME-OVER
@@ -207,12 +207,12 @@ function dessinerGameOver() {
     objC2D.fillStyle = "white";
     objC2D.font = '40pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('GAME-OVER : ' + pad(intPoints,6) + " Points", objCanvas.width/2, objCanvas.height-35);
-    objC2D.strokeStyle = "red";     objC2D.lineWidth = 4;
-    objC2D.strokeText('GAME-OVER : ' + pad(intPoints,6) + " Points", objCanvas.width/2 +1, objCanvas.height-35 );  
-    objC2D.strokeStyle = "cyan";    objC2D.lineWidth = 2;
-    objC2D.strokeText('GAME-OVER : ' + pad(intPoints,6) + " Points", objCanvas.width/2 -1, objCanvas.height-35 );
-    objC2D.closePath();   
+    objC2D.fillText('GAME-OVER : ' + pad(intPoints, 6) + " Points", objCanvas.width / 2, objCanvas.height - 35);
+    objC2D.strokeStyle = "red"; objC2D.lineWidth = 4;
+    objC2D.strokeText('GAME-OVER : ' + pad(intPoints, 6) + " Points", objCanvas.width / 2 + 1, objCanvas.height - 35);
+    objC2D.strokeStyle = "cyan"; objC2D.lineWidth = 2;
+    objC2D.strokeText('GAME-OVER : ' + pad(intPoints, 6) + " Points", objCanvas.width / 2 - 1, objCanvas.height - 35);
+    objC2D.closePath();
     objC2D.restore();
 
     objC2D.beginPath();
@@ -227,7 +227,7 @@ function dessinerGameOver() {
 }
 
 
-function dessinerLodeRunner(){
+function dessinerLodeRunner() {
     objC2D.save();
 
     if (tabDispo != null) {
@@ -240,35 +240,33 @@ function dessinerLodeRunner(){
                         objLodeRunner.intY = i * 32 + 32;
                     }
                     if (spriteCount == 3)
-                        objC2D.drawImage(objLodeRunner.Image,srcX3,srcY3,width3,height3, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
-                    else if (spriteCount == 2)  {
-                        objC2D.drawImage(objLodeRunner.Image,srcX2,srcY2,width2,height2, objLodeRunner.intX,objLodeRunner.intY, 32, 32);
-                        touche=null;
+                        objC2D.drawImage(objLodeRunner.Image, srcX3, srcY3, width3, height3, objLodeRunner.intX, objLodeRunner.intY, 32, 32);
+                    else if (spriteCount == 2) {
+                        objC2D.drawImage(objLodeRunner.Image, srcX2, srcY2, width2, height2, objLodeRunner.intX, objLodeRunner.intY, 32, 32);
+                        touche = null;
                     }
-                    else if (spriteCount == 1)  {
-                        objC2D.drawImage(objLodeRunner.Image,objLodeRunner.intX,objLodeRunner.intY, 32, 32);
-                        touche=null;
+                    else if (spriteCount == 1) {
+                        objC2D.drawImage(objLodeRunner.Image, objLodeRunner.intX, objLodeRunner.intY, 32, 32);
+                        touche = null;
                     }
-                    if(booStart==false)
-                        touche=null;
-                   // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
-                } 
+                    if (booStart == false)
+                        touche = null;
+                    // objC2D.drawImage(character,srcX,srcY,width,height,x,y,width,height);
+                }
             }
         }
     }
 
     objC2D.restore();
 }
-function dessinerBombe(){
+function dessinerBombe() {
 
-    if(binBombeDroite==true)
-    {
-        objC2D.drawImage(objIMGBombe,bombeDroite.intX,bombeDroite.intY,bombeDroite.intLargeur,bombeDroite.intHauteur);
+    if (binBombeDroite == true) {
+        objC2D.drawImage(objIMGBombe, bombeDroite.intX, bombeDroite.intY, bombeDroite.intLargeur, bombeDroite.intHauteur);
     }
 
-    if(binBombeGauche==true)
-    {
-        objC2D.drawImage(objIMGBombe,bombeGauche.intX,bombeGauche.intY,bombeGauche.intLargeur,bombeGauche.intHauteur);
+    if (binBombeGauche == true) {
+        objC2D.drawImage(objIMGBombe, bombeGauche.intX, bombeGauche.intY, bombeGauche.intLargeur, bombeGauche.intHauteur);
     }
 
 }
