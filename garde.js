@@ -30,7 +30,9 @@ function deplacementGarde() {
     // Advanced AI... aka une tonne de if else
     let posLodeX = objLodeRunner.intX;
     let posLodeY = objLodeRunner.intY;
-
+    curFrame4 = ++curFrame4 % frameCount4;
+            srcX4 = curFrame4 * width4;
+            srcY4 = 0;
     for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
 
         let objGarde = tabGardien[intNoGarde];
@@ -63,6 +65,8 @@ function deplacementGarde() {
                 }
             }
         }
+
+        
     
         // MOUVEMENT VERS LE BAS (TOMBER)
         for (var i = 0; i < tabDispo.length; i++) {
@@ -77,7 +81,6 @@ function deplacementGarde() {
                             if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
                                 (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
                                     intMouvement = 4;
-                                    spriteCount=2
                                     objGarde.Image = objImageGardeVChute;
                             }
                         }
@@ -130,9 +133,11 @@ function deplacementGarde() {
 
         switch (intMouvement) {
             case 1: // mouvement a DROITE
+            
                 objGarde.intX += 2;
                 break;
             case 2: // mouvement a GAUCHE
+            
                 objGarde.intX -= 2;
                 break;
             case 3: // mouvement en HAUT
@@ -148,15 +153,15 @@ function deplacementGarde() {
 }
 
 function dessinerGarde() {
-    sprite = 3;
+    sprite = 2;
 
     objC2D.save();
 
     if (tabGardien != null) {
         for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
             let objGarde = tabGardien[intNoGarde];
-
-            objC2D.drawImage(objGarde.Image, srcX3, srcY3, width3, height3, objGarde.intX, objGarde.intY, 32, 32);
+            
+            objC2D.drawImage(objGarde.Image, srcX4, srcY4, width4, height4, objGarde.intX, objGarde.intY, 32, 32);
         }
     }
 
