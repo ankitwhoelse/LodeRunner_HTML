@@ -15,8 +15,20 @@ function initGarde() {
                 if (tabDispo[i][k] == 8) {
                     objGarde = new Object();
                     objGarde.Image = objImageGardeVDroite;
+                    objGarde.spriteWidth = 96;
+                    objGarde.spriteHeight = 32;
+                    objGarde.rows = 1;
+                    objGarde.cols = 3;
+                    objGarde.width = objGarde.spriteWidth / objGarde.cols;
+                    objGarde.height = objGarde.spriteHeight / objGarde.rows;
+                    objGarde.curFrame = 0;
+                    objGarde.frameCount = 3;
+                    objGarde.srcX = objGarde.curFrame * objGarde.width;
+                    objGarde.srcY = 0;
+                    objGarde.or = false;
                     objGarde.intX = (k) * 32;
                     objGarde.intY = (i + 1) * 32;
+                    objGarde.Trou = false;
                     tabGardien.push(objGarde);
                 }
             }
@@ -30,9 +42,7 @@ function deplacementGarde() {
     // Advanced AI... aka une tonne de if else
     let posLodeX = objLodeRunner.intX;
     let posLodeY = objLodeRunner.intY;
-    curFrame4 = ++curFrame4 % frameCount4;
-            srcX4 = curFrame4 * width4;
-            srcY4 = 0;
+
     for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
 
         let objGarde = tabGardien[intNoGarde];
@@ -41,127 +51,208 @@ function deplacementGarde() {
         let posGardeX = objGarde.intX;
         let posGardeY = objGarde.intY;
 
-        // MOUVEMENT BASIC DROITE / GAUCHE   ||   Artificial intelligence alpha 1.2
-        if (tabDispo != null) {
+
+        if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4") {
+            if (objGarde.or)
+                tabDispo[Math.floor(objGarde.intY / 32)-2][Math.floor(objGarde.intX / 32)] = "6";
+
+            objGarde.Trou = true;
+
+            objGarde.Image = objImageGardeVChuteTrou;
+            if (intPositionBloqueGarde == 0) {
+                if (binBriqueDroite) {
+                    objGarde.intX = objGarde.intX + 10;
+                    objGarde.intY = objGarde.intY - 5;
+                }
+                else if (binBriqueGauche) {
+                    objGarde.intX = objGarde.intX - 10;
+                    objGarde.intY = objGarde.intY - 5;
+                }
+
+                intPositionBloqueGarde++;
+            }
+
+        }
+
+        if (!objGarde.Trou) {
+            objGarde.curFrame = ++objGarde.curFrame % objGarde.frameCount;
+            objGarde.srcX = objGarde.curFrame * objGarde.width;
+            objGarde.srcY = 0;
+            // MOUVEMENT BASIC DROITE / GAUCHE   ||   Artificial intelligence alpha 1.2
+            if (tabDispo != null) {
+                for (var i = 0; i < tabDispo.length; i++) {
+                    var ligneDispo = tabDispo[i];
+                    for (var k = 0; k < ligneDispo.length; k++) {
+                        if ([i - 1] > 0) {
+                            if (tabDispo[i - 1][k] == "2") {
+                                if (posLodeX > posGardeX && tabDispo[i][k + 1] != "1") {
+
+                                    intMouvement = 1;
+                                    if (objGarde.or)
+                                        objGarde.Image = objImageGardeVDroiteOr;
+                                    else
+                                        objGarde.Image = objImageGardeVDroite;
+                                    objGarde.cols = 3;
+                                    objGarde.spriteWidth = 96;
+                                    objGarde.frameCount = 3;
+                                }
+                                else if (posLodeX < posGardeX && tabDispo[i][k - 1] != "1") {
+                                    objGarde.cols = 3;
+                                    objGarde.spriteWidth = 96;
+                                    objGarde.frameCount = 3;
+                                    intMouvement = 2;
+                                    if (objGarde.or)
+                                        objGarde.Image = objImageGardeVGaucheOr;
+                                    else
+                                        objGarde.Image = objImageGardeVGauche;
+
+
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            // MOUVEMENT VERS LE BAS (TOMBER)
             for (var i = 0; i < tabDispo.length; i++) {
-                var ligneDispo = tabDispo[i];
+                let ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
-                    if ([i - 1] > 0) {
-                        if (tabDispo[i-1][k] == "2") {
-                            if (posLodeX > posGardeX && tabDispo[i][k+1] != "1")
-                            {
-                                
-                                intMouvement = 1;
-                                objGarde.Image = objImageGardeVDroite;
-                            }
-                            else if (posLodeX < posGardeX  && tabDispo[i][k-1] != "1")
-                            {
-                                intMouvement = 2;
-                                objGarde.Image = objImageGardeVGauche;
-                            }
-                                
-                        }
-                    }
-                }
-            }
-        }
+                    if (i + 1 < tabDispo.length) {
+                        if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2" && tabDispo[i][k] == "0") {
+                            let videX = k * 32 + 16;
+                            let videY = i * 32 + 32;
 
-        
-    
-        // MOUVEMENT VERS LE BAS (TOMBER)
-        for (var i = 0; i < tabDispo.length; i++) {
-            let ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (i + 1 < tabDispo.length) {
-                    if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2" && tabDispo[i][k] == "0") {
-                        let videX = k * 32 + 16;
-                        let videY = i * 32 + 32;
-
-                        if (posLodeY > posGardeY || posLodeY < posGardeY || posLodeY == posGardeY) {
-                            if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
-                                (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
+                            if (posLodeY > posGardeY || posLodeY < posGardeY || posLodeY == posGardeY) {
+                                if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
+                                    (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
+                                    objGarde.cols = 2;
+                                    objGarde.spriteWidth = 64;
+                                    objGarde.frameCount = 2;
                                     intMouvement = 4;
-                                    objGarde.Image = objImageGardeVChute;
+                                    if (objGarde.or)
+                                        objGarde.Image = objImageGardeVChuteOr;
+                                    else
+                                        objGarde.Image = objImageGardeVChute;
+                                }
                             }
                         }
                     }
                 }
-            }   
-        }
-
-        // MOUVEMENT VERS LE HAUT (ECHELLE)
-        for (var i = 0; i < tabDispo.length; i++) {
-            let ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (tabDispo[i][k] == "2") {
-                    let ladderX = k * 32 + 16;
-                    let ladderY = i * 32 + 32;
-
-                    if (posLodeY < posGardeY) {
-                        if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
-                            (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
-                                intMouvement = 3;
-                                objGarde.intX = ladderX;
-                                objGarde.Image = objImageGardeVEchelle;
-                        }
-                    }
-                }
             }
-        }
 
-        // MOUVEMENT VERS LE BAS (ECHELLE)
-        for (var i = 0; i < tabDispo.length; i++) {
-            let ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (i + 1 < tabDispo.length) {
-                    if (tabDispo[i + 1][k] == "2") {
+            // MOUVEMENT VERS LE HAUT (ECHELLE)
+            for (var i = 0; i < tabDispo.length; i++) {
+                let ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (tabDispo[i][k] == "2") {
                         let ladderX = k * 32 + 16;
                         let ladderY = i * 32 + 32;
 
-                        if (posLodeY > posGardeY) {
+                        if (posLodeY < posGardeY) {
                             if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
-                                (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
-                                    intMouvement = 4;
-                                    objGarde.intX = ladderX;
+                                (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
+                                objGarde.cols = 2;
+                                objGarde.spriteWidth = 64;
+                                objGarde.frameCount = 2;
+                                intMouvement = 3;
+                                objGarde.intX = ladderX;
+                                if (objGarde.or)
+                                    objGarde.Image = objImageGardeVEchelleOr;
+                                else
                                     objGarde.Image = objImageGardeVEchelle;
                             }
                         }
                     }
                 }
-            }   
-        }
+            }
 
-        switch (intMouvement) {
-            case 1: // mouvement a DROITE
-            
-                objGarde.intX += 2;
-                break;
-            case 2: // mouvement a GAUCHE
-            
-                objGarde.intX -= 2;
-                break;
-            case 3: // mouvement en HAUT
-                objGarde.intY -= 2;
-                break;
-            case 4: // mouvement en BAS
-                objGarde.intY += 2;
-                break;
-        }
+            // MOUVEMENT VERS LE BAS (ECHELLE)
+            for (var i = 0; i < tabDispo.length; i++) {
+                let ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (i + 1 < tabDispo.length) {
+                        if (tabDispo[i + 1][k] == "2") {
+                            let ladderX = k * 32 + 16;
+                            let ladderY = i * 32 + 32;
 
+                            if (posLodeY > posGardeY) {
+                                if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
+                                    (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                    objGarde.cols = 2;
+                                    objGarde.spriteWidth = 64;
+                                    objGarde.frameCount = 2;
+                                    intMouvement = 4;
+                                    objGarde.intX = ladderX;
+                                    if (objGarde.or)
+                                        objGarde.Image = objImageGardeVEchelleOr;
+                                    else
+                                        objGarde.Image = objImageGardeVEchelle;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // lingot d'or
+            if (!objGarde.or) {
+                for (var i = 0; i < tabDispo.length; i++) {
+                    var ligneDispo = tabDispo[i];
+                    for (var k = 0; k < ligneDispo.length; k++) {
+                        if (tabDispo[i][k] == "6") {
+                            var goldX = k * 32 + 16;
+                            var goldY = i * 32 + 32;
+
+                            if ((objGarde.intX - 16 <= goldX && objGarde.intX + 16 >= goldX) &&
+                                (objGarde.intY - 32 <= goldY && objGarde.intY >= goldY - 32)) {
+                                objGarde.or = true;
+                                intLingotOr--;
+                                //intLingotOrRamasse++;
+                                tabDispo[i][k] = "0";
+                                //intPoints += 250;
+                                audio1.play();
+                                // console.log("picked up gold : " + intLingotOrRamasse);
+                            }
+                        }
+                    }
+                }
+            }
+            switch (intMouvement) {
+                case 1: // mouvement a DROITE
+
+                    objGarde.intX += 2;
+                    break;
+                case 2: // mouvement a GAUCHE
+
+                    objGarde.intX -= 2;
+                    break;
+                case 3: // mouvement en HAUT
+                    objGarde.intY -= 2;
+                    break;
+                case 4: // mouvement en BAS
+                    objGarde.intY += 2;
+                    break;
+            }
+
+        }
     }
-
 }
 
 function dessinerGarde() {
-    sprite = 2;
+    sprite = 3;
 
     objC2D.save();
 
     if (tabGardien != null) {
         for (let intNoGarde = 0; intNoGarde < tabGardien.length; intNoGarde++) {
             let objGarde = tabGardien[intNoGarde];
-            
-            objC2D.drawImage(objGarde.Image, srcX4, srcY4, width4, height4, objGarde.intX, objGarde.intY, 32, 32);
+            if (!objGarde.Trou)
+                objC2D.drawImage(objGarde.Image, objGarde.srcX, objGarde.srcY, objGarde.width, objGarde.height, objGarde.intX, objGarde.intY, 32, 32);
+            else
+                objC2D.drawImage(objGarde.Image, objGarde.intX, objGarde.intY, objGarde.width, objGarde.height);
         }
     }
 
