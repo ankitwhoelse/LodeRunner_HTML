@@ -1,4 +1,5 @@
 // Un cycle d'animation
+// de base
 function animer() {
     setTimeout(function () {
         objCycleAnimation = requestAnimationFrame(animer);

@@ -26,19 +26,6 @@ function initDisposition() {
         initGarde();
     });
 }
-/*
-// Initialiser la disposition initiale dans un tableau => MAC OSX
-function initDisposition() {
-    $.get("dispositions.txt", function(data) {
-        tabDispo = data.split("\n").map( function(el) {
-             return el.split(";");
-            }
-        );
-        console.log(tabDispo)
-        initLingotOr();
-    });
-}
-*/
 
 function initLingotOr() {
     // AJOUTER LINGOT D'OR A RANDOM ENDROITS SUR LA MAP
