@@ -1,10 +1,4 @@
- 
-// liste de fonctions / choses a faire
-// initialiser caracteristiques
-// init position random unique
-// mouvement
-// dessiner
-
+// INITIALISER LES OBJETS GARDES
 function initGarde() {
     tabGardien = new Array();
     let objGarde = null;
@@ -43,8 +37,9 @@ function initGarde() {
 
 }
 
+
+// Advanced AI... aka une tonne de if else
 function deplacementGarde() {
-    // Advanced AI... aka une tonne de if else
     let posLodeX = objLodeRunner.intX;
     let posLodeY = objLodeRunner.intY;
 
@@ -111,10 +106,8 @@ function deplacementGarde() {
                                 let ladderX = k * 32 + 16;
                                 let ladderY = i * 32 + 32;
 
-
                                 if (ladderX < objCanvas.width/2 && posLodeX < objCanvas.width/2) {
                                     // left side
-
                                     if (ladderX >= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                         intMouvement = 1;   // droite
                                         break;
@@ -124,7 +117,6 @@ function deplacementGarde() {
                                     }
                                 } else if (ladderX > objCanvas.width/2 && posLodeX > objCanvas.width/2) {
                                     // right side
-                                    
                                     if (ladderX <= posGardeX && (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                         intMouvement = 2;   // gauche
                                         break;
@@ -144,35 +136,39 @@ function deplacementGarde() {
 
                                 if (ladderX < objCanvas.width/2 && posLodeX < objCanvas.width/2) {  
                                     // left side
-
                                     if (ladderX >= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                         intMouvement = 1;   // droite
+                                        break;
                                     }
                                     else if (ladderX <= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                         intMouvement = 2;   // gauche
+                                        break;
                                     }
                                 } else if (ladderX > objCanvas.width/2 && posLodeX > objCanvas.width/2) { 
                                     // right side
-                                    
                                     if (ladderX <= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                         intMouvement = 2;   // gauche
                                         break;
                                     }
                                     else if (ladderX >= posGardeX && (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
                                         intMouvement = 1;   // droite
+                                        break;
                                     }
                                 }
                             }
-                        } else if (posGardeY == posLodeY) { // garde au meme niveau on map
+
+                        } else if (posGardeY == posLodeY) { 
+                            // garde au meme niveau on map
 
                             if (posGardeX > posLodeX) {
-                                intMouvement = 2;
+                                intMouvement = 2;   // gauche
                                 break;
                             } else if (posGardeX < posLodeX) {
-                                intMouvement = 1;
+                                intMouvement = 1;   // droite
                             }
                         }
 
+                        //  PANTALON DORE
                         if (intMouvement == 1) {
                             if (objGarde.or)
                                 objGarde.Image = objImageGardeVDroiteOr;
@@ -190,7 +186,7 @@ function deplacementGarde() {
             }
         }
 
-        //Barre de franchissement
+        // Barre de franchissement
         if (tabDispo[Math.floor(objGarde.intY / 32) - 1][Math.floor(objGarde.intX / 32)] == "3") {
             objGarde.cols = 3;
             objGarde.spriteWidth = 96;
@@ -205,7 +201,7 @@ function deplacementGarde() {
                 objGarde.Image = objImageGardeVBarreDroite;
         }
 
-        //Barre de franchissement lorsqu'il tombe
+        // Barre de franchissement lorsqu'il tombe
         if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "3") {
             objGarde.intY = objGarde.intY + 16;
             intMouvement = 2;
@@ -309,7 +305,8 @@ function deplacementGarde() {
                 }
             }
         }
-        // lingot d'or
+
+        // LINGOT D'OR
         if (!objGarde.or) {
             for (var i = 0; i < tabDispo.length; i++) {
                 var ligneDispo = tabDispo[i];
@@ -332,28 +329,27 @@ function deplacementGarde() {
                 }
             }
         }
+
         switch (intMouvement) {
             case 1: // mouvement a DROITE
-                objGarde.intX += 2;
+                objGarde.intX += 3;
                 break;
             case 2: // mouvement a GAUCHE
-                objGarde.intX -= 2;
+                objGarde.intX -= 3;
                 break;
             case 3: // mouvement en HAUT
                 objGarde.intY -= 2;
                 break;
             case 4: // mouvement en BAS
-                objGarde.intY += 2;
+                objGarde.intY += 4;
                 break;
         }
     }
 }
 
-
-
+//  DESSINER GARDE
 function dessinerGarde() {
     sprite = 3;
-
     objC2D.save();
 
     if (tabGardien != null) {
