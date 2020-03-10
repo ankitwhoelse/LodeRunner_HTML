@@ -8,7 +8,7 @@ function animer() {
     }, 1000 / framesPerSecond);
 }
 
-// Arrêter l'animation
+// Arrï¿½ter l'animation
 function arreterAnimation() {
     if (objCycleAnimation != null)
         cancelAnimationFrame(objCycleAnimation);
@@ -20,10 +20,10 @@ function effacerDessin() {
     objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
 }
 
-// Pour mettre à jour l'animation
+// Pour mettre ï¿½ jour l'animation
 function mettreAjourAnimation() {
     for (let i = 0; i < tabBombes.length; i++) {
-       
+
         tabBombes[i].tempsBombeDroite++;
         tabBombes[i].tempsBriqueDroite++;
         if (tabBombes[i].tempsBombeDroite == 15) {
@@ -183,9 +183,9 @@ function mettreAjourAnimation() {
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
             if (intPositionBloque == 0) {
-               
-                     objLodeRunner.intX = Math.floor(objLodeRunner.intX/32)*32  + 16;
-                     objLodeRunner.intY = Math.floor(objLodeRunner.intY/32)*32  - 1.2;
+
+                objLodeRunner.intX = Math.floor(objLodeRunner.intX / 32) * 32 + 16;
+                objLodeRunner.intY = Math.floor(objLodeRunner.intY / 32) * 32 - 1.2;
                 /* else if (binBriqueGauche) {
                      objLodeRunner.intX = objLodeRunner.intX - 10;
                      objLodeRunner.intY = objLodeRunner.intY - 5;
@@ -523,7 +523,7 @@ function changementDirection(toucheAppuye) {
                                 (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
                                 //tabDispo[i + 1][k + 1] = "0";
                                 //binBombeDroite = true;
-                                let bombeDroite= new Object();
+                                let bombeDroite = new Object();
                                 bombeDroite.tempsBombeDroite = 0;
                                 bombeDroite.intI = i;
                                 bombeDroite.intK = k;
