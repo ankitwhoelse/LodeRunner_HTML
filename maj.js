@@ -9,7 +9,7 @@ function animer() {
     }, 1000 / framesPerSecond);
 }
 
-// Arr�ter l'animation
+// Arreter l'animation
 function arreterAnimation() {
     if (objCycleAnimation != null)
         cancelAnimationFrame(objCycleAnimation);
@@ -21,7 +21,7 @@ function effacerDessin() {
     objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
 }
 
-// Pour mettre � jour l'animation
+// Pour mettre a jour l'animation
 function mettreAjourAnimation() {
 
     // BOMBES
@@ -158,8 +158,9 @@ function mettreAjourAnimation() {
         }
 
 
-        if (binTombe) {
-            objLodeRunner.intY += 7;
+        if (binTombe && !binGaucheDroite) {
+            
+            objLodeRunner.intY += 6;
             objLodeRunner.Image = objLodeChute;
             spriteCount = 2;
             curFrame2 = ++curFrame2 % frameCount2;
@@ -177,19 +178,18 @@ function mettreAjourAnimation() {
             }
             
             if (tabDispo[Math.floor(espaceSousLodeY / 32)][Math.floor(espaceSousLodeX / 32)] == "4") {
-
                 binGaucheDroite = false;
                 binTombe = false;
             }
-            /*  if (binBriqueDroite || binBriqueGauche) {
-                  binGaucheDroite = false;
-              }*/
 
         }
+        else if (!binTombe && !binGaucheDroite) {
+            spriteCount = 3;
+        }
+
     }
 }
 
-let binTombe = false;
 
 function mettreAjourLodeRunner(sprite, touche) {
     if (booStart == true) {
