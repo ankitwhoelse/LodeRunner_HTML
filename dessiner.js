@@ -107,6 +107,7 @@ function dessinerEchellesBarres() {
     objC2D.restore();
 }
 
+// Pour dessiner l'echelle de fin
 function dessinerEchelleEscape() {
     objC2D.save();
 
@@ -124,6 +125,7 @@ function dessinerEchelleEscape() {
     objC2D.restore();
 }
 
+// Pour dessiner les lingots d'or
 function dessinerOr() {
     objC2D.save();
 
