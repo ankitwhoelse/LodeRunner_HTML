@@ -25,26 +25,24 @@ function effacerDessin() {
 function mettreAjourAnimation() {
 
     // BOMBES
-    for (let i = 0; i < tabBombes.length; i++) {
-        tabBombes[i].tempsBombeDroite++;
-        tabBombes[i].tempsBriqueDroite++;
-        if (tabBombes[i].tempsBombeDroite == 15) {
-            //binBombeDroite = false;
+    for (let i = 0; i < tabBombesDroite.length; i++) {
+        tabBombesDroite[i].tempsBombeDroite++;
+        tabBombesDroite[i].tempsBriqueDroite++;
+        if (tabBombesDroite[i].tempsBombeDroite == 15) {
 
-            tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "0";
-            //objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY+16, 32, 32);
+            tabDispo[tabBombesDroite[i].intI + 1][tabBombesDroite[i].intK + 1] = "0";
             bombeDroite.tempsBriqueDroite = 0;
-            // binBriqueDroite = true;
+            console.log("x bombe= "+ tabBombesDroite[i].intX+"Y bombe= "+ tabBombesDroite[i].intY  );
         }
-        if (tabBombes[i].tempsBriqueDroite == 60) {
-            tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "1";
+        if (tabBombesDroite[i].tempsBriqueDroite == 60) {
+            tabDispo[tabBombesDroite[i].intI + 1][tabBombesDroite[i].intK + 1] = "1";
             audio4.play();
 
             if (binLodeTrou == true) {
                 LodeRunnerMeurt();
             }
-            // binBriqueDroite = false;
-            tabBombes.shift();
+            
+            tabBombesDroite.shift();
         }
     }
 
@@ -136,6 +134,7 @@ function mettreAjourAnimation() {
             binTombe = true;
         }  else if (tabDispo[Math.floor(espaceSousLodeY / 32)][Math.floor(espaceSousLodeX / 32)] == "4") {
             binGaucheDroite = false;
+            
             binLodeTrou = true;
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
@@ -143,6 +142,7 @@ function mettreAjourAnimation() {
             if (intPositionBloque == 0) {
                 objLodeRunner.intX = Math.floor(objLodeRunner.intX / 32) * 32 + 16;
                 objLodeRunner.intY = Math.floor(objLodeRunner.intY / 32) * 32 - 1.2;
+                console.log("X lode Trou= "+objLodeRunner.intX+"Y lode Trou= "+objLodeRunner.intY);
                 /* else if (binBriqueGauche) {
                      objLodeRunner.intX = objLodeRunner.intX - 10;
                      objLodeRunner.intY = objLodeRunner.intY - 5;
@@ -487,8 +487,8 @@ function changementDirection(toucheAppuye) {
                                     bombeDroite.intHauteur = 32;
                                     bombeDroite.tempsBriqueDroite = 0;
                                     objC2D.drawImage(objIMGBombe, bombeDroite.intX, bombeDroite.intY, bombeDroite.intLargeur, bombeDroite.intHauteur);
-                                    tabBombes.push(bombeDroite);
-                                    console.log("tab bombe " + tabBombes);
+                                    tabBombesDroite.push(bombeDroite);
+                                    console.log("tab bombe " + tabBombesDroite);
                                     // objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeDroite.intX, bombeDroite.intY, 32, 32);
                                     //objC2D.drawImage(objIMGBombe, (k + 1) * 32 + 16, i * 32 + 32, 32, 32);
                                     audio3.play();
