@@ -34,11 +34,11 @@ function mettreAjourAnimation() {
             bombeDroite.tempsBriqueDroite = 0;
             console.log("x bombe= "+ tabBombesDroite[i].intX+"Y bombe= "+ tabBombesDroite[i].intY  );
         }
-        if (tabBombesDroite[i].tempsBriqueDroite == 60) {
+        if (tabBombesDroite[i].tempsBriqueDroite == 60 ) {
             tabDispo[tabBombesDroite[i].intI + 1][tabBombesDroite[i].intK + 1] = "1";
             audio4.play();
 
-            if (binLodeTrou == true) {
+            if (binLodeTrou == true && tabBombesDroite[i].intX==objLodeRunner.intX&&tabBombesDroite[i].intY==Math.round(objLodeRunner.intY-30.8)) {
                 LodeRunnerMeurt();
             }
             
@@ -134,7 +134,7 @@ function mettreAjourAnimation() {
             binTombe = true;
         }  else if (tabDispo[Math.floor(espaceSousLodeY / 32)][Math.floor(espaceSousLodeX / 32)] == "4") {
             binGaucheDroite = false;
-            
+            binTombe=false;
             binLodeTrou = true;
             objLodeRunner.Image = objLodeChuteSolo;
             spriteCount = 1;
@@ -183,7 +183,7 @@ function mettreAjourAnimation() {
             }
 
         }
-        else if (!binTombe && !binGaucheDroite) {
+        else if (!binTombe && !binGaucheDroite && !binLodeTrou) {
             spriteCount = 3;
         }
 
