@@ -17,4 +17,25 @@ function sleep(milliseconds) {
         break;
       }
     }
-  }
+}
+
+// fonction LodeRunner meurt
+function LodeRunnerMeurt() {
+  audio5.play()
+  binLodeTrou = false;
+  spriteCount = 3;
+  objLodeRunner.Image = objImageLodeRunner;
+  booStart = true;
+  binBombeDroite = false;
+  binBombeGauche = false;
+  framesPerSecond = 60;
+  intLingotOr = 5;
+  intPoints -= intLingotOrRamasse * 250;
+  intLingotOrRamasse = 0;
+  objLodeRunner.intY = 0;
+  objLodeRunner.intX = 0;
+  initDisposition();
+  dessiner();
+  dessinerLodeRunner();
+  intVies--;
+}
