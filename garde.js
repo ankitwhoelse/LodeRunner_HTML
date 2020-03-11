@@ -58,6 +58,7 @@ function deplacementGarde() {
                 tabDispo[Math.floor(objGarde.intY / 32) - 2][Math.floor(objGarde.intX / 32)] = "6";
 
             objGarde.Trou = true;
+            audio8.play();
 
             objGarde.Image = objImageGardeVChuteTrou;
             if (objGarde.intPositionBloqueGarde == 0) {
@@ -80,6 +81,7 @@ function deplacementGarde() {
                 objGarde.intPositionBloqueGarde = 0;
                 intPoints += 75;
                 objGarde.Trou = false;
+                audio9.play();
             }
 
         }

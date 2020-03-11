@@ -2,14 +2,14 @@
 trouve les sons pour:
 
 1	runner rammase gold		(1.ogg)	done
-2	runner tombe			(2.ogg) done mais pas tres bon
+2	runner tombe			(2.ogg) done
 3	runner creuse un trou 	(3.ogg) done
-4	trou se auto-rempli		(4.ogg) 
+4	trou se auto-rempli		(4.ogg) done
 5	runner perd une vie		(5.ogg) done
 6	runner perd all vies	(6.ogg) done
 7	runner a terminer lvl	(7.ogg) done
-8	garde tombe dans trou	(8.ogg)	
-9	garde meurt				(9.ogg) 
+8	garde tombe dans trou	(8.ogg) done	
+9	garde meurt				(9.ogg) done
 10	game play sound			(10.ogg) done
 11 	game over sound			(11.ogg) done
 12	echelle finale			(12.ogg) done

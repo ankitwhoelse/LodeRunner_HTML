@@ -38,9 +38,10 @@ function mettreAjourAnimation() {
         }
         if (tabBombes[i].tempsBriqueDroite == 60) {
             tabDispo[tabBombes[i].intI + 1][tabBombes[i].intK + 1] = "1";
+            audio4.play();
+
             if (binLodeTrou == true) {
                 LodeRunnerMeurt();
-
             }
             // binBriqueDroite = false;
             tabBombes.shift();
