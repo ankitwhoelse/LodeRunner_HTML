@@ -38,7 +38,7 @@ function mettreAjourAnimation() {
             tabDispo[tabBombesDroite[i].intI + 1][tabBombesDroite[i].intK + 1] = "1";
             audio4.play();
 
-            if (binLodeTrou == true && tabBombesDroite[i].intX==objLodeRunner.intX&&tabBombesDroite[i].intY==Math.round(objLodeRunner.intY-30.8)) {
+            if (binLodeTrou == true && tabBombesDroite[i].intX==objLodeRunner.intX&&tabBombesDroite[i].intY==Math.round(objLodeRunner.intY-36.8)) {
                 LodeRunnerMeurt();
             }
             
@@ -50,20 +50,26 @@ function mettreAjourAnimation() {
     if (bombTimer != 30)
         bombTimer++;
 
-    if (tempsBombeGauche == 15 && binBombeGauche) {
-        binBombeGauche = false;
-        tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "0";
-        tempsBriqueGauche = 0;
-        binBriqueGauche = true;
-    }
-
-    if (tempsBriqueGauche == 60) {
-        tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "1";
-        if (binLodeTrou == true) {
-            LodeRunnerMeurt();
+        for (let i = 0; i < tabBombesGauche.length; i++) {
+            tabBombesGauche[i].tempsBombeGauche++;
+            tabBombesGauche[i].tempsBriqueGauche++;
+            if (tabBombesGauche[i].tempsBombeGauche == 15) {
+    
+                tabDispo[tabBombesGauche[i].intI + 1][tabBombesGauche[i].intK - 1] = "0";
+                bombeGauche.tempsBriqueGauche = 0;
+                console.log("x bombe= "+ tabBombesGauche[i].intX+"Y bombe= "+ tabBombesGauche[i].intY  );
+            }
+            if (tabBombesGauche[i].tempsBriqueGauche == 60 ) {
+                tabDispo[tabBombesGauche[i].intI + 1][tabBombesGauche[i].intK - 1] = "1";
+                audio4.play();
+    
+                if (binLodeTrou == true && tabBombesGauche[i].intX==objLodeRunner.intX&&tabBombesGauche[i].intY==Math.round(objLodeRunner.intY-36.8)) {
+                    LodeRunnerMeurt();
+                }
+                
+                tabBombesGauche.shift();
+            }
         }
-        binBriqueGauche = false;
-    }
 
     // Collision avec un garde
     if (tabGardien != null) {
@@ -143,10 +149,12 @@ function mettreAjourAnimation() {
                 objLodeRunner.intX = Math.floor(objLodeRunner.intX / 32) * 32 + 16;
                 objLodeRunner.intY = Math.floor(objLodeRunner.intY / 32) * 32 - 1.2;
                 console.log("X lode Trou= "+objLodeRunner.intX+"Y lode Trou= "+objLodeRunner.intY);
-                /* else if (binBriqueGauche) {
-                     objLodeRunner.intX = objLodeRunner.intX - 10;
-                     objLodeRunner.intY = objLodeRunner.intY - 5;
-                 }*/
+
+
+               /* objLodeRunner.intX = Math.floor(objLodeRunner.intX / 32) * 32 + 16;
+                objLodeRunner.intY = Math.floor(objLodeRunner.intY / 32) * 32 - 1.2;
+                console.log("X lode Trou= "+objLodeRunner.intX+"Y lode Trou= "+objLodeRunner.intY);
+                */
                 intPositionBloque++;
             }
 
@@ -516,20 +524,25 @@ function changementDirection(toucheAppuye) {
                                 var briqueY = i * 32 + 32;
 
                                 if ((objLodeRunner.intX - 16 <= briqueX && objLodeRunner.intX + 16 >= briqueX) &&
-                                    (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
-                                    bombeGauche.intI = i;
-                                    bombeGauche.intK = k;
-                                    binBombeGauche = true;
-                                    tempsBombeGauche = 0;
-                                    bombeGauche.intX = (k - 1) * 32 + 16;
-                                    bombeGauche.intY = i * 32 + 32;
-                                    bombeGauche.intLargeur = 32;
-                                    bombeGauche.intHauteur = 32;
-                                    //objC2D.drawImage(objIMGBombe, (k - 1) * 32 + 16, i * 32 + 32, 32, 32);
-                                    objC2D.drawImage(objIMGBombe, bombeGauche.intX, bombeGauche.intY, bombeGauche.intLargeur, bombeGauche.intHauteur);
-                                    objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeGauche.intX, bombeGauche.intY, 32, 32);
-                                    audio3.play();
-                                }
+                                (objLodeRunner.intY + 32 >= briqueY && objLodeRunner.intY <= briqueY + 32)) {
+                                //tabDispo[i + 1][k + 1] = "0";
+                                //binBombeDroite = true;
+                                let bombeGauche = new Object();
+                                bombeGauche.tempsBombeGauche = 0;
+                                bombeGauche.intI = i;
+                                bombeGauche.intK = k;
+                                bombeGauche.intX = (k - 1) * 32 + 16;
+                                bombeGauche.intY = i * 32 + 32;
+                                bombeGauche.intLargeur = 32;
+                                bombeGauche.intHauteur = 32;
+                                bombeGauche.tempsBriqueGauche = 0;
+                                objC2D.drawImage(objIMGBombe, bombeGauche.intX, bombeGauche.intY, bombeGauche.intLargeur, bombeGauche.intHauteur);
+                                tabBombesGauche.push(bombeGauche);
+                                console.log("tab bombe " + tabBombesGauche);
+                                // objC2D.drawImage(objImageBriqueExplose, srcX5, srcY5, width5, height5, bombeGauche.intX, bombeGauche.intY, 32, 32);
+                                //objC2D.drawImage(objIMGBombe, (k + 1) * 32 + 16, i * 32 + 32, 32, 32);
+                                audio3.play();
+                            }
                             }
                         }
                     }

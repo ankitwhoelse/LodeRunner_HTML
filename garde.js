@@ -51,8 +51,8 @@ function deplacementGarde() {
         let posGardeX = objGarde.intX;
         let posGardeY = objGarde.intY;
 
-        // GARDE TOMBE DANS UN TROU
-        if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4") {
+        // GARDE TOMBE DANS UN TROU tabDispo[Math.floor(objGarde.intY / 32)+1][Math.floor(objGarde.intX / 32)] == "1"
+        if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4"|| objGarde.intY>=544) {
             
             if (objGarde.or) // if garde possede un lingot, il l'échappe
                 tabDispo[Math.floor(objGarde.intY / 32) - 2][Math.floor(objGarde.intX / 32)] = "6";

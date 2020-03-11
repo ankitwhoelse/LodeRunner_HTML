@@ -270,9 +270,12 @@ if(tabBombesDroite.length!=0)
         objC2D.drawImage(objIMGBombe,tabBombesDroite[i].intX,tabBombesDroite[i].intY,tabBombesDroite[i].intLargeur,tabBombesDroite[i].intHauteur);
     }
 }
-    if(binBombeGauche==true)
+if(tabBombesGauche.length!=0)
+{
+    for(let i=0;i<tabBombesGauche.length;i++)
     {
-        objC2D.drawImage(objIMGBombe,bombeGauche.intX,bombeGauche.intY,bombeGauche.intLargeur,bombeGauche.intHauteur);
+        if(tabBombesGauche[i].tempsBombeGauche<15)
+        objC2D.drawImage(objIMGBombe,tabBombesGauche[i].intX,tabBombesGauche[i].intY,tabBombesGauche[i].intLargeur,tabBombesGauche[i].intHauteur);
     }
-
+}
 }
