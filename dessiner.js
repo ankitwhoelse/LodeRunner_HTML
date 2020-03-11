@@ -260,12 +260,12 @@ function dessinerLodeRunner() {
     objC2D.restore();
 }
 function dessinerBombe(){
-if(tabBombes.length!=0)
+if(tabBombesDroite.length!=0)
 {
-    for(let i=0;i<tabBombes.length;i++)
+    for(let i=0;i<tabBombesDroite.length;i++)
     {
-        if(tabBombes[i].tempsBombeDroite<15)
-        objC2D.drawImage(objIMGBombe,tabBombes[i].intX,tabBombes[i].intY,tabBombes[i].intLargeur,tabBombes[i].intHauteur);
+        if(tabBombesDroite[i].tempsBombeDroite<15)
+        objC2D.drawImage(objIMGBombe,tabBombesDroite[i].intX,tabBombesDroite[i].intY,tabBombesDroite[i].intLargeur,tabBombesDroite[i].intHauteur);
     }
 }
     if(binBombeGauche==true)
