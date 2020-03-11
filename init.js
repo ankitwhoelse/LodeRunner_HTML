@@ -1,4 +1,5 @@
 function initAnimation() {
+    audio10.volume = 0.75;
     objCanvas = document.getElementById('monCanvas'); // (960x640)
     objCanvas.focus();
     objC2D = objCanvas.getContext('2d');

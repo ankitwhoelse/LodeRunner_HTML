@@ -9,7 +9,7 @@ function animer() {
     }, 1000 / framesPerSecond);
 }
 
-// Arr�ter l'animation
+// Arreter l'animation
 function arreterAnimation() {
     if (objCycleAnimation != null)
         cancelAnimationFrame(objCycleAnimation);
@@ -21,7 +21,7 @@ function effacerDessin() {
     objC2D.clearRect(0, 0, objCanvas.width, objCanvas.height);
 }
 
-// Pour mettre � jour l'animation
+// Pour mettre a jour l'animation
 function mettreAjourAnimation() {
 
     // BOMBES
@@ -36,26 +36,10 @@ function mettreAjourAnimation() {
         }
         if (tabBombesDroite[i].tempsBriqueDroite == 60) {
             tabDispo[tabBombesDroite[i].intI + 1][tabBombesDroite[i].intK + 1] = "1";
-            if (binLodeTrou == true && tabBombesDroite[i].intX==objLodeRunner.intX&& tabBombesDroite[i].intY==Math.round(objLodeRunner.intY-37.8)) {
-                //mort
-                audio5.play();
-                binLodeTrou = false;
-                spriteCount = 3;
-                objLodeRunner.Image = objImageLodeRunner;
-                booStart = true;
-                binBombeDroite = false;
-                binBombeGauche = false;
-                framesPerSecond = 60;
-                intLingotOr = 5;
-                intPoints -= intLingotOrRamasse * 250;
-                intLingotOrRamasse = 0;
-                objLodeRunner.intY = 0;
-                objLodeRunner.intX = 0;
-                initDisposition();
-                dessiner();
-                dessinerLodeRunner();
-                intVies--;
+            audio4.play();
 
+            if (binLodeTrou == true) {
+                LodeRunnerMeurt();
             }
             
             tabBombesDroite.shift();
@@ -76,23 +60,7 @@ function mettreAjourAnimation() {
     if (tempsBriqueGauche == 60) {
         tabDispo[bombeGauche.intI + 1][bombeGauche.intK - 1] = "1";
         if (binLodeTrou == true) {
-            audio5.play();
-            binLodeTrou = false;
-            spriteCount = 3;
-            objLodeRunner.Image = objImageLodeRunner;
-            booStart = true;
-            binBombeDroite = false;
-            binBombeGauche = false;
-            framesPerSecond = 60;
-            intLingotOr = 5;
-            intPoints -= intLingotOrRamasse * 250;
-            intLingotOrRamasse = 0;
-            objLodeRunner.intY = 0;
-            objLodeRunner.intX = 0;
-            initDisposition();
-            dessiner();
-            dessinerLodeRunner();
-            intVies--;
+            LodeRunnerMeurt();
         }
         binBriqueGauche = false;
     }
@@ -103,23 +71,7 @@ function mettreAjourAnimation() {
             let objGarde = tabGardien[intNoGarde];
 
             if (Math.floor(objGarde.intX / 32) == Math.floor(objLodeRunner.intX / 32) && Math.floor(objGarde.intY / 32) == Math.floor(objLodeRunner.intY / 32)) {
-                console.log("dead")
-                audio5.play();
-                spriteCount = 3;
-                objLodeRunner.Image = objImageLodeRunner;
-                booStart = true;
-                binBombeDroite = false;
-                binBombeGauche = false;
-                framesPerSecond = 60;
-                intLingotOr = 5;
-                intPoints -= intLingotOrRamasse * 250;
-                intLingotOrRamasse = 0;
-                objLodeRunner.intY = 0;
-                objLodeRunner.intX = 0;
-                initDisposition();
-                dessiner();
-                dessinerLodeRunner();
-                intVies--;
+                LodeRunnerMeurt();
             }
 
         }
@@ -206,8 +158,9 @@ function mettreAjourAnimation() {
         }
 
 
-        if (binTombe) {
-            objLodeRunner.intY += 7;
+        if (binTombe && !binGaucheDroite) {
+            
+            objLodeRunner.intY += 6;
             objLodeRunner.Image = objLodeChute;
             spriteCount = 2;
             curFrame2 = ++curFrame2 % frameCount2;
@@ -225,19 +178,18 @@ function mettreAjourAnimation() {
             }
             
             if (tabDispo[Math.floor(espaceSousLodeY / 32)][Math.floor(espaceSousLodeX / 32)] == "4") {
-
                 binGaucheDroite = false;
                 binTombe = false;
             }
-            /*  if (binBriqueDroite || binBriqueGauche) {
-                  binGaucheDroite = false;
-              }*/
 
         }
+        else if (!binTombe && !binGaucheDroite) {
+            spriteCount = 3;
+        }
+
     }
 }
 
-let binTombe = false;
 
 function mettreAjourLodeRunner(sprite, touche) {
     if (booStart == true) {
@@ -331,12 +283,7 @@ function changementDirection(toucheAppuye) {
 
     switch (toucheAppuye) {
         case "gauche":      // mouvement sur sol/barre de franchissement et placer bombs
-
             spriteCount = 3;
-            //console.log(tabDispo[Math.floor(objLodeRunner.intY / 32) - 1][Math.floor(objLodeRunner.intX / 32)]);
-
-            //Si lode touche un garde
-
 
             var espaceHautLodeX = objLodeRunner.intX;
             var espaceHautLodeY = objLodeRunner.intY;

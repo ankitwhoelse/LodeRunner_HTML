@@ -51,7 +51,6 @@ function deplacementGarde() {
         let posGardeX = objGarde.intX;
         let posGardeY = objGarde.intY;
 
-        //comentaire
         // GARDE TOMBE DANS UN TROU
         if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4") {
             
@@ -59,6 +58,7 @@ function deplacementGarde() {
                 tabDispo[Math.floor(objGarde.intY / 32) - 2][Math.floor(objGarde.intX / 32)] = "6";
 
             objGarde.Trou = true;
+            audio8.play();
 
             objGarde.Image = objImageGardeVChuteTrou;
             if (objGarde.intPositionBloqueGarde == 0) {
@@ -77,9 +77,11 @@ function deplacementGarde() {
                 objGarde.intX = objGarde.initIntX;
                 objGarde.intY = objGarde.initIntY;
                 objGarde.Image = objImageGardeVGauche;
+                objGarde.or = false;
                 objGarde.intPositionBloqueGarde = 0;
                 intPoints += 75;
                 objGarde.Trou = false;
+                audio9.play();
             }
 
         }
@@ -162,18 +164,22 @@ function deplacementGarde() {
 
                             if (posGardeX > posLodeX) {
                                 intMouvement = 2;   // gauche
-                                break;
                             } else if (posGardeX < posLodeX) {
                                 intMouvement = 1;   // droite
                             }
+                        } else {
+                            objGarde.cols = 2;
+                            objGarde.spriteWidth = 64;
+                            objGarde.frameCount = 2;
                         }
 
-                        //  PANTALON DORE
+                        //  PANTALON DORÉ
                         if (intMouvement == 1) {
                             if (objGarde.or)
                                 objGarde.Image = objImageGardeVDroiteOr;
                             else
                                 objGarde.Image = objImageGardeVDroite;
+
                         } else if (intMouvement == 2) {
                             if (objGarde.or)
                                 objGarde.Image = objImageGardeVGaucheOr;
@@ -208,6 +214,7 @@ function deplacementGarde() {
             objGarde.cols = 3;
             objGarde.spriteWidth = 96;
             objGarde.frameCount = 3;
+
             if (objGarde.or && intMouvement == 2)
                 objGarde.Image = objImageGardeVBarreGaucheOr;
             else if (!objGarde.or && intMouvement == 2)
@@ -236,6 +243,7 @@ function deplacementGarde() {
                                 objGarde.spriteWidth = 64;
                                 objGarde.frameCount = 2;
                                 intMouvement = 4;
+
                                 if (objGarde.or)
                                     objGarde.Image = objImageGardeVChuteOr;
                                 else
@@ -266,6 +274,7 @@ function deplacementGarde() {
                             objGarde.frameCount = 2;
                             intMouvement = 3;
                             objGarde.intX = ladderX;
+
                             if (objGarde.or)
                                 objGarde.Image = objImageGardeVEchelleOr;
                             else
@@ -295,6 +304,7 @@ function deplacementGarde() {
                                 objGarde.frameCount = 2;
                                 intMouvement = 4;
                                 objGarde.intX = ladderX;
+
                                 if (objGarde.or)
                                     objGarde.Image = objImageGardeVEchelleOr;
                                 else
@@ -319,11 +329,8 @@ function deplacementGarde() {
                             (objGarde.intY - 32 <= goldY && objGarde.intY >= goldY - 32)) {
                             objGarde.or = true;
                             intLingotOr--;
-                            //intLingotOrRamasse++;
                             tabDispo[i][k] = "0";
-                            //intPoints += 250;
                             audio1.play();
-                            // console.log("picked up gold : " + intLingotOrRamasse);
                         }
                     }
                 }
