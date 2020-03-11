@@ -1,0 +1,2 @@
+changer couleur de garde, new color each spawn
+barre de franchissement (check le Y)
