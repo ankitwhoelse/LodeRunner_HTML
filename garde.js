@@ -51,7 +51,6 @@ function deplacementGarde() {
         let posGardeX = objGarde.intX;
         let posGardeY = objGarde.intY;
 
-        //comentaire
         // GARDE TOMBE DANS UN TROU
         if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "4") {
             
@@ -77,6 +76,7 @@ function deplacementGarde() {
                 objGarde.intX = objGarde.initIntX;
                 objGarde.intY = objGarde.initIntY;
                 objGarde.Image = objImageGardeVGauche;
+                objGarde.or = false;
                 objGarde.intPositionBloqueGarde = 0;
                 intPoints += 75;
                 objGarde.Trou = false;
