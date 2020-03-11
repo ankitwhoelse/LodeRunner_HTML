@@ -190,119 +190,89 @@ function deplacementGarde() {
                     }
                 }
             }
-        }
+        
 
-        // Barre de franchissement
-        if (tabDispo[Math.floor(objGarde.intY / 32) - 1][Math.floor(objGarde.intX / 32)] == "3") {
-            objGarde.cols = 3;
-            objGarde.spriteWidth = 96;
-            objGarde.frameCount = 3;
-            if (objGarde.or && intMouvement == 2)
-                objGarde.Image = objImageGardeVBarreGaucheOr;
-            else if (!objGarde.or && intMouvement == 2)
-                objGarde.Image = objImageGardeVBarreGauche;
-            else if (objGarde.or && intMouvement == 1)
-                objGarde.Image = objImageGardeVBarreDroiteOr;
-            else if (!objGarde.or && intMouvement == 1)
-                objGarde.Image = objImageGardeVBarreDroite;
-        }
+            // Barre de franchissement
+            if (tabDispo[Math.floor(objGarde.intY / 32) - 1][Math.floor(objGarde.intX / 32)] == "3") {
+                objGarde.cols = 3;
+                objGarde.spriteWidth = 96;
+                objGarde.frameCount = 3;
+                if (objGarde.or && intMouvement == 2)
+                    objGarde.Image = objImageGardeVBarreGaucheOr;
+                else if (!objGarde.or && intMouvement == 2)
+                    objGarde.Image = objImageGardeVBarreGauche;
+                else if (objGarde.or && intMouvement == 1)
+                    objGarde.Image = objImageGardeVBarreDroiteOr;
+                else if (!objGarde.or && intMouvement == 1)
+                    objGarde.Image = objImageGardeVBarreDroite;
+            }
 
-        // Barre de franchissement lorsqu'il tombe
-        if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "3") {
-            objGarde.intY = objGarde.intY + 16;
-            intMouvement = 2;
-            objGarde.cols = 3;
-            objGarde.spriteWidth = 96;
-            objGarde.frameCount = 3;
+            // Barre de franchissement lorsqu'il tombe
+            if (tabDispo[Math.floor(objGarde.intY / 32)][Math.floor(objGarde.intX / 32)] == "3") {
+                objGarde.intY = objGarde.intY + 16;
+                intMouvement = 2;
+                objGarde.cols = 3;
+                objGarde.spriteWidth = 96;
+                objGarde.frameCount = 3;
 
-            if (objGarde.or && intMouvement == 2)
-                objGarde.Image = objImageGardeVBarreGaucheOr;
-            else if (!objGarde.or && intMouvement == 2)
-                objGarde.Image = objImageGardeVBarreGauche;
-            else if (objGarde.or && intMouvement == 1)
-                objGarde.Image = objImageGardeVBarreDroiteOr;
-            else if (!objGarde.or && intMouvement == 1)
-                objGarde.Image = objImageGardeVBarreDroite;
-        }
+                if (objGarde.or && intMouvement == 2)
+                    objGarde.Image = objImageGardeVBarreGaucheOr;
+                else if (!objGarde.or && intMouvement == 2)
+                    objGarde.Image = objImageGardeVBarreGauche;
+                else if (objGarde.or && intMouvement == 1)
+                    objGarde.Image = objImageGardeVBarreDroiteOr;
+                else if (!objGarde.or && intMouvement == 1)
+                    objGarde.Image = objImageGardeVBarreDroite;
+            }
 
-        // MOUVEMENT VERS LE BAS (TOMBER)
-        for (var i = 0; i < tabDispo.length; i++) {
-            let ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (i + 1 < tabDispo.length) {
+            // MOUVEMENT VERS LE BAS (TOMBER)
+            for (var i = 0; i < tabDispo.length; i++) {
+                let ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (i + 1 < tabDispo.length) {
 
-                    if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2" && tabDispo[i][k] == "0") {
-                        let videX = k * 32 + 16;
-                        let videY = i * 32 + 32;
+                        if (tabDispo[i + 1][k] == "0" && tabDispo[i][k] != "1" && tabDispo[i][k] != "2" && tabDispo[i][k] == "0") {
+                            let videX = k * 32 + 16;
+                            let videY = i * 32 + 32;
 
-                        if (posLodeY > posGardeY || posLodeY < posGardeY || posLodeY == posGardeY) {
-                            // console.log("x "+ videX + " Y"+videY);
-                            if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
-                                (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
-                                objGarde.cols = 2;
-                                objGarde.spriteWidth = 64;
-                                objGarde.frameCount = 2;
-                                intMouvement = 4;
+                            if (posLodeY > posGardeY || posLodeY < posGardeY || posLodeY == posGardeY) {
+                                // console.log("x "+ videX + " Y"+videY);
+                                if ((objGarde.intX - 16 < videX && objGarde.intX + 16 > videX) &&
+                                    (objGarde.intY + 32 > videY && objGarde.intY < videY + 32)) {
+                                    objGarde.cols = 2;
+                                    objGarde.spriteWidth = 64;
+                                    objGarde.frameCount = 2;
+                                    intMouvement = 4;
 
-                                if (objGarde.or)
-                                    objGarde.Image = objImageGardeVChuteOr;
-                                else
-                                    objGarde.Image = objImageGardeVChute;
+                                    if (objGarde.or)
+                                        objGarde.Image = objImageGardeVChuteOr;
+                                    else
+                                        objGarde.Image = objImageGardeVChute;
+                                }
                             }
+
                         }
-
-                    }
-
-                }
-            }
-        }
-
-
-        // MOUVEMENT VERS LE HAUT (ECHELLE)
-        for (var i = 0; i < tabDispo.length; i++) {
-            let ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (tabDispo[i][k] == "2") {
-                    let ladderX = k * 32 + 16;
-                    let ladderY = i * 32 + 32;
-
-                    if (posLodeY < posGardeY) {
-                        if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
-                            (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
-                            objGarde.cols = 2;
-                            objGarde.spriteWidth = 64;
-                            objGarde.frameCount = 2;
-                            intMouvement = 3;
-                            objGarde.intX = ladderX;
-
-                            if (objGarde.or)
-                                objGarde.Image = objImageGardeVEchelleOr;
-                            else
-                                objGarde.Image = objImageGardeVEchelle;
-                        }
-                    } else {
 
                     }
                 }
             }
-        }
 
-        // MOUVEMENT VERS LE BAS (ECHELLE)
-        for (var i = 0; i < tabDispo.length; i++) {
-            let ligneDispo = tabDispo[i];
-            for (var k = 0; k < ligneDispo.length; k++) {
-                if (i + 1 < tabDispo.length) {
-                    if (tabDispo[i + 1][k] == "2") {
+
+            // MOUVEMENT VERS LE HAUT (ECHELLE)
+            for (var i = 0; i < tabDispo.length; i++) {
+                let ligneDispo = tabDispo[i];
+                for (var k = 0; k < ligneDispo.length; k++) {
+                    if (tabDispo[i][k] == "2") {
                         let ladderX = k * 32 + 16;
                         let ladderY = i * 32 + 32;
 
-                        if (posLodeY > posGardeY) {
+                        if (posLodeY < posGardeY) {
                             if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
-                                (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                (objGarde.intY - 32 < ladderY && objGarde.intY > ladderY - 32)) {
                                 objGarde.cols = 2;
                                 objGarde.spriteWidth = 64;
                                 objGarde.frameCount = 2;
-                                intMouvement = 4;
+                                intMouvement = 3;
                                 objGarde.intX = ladderX;
 
                                 if (objGarde.or)
@@ -310,27 +280,58 @@ function deplacementGarde() {
                                 else
                                     objGarde.Image = objImageGardeVEchelle;
                             }
+                        } else {
+
                         }
                     }
                 }
             }
-        }
 
-        // LINGOT D'OR
-        if (!objGarde.or) {
+            // MOUVEMENT VERS LE BAS (ECHELLE)
             for (var i = 0; i < tabDispo.length; i++) {
-                var ligneDispo = tabDispo[i];
+                let ligneDispo = tabDispo[i];
                 for (var k = 0; k < ligneDispo.length; k++) {
-                    if (tabDispo[i][k] == "6") {
-                        var goldX = k * 32 + 16;
-                        var goldY = i * 32 + 32;
+                    if (i + 1 < tabDispo.length) {
+                        if (tabDispo[i + 1][k] == "2") {
+                            let ladderX = k * 32 + 16;
+                            let ladderY = i * 32 + 32;
 
-                        if ((objGarde.intX - 16 <= goldX && objGarde.intX + 16 >= goldX) &&
-                            (objGarde.intY - 32 <= goldY && objGarde.intY >= goldY - 32)) {
-                            objGarde.or = true;
-                            intLingotOr--;
-                            tabDispo[i][k] = "0";
-                            audio1.play();
+                            if (posLodeY > posGardeY) {
+                                if ((objGarde.intX - 16 < ladderX && objGarde.intX + 16 > ladderX) &&
+                                    (objGarde.intY + 32 > ladderY && objGarde.intY < ladderY + 32)) {
+                                    objGarde.cols = 2;
+                                    objGarde.spriteWidth = 64;
+                                    objGarde.frameCount = 2;
+                                    intMouvement = 4;
+                                    objGarde.intX = ladderX;
+
+                                    if (objGarde.or)
+                                        objGarde.Image = objImageGardeVEchelleOr;
+                                    else
+                                        objGarde.Image = objImageGardeVEchelle;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // LINGOT D'OR
+            if (!objGarde.or) {
+                for (var i = 0; i < tabDispo.length; i++) {
+                    var ligneDispo = tabDispo[i];
+                    for (var k = 0; k < ligneDispo.length; k++) {
+                        if (tabDispo[i][k] == "6") {
+                            var goldX = k * 32 + 16;
+                            var goldY = i * 32 + 32;
+
+                            if ((objGarde.intX - 16 <= goldX && objGarde.intX + 16 >= goldX) &&
+                                (objGarde.intY - 32 <= goldY && objGarde.intY >= goldY - 32)) {
+                                objGarde.or = true;
+                                intLingotOr--;
+                                tabDispo[i][k] = "0";
+                                audio1.play();
+                            }
                         }
                     }
                 }

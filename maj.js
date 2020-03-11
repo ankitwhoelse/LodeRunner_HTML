@@ -159,7 +159,7 @@ function mettreAjourAnimation() {
 
 
         if (binTombe && !binGaucheDroite) {
-            
+
             objLodeRunner.intY += 6;
             objLodeRunner.Image = objLodeChute;
             spriteCount = 2;
@@ -208,8 +208,8 @@ function mettreAjourLodeRunner(sprite, touche) {
             srcY2 = 0;
 
             curFrame5 = ++curFrame5 % frameCount5;
-            srcX5 = curFrame5 * width2;
-            srcY2 = 0;
+            srcX5 = curFrame5 * width5;
+            srcY5 = 0;
         } else if (sprite == 1) {
             curFrame1 = ++curFrame1 % frameCount1;
             srcX1 = curFrame1 * width1;
@@ -397,6 +397,7 @@ function changementDirection(toucheAppuye) {
                             objLodeRunner.intY -= 2;
                             objLodeRunner.intX = ladderX;
 
+                            // LEVEL WIN / PROCHAIN NIVEAU
                             if (objLodeRunner.intY < 32) {
                                 console.log("exit level")
                                 audio7.play();
@@ -408,10 +409,11 @@ function changementDirection(toucheAppuye) {
                                 intNiveau++;
                                 intGardeCompte++;
                                 intPoints += 1500;
-                                intLingotOr = -1;
+                                intLingotOr = 5;
                                 intLingotOrRamasse -= 5;
                                 objLodeRunner.intY = 0;
                                 objLodeRunner.intX = 0;
+                                initDisposition();
                                 dessiner();
                                 dessinerLodeRunner();
 
