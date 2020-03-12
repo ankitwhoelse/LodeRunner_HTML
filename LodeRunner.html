@@ -47,9 +47,10 @@
     let direction=0;
     let binBarre=false;
     var intPoints = 0;
+    var intOldPoints = 0;
     var intVies = 5;
     var intNiveau = 1;
-    var intLingotOr = 5;
+    var intLingotOr = 6;
     var intGardeCompte = 3;
     var intLingotOrRamasse = 0;
     var binNextLevel = true;
@@ -62,7 +63,8 @@
     let tabBombesDroite=new Array();
     let tabBombesGauche=new Array();
     var bombTimer = 30;
-
+    var intSec = 0;
+    var timerInit = false;
 
     // spritesheet 1
     var spriteWidth1 = 32;
@@ -102,9 +104,6 @@
     var srcX3;
     var srcY3;
     // spritesheet 3
-
-    //	var left = false; 
-    //		var right = true;
 
     var speed = 12;
      // spritesheet 4
@@ -184,18 +183,9 @@
 
           case "c":  
               changementDirection("c");
-          
               break;
 
-          case "Escape":
-            let intXL = objLodeRunner.intX;
-            let intYL = objLodeRunner.intY;
-            booStart=true;
-            objLodeRunner.intX=intXL;
-            objLodeRunner.intY=intYL;
-            break;
           default: 
-
               break;
       }
 
@@ -204,7 +194,7 @@
   </script>
 </head>
 
-<body bgcolor="F5DEB3" onload="initAnimation()">
+<body bgcolor="F5DEB3" onload="initAnimation(); instructions();">
   <canvas id="monCanvas" width="928" height="672" tabIndex="1" onkeydown="gestionClavier()">
     Votre navigateur ne supporte pas la balise canvas
   </canvas>

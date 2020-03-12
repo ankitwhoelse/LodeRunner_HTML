@@ -2,14 +2,15 @@
 function initGarde() {
     tabGardien = new Array();
     let objGarde = null;
+    let intCouleur = 0;
 
     if (tabDispo != null && tabGardien != null) {
         for (var i = 0; i < tabDispo.length; i++) {
             var ligneDispo = tabDispo[i];
             for (var k = 0; k < ligneDispo.length; k++) {
                 if (tabDispo[i][k] == 8) {
+                    intCouleur++;
                     objGarde = new Object();
-                    objGarde.Image = objImageGardeVDroite;
                     objGarde.spriteWidth = 96;
                     objGarde.spriteHeight = 32;
                     objGarde.rows = 1;
@@ -27,6 +28,17 @@ function initGarde() {
                     objGarde.initIntY = objGarde.intY;
                     objGarde.intPositionBloqueGarde = 0;
                     objGarde.Trou = false;
+
+                    if (intCouleur%3 == 0) {     // VERT     0
+                        objGarde.couleur = 0;
+                        objGarde.Image = objImageGardeVDroite; }
+                    else if (intCouleur%3 == 1){ // MAUVE    1
+                        objGarde.couleur = 1;
+                        objGarde.Image = objImageGardeMDroite; }
+                    else if (intCouleur%3 == 2){ // ROUGE    2
+                        objGarde.couleur = 2;
+                        objGarde.Image = objImageGardeRDroite; }
+
                     tabGardien.push(objGarde);
                     tabDispo[i][k] = 0;
                 }
@@ -60,7 +72,13 @@ function deplacementGarde() {
             objGarde.Trou = true;
             audio8.play();
 
-            objGarde.Image = objImageGardeVChuteTrou;
+            if (objGarde.couleur==0)
+                objGarde.Image = objImageGardeVChuteTrou;
+            else if (objGarde.couleur==1)
+                objGarde.Image = objImageGardeMChuteTrou;
+            else if (objGarde.couleur==2)
+                objGarde.Image = objImageGardeRChuteTrou;
+
             if (objGarde.intPositionBloqueGarde == 0) {
                 if (binBriqueDroite) {
                     objGarde.intX = objGarde.intX + 10;
@@ -76,7 +94,14 @@ function deplacementGarde() {
             } else if (tabDispo[Math.floor(objGarde.intY / 32) - 1][Math.floor(objGarde.intX / 32)] == "1") {
                 objGarde.intX = objGarde.initIntX;
                 objGarde.intY = objGarde.initIntY;
-                objGarde.Image = objImageGardeVGauche;
+
+                if (objGarde.couleur==0)
+                    objGarde.Image = objImageGardeVGauche;
+                else if (objGarde.couleur==1)
+                    objGarde.Image = objImageGardeMGauche;
+                else if (objGarde.couleur==2)
+                    objGarde.Image = objImageGardeRGauche;
+
                 objGarde.or = false;
                 objGarde.intPositionBloqueGarde = 0;
                 intPoints += 75;
@@ -175,16 +200,40 @@ function deplacementGarde() {
 
                         //  PANTALON DORÉ
                         if (intMouvement == 1) {
-                            if (objGarde.or)
-                                objGarde.Image = objImageGardeVDroiteOr;
-                            else
-                                objGarde.Image = objImageGardeVDroite;
+                            if (objGarde.or) {
+                                if (objGarde.couleur==0)
+                                    objGarde.Image = objImageGardeVDroiteOr;
+                                else if (objGarde.couleur==1)
+                                    objGarde.Image = objImageGardeMDroiteOr;
+                                else if (objGarde.couleur==2)
+                                    objGarde.Image = objImageGardeRDroiteOr;
+                            }
+                            else {
+                                if (objGarde.couleur==0)
+                                    objGarde.Image = objImageGardeVDroite;
+                                else if (objGarde.couleur==1)
+                                    objGarde.Image = objImageGardeMDroite;
+                                else if (objGarde.couleur==2)
+                                    objGarde.Image = objImageGardeRDroite;
+                            }
 
                         } else if (intMouvement == 2) {
-                            if (objGarde.or)
-                                objGarde.Image = objImageGardeVGaucheOr;
-                            else
-                                objGarde.Image = objImageGardeVGauche;
+                            if (objGarde.or) {
+                                if (objGarde.couleur==0)
+                                    objGarde.Image = objImageGardeVGaucheOr;
+                                else if (objGarde.couleur==1)
+                                    objGarde.Image = objImageGardeMGaucheOr;
+                                else if (objGarde.couleur==2)
+                                    objGarde.Image = objImageGardeRGaucheOr;
+                            }
+                            else {
+                                if (objGarde.couleur==0)
+                                    objGarde.Image = objImageGardeVGauche;
+                                else if (objGarde.couleur==1)
+                                    objGarde.Image = objImageGardeMGauche;
+                                else if (objGarde.couleur==2)
+                                    objGarde.Image = objImageGardeRGauche;
+                            }
                         }
 
                     }
@@ -197,14 +246,40 @@ function deplacementGarde() {
                 objGarde.cols = 3;
                 objGarde.spriteWidth = 96;
                 objGarde.frameCount = 3;
-                if (objGarde.or && intMouvement == 2)
-                    objGarde.Image = objImageGardeVBarreGaucheOr;
-                else if (!objGarde.or && intMouvement == 2)
-                    objGarde.Image = objImageGardeVBarreGauche;
-                else if (objGarde.or && intMouvement == 1)
-                    objGarde.Image = objImageGardeVBarreDroiteOr;
-                else if (!objGarde.or && intMouvement == 1)
-                    objGarde.Image = objImageGardeVBarreDroite;
+
+                if (objGarde.or && intMouvement == 2) {         
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreGaucheOr;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreGaucheOr;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreGaucheOr;
+
+                } else if (!objGarde.or && intMouvement == 2) {  
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreGauche;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreGauche;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreGauche;
+
+                } else if (objGarde.or && intMouvement == 1) {  
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreDroiteOr;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreDroiteOr;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreDroiteOr;
+
+                } else if (!objGarde.or && intMouvement == 1) {     
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreDroite;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreDroite;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreDroite;
+                }
+
             }
 
             // Barre de franchissement lorsqu'il tombe
@@ -215,14 +290,39 @@ function deplacementGarde() {
                 objGarde.spriteWidth = 96;
                 objGarde.frameCount = 3;
 
-                if (objGarde.or && intMouvement == 2)
-                    objGarde.Image = objImageGardeVBarreGaucheOr;
-                else if (!objGarde.or && intMouvement == 2)
-                    objGarde.Image = objImageGardeVBarreGauche;
-                else if (objGarde.or && intMouvement == 1)
-                    objGarde.Image = objImageGardeVBarreDroiteOr;
-                else if (!objGarde.or && intMouvement == 1)
-                    objGarde.Image = objImageGardeVBarreDroite;
+                if (objGarde.or && intMouvement == 2) {         
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreGaucheOr;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreGaucheOr;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreGaucheOr;
+
+                } else if (!objGarde.or && intMouvement == 2) {  
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreGauche;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreGauche;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreGauche;
+
+                } else if (objGarde.or && intMouvement == 1) {  
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreDroiteOr;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreDroiteOr;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreDroiteOr;
+
+                } else if (!objGarde.or && intMouvement == 1) {     
+                    if (objGarde.couleur==0)
+                        objGarde.Image = objImageGardeVBarreDroite;
+                    else if (objGarde.couleur==1)
+                        objGarde.Image = objImageGardeMBarreDroite;
+                    else if (objGarde.couleur==2)
+                        objGarde.Image = objImageGardeRBarreDroite;
+                }
+
             }
 
             // MOUVEMENT VERS LE BAS (TOMBER)
@@ -244,10 +344,23 @@ function deplacementGarde() {
                                     objGarde.frameCount = 2;
                                     intMouvement = 4;
 
-                                    if (objGarde.or)
-                                        objGarde.Image = objImageGardeVChuteOr;
-                                    else
-                                        objGarde.Image = objImageGardeVChute;
+                                    if (objGarde.or) {
+                                        if (objGarde.couleur==0)
+                                            objGarde.Image = objImageGardeVChuteOr;
+                                        else if (objGarde.couleur==1)
+                                            objGarde.Image = objImageGardeMChuteOr;
+                                        else if (objGarde.couleur==2)
+                                            objGarde.Image = objImageGardeRChuteOr;
+
+                                    } else {
+                                        if (objGarde.couleur==0)
+                                            objGarde.Image = objImageGardeVChute;
+                                        else if (objGarde.couleur==1)
+                                            objGarde.Image = objImageGardeMChute;
+                                        else if (objGarde.couleur==2)
+                                            objGarde.Image = objImageGardeRChute;
+                                    }
+
                                 }
                             }
 
@@ -275,10 +388,23 @@ function deplacementGarde() {
                                 intMouvement = 3;
                                 objGarde.intX = ladderX;
 
-                                if (objGarde.or)
-                                    objGarde.Image = objImageGardeVEchelleOr;
-                                else
-                                    objGarde.Image = objImageGardeVEchelle;
+                                if (objGarde.or) {
+                                    if (objGarde.couleur==0)
+                                        objGarde.Image = objImageGardeVEchelleOr;
+                                    else if (objGarde.couleur==1)
+                                        objGarde.Image = objImageGardeMEchelleOr;
+                                    else if (objGarde.couleur==2)
+                                        objGarde.Image = objImageGardeREchelleOr;
+
+                                } else {
+                                    if (objGarde.couleur==0)
+                                        objGarde.Image = objImageGardeVEchelle;
+                                    else if (objGarde.couleur==1)
+                                        objGarde.Image = objImageGardeMEchelle;
+                                    else if (objGarde.couleur==2)
+                                        objGarde.Image = objImageGardeREchelle;
+                                }
+
                             }
                         } else {
 
@@ -305,10 +431,23 @@ function deplacementGarde() {
                                     intMouvement = 4;
                                     objGarde.intX = ladderX;
 
-                                    if (objGarde.or)
-                                        objGarde.Image = objImageGardeVEchelleOr;
-                                    else
-                                        objGarde.Image = objImageGardeVEchelle;
+                                    if (objGarde.or) {
+                                        if (objGarde.couleur==0)
+                                            objGarde.Image = objImageGardeVEchelleOr;
+                                        else if (objGarde.couleur==1)
+                                            objGarde.Image = objImageGardeMEchelleOr;
+                                        else if (objGarde.couleur==2)
+                                            objGarde.Image = objImageGardeREchelleOr;
+    
+                                    } else {
+                                        if (objGarde.couleur==0)
+                                            objGarde.Image = objImageGardeVEchelle;
+                                        else if (objGarde.couleur==1)
+                                            objGarde.Image = objImageGardeMEchelle;
+                                        else if (objGarde.couleur==2)
+                                            objGarde.Image = objImageGardeREchelle;
+                                    }
+
                                 }
                             }
                         }

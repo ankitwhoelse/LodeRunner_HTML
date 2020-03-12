@@ -15,7 +15,7 @@ function dessiner() {
     else
         dessinerGameOver();
 
-    if (intLingotOrRamasse > 4) {
+    if (intLingotOrRamasse > 5) {
         if (audioEchelleF)
             audio12.play();
         audioEchelleF = false;
@@ -176,8 +176,8 @@ function dessinerTexte() {
     objC2D.lineWidth = 1;
     objC2D.font = '30pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('Niveau : ' + pad(intNiveau, 2), objCanvas.width / 2, objCanvas.height - 40);
-    objC2D.strokeText('Niveau : ' + pad(intNiveau, 2), objCanvas.width / 2, objCanvas.height - 40);
+    objC2D.fillText('Niveau : ' + pad(intNiveau, 2), objCanvas.width / 2 - 30, objCanvas.height - 40);
+    objC2D.strokeText('Niveau : ' + pad(intNiveau, 2), objCanvas.width / 2 - 30, objCanvas.height - 40);
     objC2D.closePath();
 
     // Texte de vies restantes
@@ -187,8 +187,19 @@ function dessinerTexte() {
     objC2D.lineWidth = 1;
     objC2D.font = '30pt Impact'; // Police de caractères
     objC2D.textAlign = 'center';
-    objC2D.fillText('Vies : ' + pad(intVies, 2), objCanvas.width - 164, objCanvas.height - 40);
-    objC2D.strokeText('Vies : ' + pad(intVies, 2), objCanvas.width - 164, objCanvas.height - 40);
+    objC2D.fillText('Vies : ' + pad(intVies, 2), objCanvas.width - 270, objCanvas.height - 40);
+    objC2D.strokeText('Vies : ' + pad(intVies, 2), objCanvas.width - 270, objCanvas.height - 40);
+    objC2D.closePath();
+
+    // Texte de temps
+    objC2D.beginPath();
+    objC2D.fillStyle = "white";
+    objC2D.strokeStyle = "pink";
+    objC2D.lineWidth = 1;
+    objC2D.font = '30pt Impact'; // Police de caractères
+    objC2D.textAlign = 'center';
+    objC2D.fillText(pad(Math.floor(intSec/60),2)+ ':' + pad(intSec%60,2), objCanvas.width - 84, objCanvas.height - 40);
+  //  objC2D.strokeText(pad(Math.floor(intSec/60),2)+ ':' + pad(intSec%60,2), objCanvas.width - 84, objCanvas.height - 40);
     objC2D.closePath();
 }
 
@@ -261,21 +272,17 @@ function dessinerLodeRunner() {
 
     objC2D.restore();
 }
-function dessinerBombe(){
-if(tabBombesDroite.length!=0)
-{
-    for(let i=0;i<tabBombesDroite.length;i++)
-    {
-        if(tabBombesDroite[i].tempsBombeDroite<15)
-        objC2D.drawImage(objIMGBombe,tabBombesDroite[i].intX,tabBombesDroite[i].intY,tabBombesDroite[i].intLargeur,tabBombesDroite[i].intHauteur);
+function dessinerBombe() {
+    if (tabBombesDroite.length != 0) {
+        for (let i = 0; i < tabBombesDroite.length; i++) {
+            if (tabBombesDroite[i].tempsBombeDroite < 15)
+                objC2D.drawImage(objIMGBombe, tabBombesDroite[i].intX, tabBombesDroite[i].intY, tabBombesDroite[i].intLargeur, tabBombesDroite[i].intHauteur);
+        }
     }
-}
-if(tabBombesGauche.length!=0)
-{
-    for(let i=0;i<tabBombesGauche.length;i++)
-    {
-        if(tabBombesGauche[i].tempsBombeGauche<15)
-        objC2D.drawImage(objIMGBombe,tabBombesGauche[i].intX,tabBombesGauche[i].intY,tabBombesGauche[i].intLargeur,tabBombesGauche[i].intHauteur);
+    if (tabBombesGauche.length != 0) {
+        for (let i = 0; i < tabBombesGauche.length; i++) {
+            if (tabBombesGauche[i].tempsBombeGauche < 15)
+                objC2D.drawImage(objIMGBombe, tabBombesGauche[i].intX, tabBombesGauche[i].intY, tabBombesGauche[i].intLargeur, tabBombesGauche[i].intHauteur);
+        }
     }
-}
 }
